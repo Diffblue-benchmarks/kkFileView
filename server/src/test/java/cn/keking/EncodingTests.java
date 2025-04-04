@@ -18,7 +18,7 @@ public class EncodingTests {
     @Test
     void testCharDet() throws URISyntaxException {
         for (int i = 0; i < 29; i++) {
-            File dir = new File(getClass().getClassLoader().getResource("testData\\" + i).toURI());
+            File dir = new File(getClass().getClassLoader().getResource("testData/" + i).toURI());
             String dirPath = dir.getPath();
             String textFileName = dir.list()[0];
             String textFilePath = dirPath + "/" + textFileName;
