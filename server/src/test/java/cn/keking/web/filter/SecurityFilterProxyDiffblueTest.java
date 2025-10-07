@@ -1,9 +1,12 @@
 package cn.keking.web.filter;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.IOException;
 import javax.servlet.FilterChain;
@@ -25,31 +28,77 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 @ContextConfiguration(classes = {SecurityFilterProxy.class})
-@WebAppConfiguration
 @ExtendWith(SpringExtension.class)
+@WebAppConfiguration
 class SecurityFilterProxyDiffblueTest {
-  @Autowired
-  private SecurityFilterProxy securityFilterProxy;
+  @Autowired private SecurityFilterProxy securityFilterProxy;
 
   /**
-   * Test {@link SecurityFilterProxy#doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)}.
+   * Test {@link SecurityFilterProxy#doFilterInternal(HttpServletRequest, HttpServletResponse,
+   * FilterChain)}.
+   *
    * <ul>
-   *   <li>When {@link MockHttpServletRequest#MockHttpServletRequest()}.</li>
-   *   <li>Then calls {@link FilterChain#doFilter(ServletRequest, ServletResponse)}.</li>
+   *   <li>Then throw {@link ServletException}.
    * </ul>
-   * <p>
-   * Method under test: {@link SecurityFilterProxy#doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)}
+   *
+   * <p>Method under test: {@link SecurityFilterProxy#doFilterInternal(HttpServletRequest,
+   * HttpServletResponse, FilterChain)}
    */
   @Test
-  @DisplayName("Test doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain); when MockHttpServletRequest(); then calls doFilter(ServletRequest, ServletResponse)")
-  @Tag("MaintainedByDiffblue")
-  @MethodsUnderTest({"void SecurityFilterProxy.doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)"})
-  void testDoFilterInternal_whenMockHttpServletRequest_thenCallsDoFilter() throws IOException, ServletException {
+  @DisplayName(
+      "Test doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain); then throw ServletException")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({
+    "void SecurityFilterProxy.doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)"
+  })
+  void testDoFilterInternal_thenThrowServletException() throws IOException, ServletException {
     // Arrange
     MockHttpServletRequest request = new MockHttpServletRequest();
     MockHttpServletResponse response = new MockHttpServletResponse();
+
     FilterChain filterChain = mock(FilterChain.class);
-    doNothing().when(filterChain).doFilter(Mockito.<ServletRequest>any(), Mockito.<ServletResponse>any());
+    doThrow(new ServletException("An error occurred"))
+        .when(filterChain)
+        .doFilter(Mockito.<ServletRequest>any(), Mockito.<ServletResponse>any());
+
+    // Act and Assert
+    assertThrows(
+        ServletException.class,
+        () -> securityFilterProxy.doFilterInternal(request, response, filterChain));
+    verify(filterChain).doFilter(isA(ServletRequest.class), isA(ServletResponse.class));
+  }
+
+  /**
+   * Test {@link SecurityFilterProxy#doFilterInternal(HttpServletRequest, HttpServletResponse,
+   * FilterChain)}.
+   *
+   * <ul>
+   *   <li>When {@link MockHttpServletRequest#MockHttpServletRequest()}.
+   *   <li>Then calls {@link FilterChain#doFilter(ServletRequest, ServletResponse)}.
+   * </ul>
+   *
+   * <p>Method under test: {@link SecurityFilterProxy#doFilterInternal(HttpServletRequest,
+   * HttpServletResponse, FilterChain)}
+   */
+  @Test
+  @DisplayName(
+      "Test doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain); when MockHttpServletRequest(); then calls doFilter(ServletRequest, ServletResponse)")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({
+    "void SecurityFilterProxy.doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)"
+  })
+  void testDoFilterInternal_whenMockHttpServletRequest_thenCallsDoFilter()
+      throws IOException, ServletException {
+    // Arrange
+    MockHttpServletRequest request = new MockHttpServletRequest();
+    MockHttpServletResponse response = new MockHttpServletResponse();
+
+    FilterChain filterChain = mock(FilterChain.class);
+    doNothing()
+        .when(filterChain)
+        .doFilter(Mockito.<ServletRequest>any(), Mockito.<ServletResponse>any());
 
     // Act
     securityFilterProxy.doFilterInternal(request, response, filterChain);
