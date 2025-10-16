@@ -1,15 +1,18 @@
 package cn.keking.service.cache.impl;
 
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 /**
  * Test configuration for CacheServiceJDKImpl to resolve Spring context issues.
  * This configuration provides the necessary beans for testing without requiring
  * the conditional expression to be satisfied.
+ *
+ * Note: Using @Configuration instead of @TestConfiguration to ensure it's
+ * automatically picked up by component scanning in test contexts.
  */
-@TestConfiguration
+@Configuration
 public class CacheServiceJDKImplTestConfiguration {
 
     /**
