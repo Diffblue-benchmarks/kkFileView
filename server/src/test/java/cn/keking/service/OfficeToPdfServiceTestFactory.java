@@ -1,5 +1,6 @@
 package cn.keking.service;
 
+import cn.keking.config.ConfigConstants;
 import cn.keking.model.FileAttribute;
 import cn.keking.model.FileType;
 import com.diffblue.cover.annotations.InterestingTestFactory;
@@ -17,6 +18,15 @@ public class OfficeToPdfServiceTestFactory {
      */
     @InterestingTestFactory
     public static FileAttribute createFileAttribute() {
+        // Initialize ConfigConstants to prevent NPE in converterFile method
+        ConfigConstants.setOfficePageRangeValue("false");
+        ConfigConstants.setOfficeWatermarkValue("false");
+        ConfigConstants.setOfficeQualityValue("80");
+        ConfigConstants.setOfficeMaxImageResolutionValue("150");
+        ConfigConstants.setOfficeExportBookmarksValue(true);
+        ConfigConstants.setOfficeExportNotesValue(true);
+        ConfigConstants.setOfficeDocumentOpenPasswordsValue(true);
+
         FileAttribute fileAttribute = new FileAttribute();
         fileAttribute.setType(FileType.OFFICE);
         fileAttribute.setSuffix("docx");
