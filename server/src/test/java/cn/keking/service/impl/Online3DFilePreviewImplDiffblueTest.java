@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isA;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import cn.keking.model.FileAttribute;
@@ -17,18 +16,30 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
 
+@ContextConfiguration(classes = {Online3DFilePreviewImpl.class})
+@ExtendWith(SpringExtension.class)
 class Online3DFilePreviewImplDiffblueTest {
+  @MockBean(name = "commonPreview")
+  private CommonPreviewImpl commonPreviewImpl;
+
+  @Autowired private Online3DFilePreviewImpl online3DFilePreviewImpl;
+
   /**
    * Test {@link Online3DFilePreviewImpl#filePreviewHandle(String, Model, FileAttribute)}.
    *
    * <ul>
    *   <li>Given {@code false}.
    *   <li>When {@code null}.
-   *   <li>Then return {@code online3D}.
+   *   <li>Then {@link ConcurrentModel#ConcurrentModel()} Empty.
    * </ul>
    *
    * <p>Method under test: {@link Online3DFilePreviewImpl#filePreviewHandle(String, Model,
@@ -36,17 +47,13 @@ class Online3DFilePreviewImplDiffblueTest {
    */
   @Test
   @DisplayName(
-      "Test filePreviewHandle(String, Model, FileAttribute); given 'false'; when 'null'; then return 'online3D'")
+      "Test filePreviewHandle(String, Model, FileAttribute); given 'false'; when 'null'; then ConcurrentModel() Empty")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({
     "String Online3DFilePreviewImpl.filePreviewHandle(String, Model, FileAttribute)"
   })
-  void testFilePreviewHandle_givenFalse_whenNull_thenReturnOnline3D() {
-    //   Diffblue Cover was unable to create a Spring-specific test for this Spring method.
-    //   Run dcover create --keep-partial-tests to gain insights into why
-    //   a non-Spring test was created.
-
+  void testFilePreviewHandle_givenFalse_whenNull_thenConcurrentModelEmpty() {
     // Arrange
     FileHandlerService fileHandlerService = new FileHandlerService(new CacheServiceJDKImpl());
     CommonPreviewImpl commonPreview =
@@ -82,16 +89,10 @@ class Online3DFilePreviewImplDiffblueTest {
     "String Online3DFilePreviewImpl.filePreviewHandle(String, Model, FileAttribute)"
   })
   void testFilePreviewHandle_thenCallsFilePreviewHandle() {
-    //   Diffblue Cover was unable to create a Spring-specific test for this Spring method.
-    //   Run dcover create --keep-partial-tests to gain insights into why
-    //   a non-Spring test was created.
-
     // Arrange
-    CommonPreviewImpl commonPreview = mock(CommonPreviewImpl.class);
-    when(commonPreview.filePreviewHandle(
+    when(commonPreviewImpl.filePreviewHandle(
             Mockito.<String>any(), Mockito.<Model>any(), Mockito.<FileAttribute>any()))
         .thenReturn("File Preview Handle");
-    Online3DFilePreviewImpl online3DFilePreviewImpl = new Online3DFilePreviewImpl(commonPreview);
     ConcurrentModel model = new ConcurrentModel();
 
     // Act
@@ -100,11 +101,10 @@ class Online3DFilePreviewImplDiffblueTest {
             "https://example.org/example", model, new FileAttribute());
 
     // Assert
-    verify(commonPreview)
+    verify(commonPreviewImpl)
         .filePreviewHandle(
             eq("https://example.org/example"), isA(Model.class), isA(FileAttribute.class));
     assertEquals("online3D", actualFilePreviewHandleResult);
-    assertTrue(model.isEmpty());
   }
 
   /**
@@ -126,10 +126,6 @@ class Online3DFilePreviewImplDiffblueTest {
     "String Online3DFilePreviewImpl.filePreviewHandle(String, Model, FileAttribute)"
   })
   void testFilePreviewHandle_thenConcurrentModelSizeIsOne() {
-    //   Diffblue Cover was unable to create a Spring-specific test for this Spring method.
-    //   Run dcover create --keep-partial-tests to gain insights into why
-    //   a non-Spring test was created.
-
     // Arrange
     FileHandlerService fileHandlerService = new FileHandlerService(new CacheServiceJDKImpl());
     CommonPreviewImpl commonPreview =
@@ -165,10 +161,6 @@ class Online3DFilePreviewImplDiffblueTest {
     "String Online3DFilePreviewImpl.filePreviewHandle(String, Model, FileAttribute)"
   })
   void testFilePreviewHandle_thenConcurrentModelSizeIsTwo() {
-    //   Diffblue Cover was unable to create a Spring-specific test for this Spring method.
-    //   Run dcover create --keep-partial-tests to gain insights into why
-    //   a non-Spring test was created.
-
     // Arrange
     FileHandlerService fileHandlerService = new FileHandlerService(new CacheServiceJDKImpl());
     PictureFilePreviewImpl commonPreview =

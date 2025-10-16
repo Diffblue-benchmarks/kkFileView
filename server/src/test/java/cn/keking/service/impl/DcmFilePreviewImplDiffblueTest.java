@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isA;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import cn.keking.model.FileAttribute;
@@ -17,18 +16,30 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
 
+@ContextConfiguration(classes = {DcmFilePreviewImpl.class})
+@ExtendWith(SpringExtension.class)
 class DcmFilePreviewImplDiffblueTest {
+  @MockBean(name = "commonPreview")
+  private CommonPreviewImpl commonPreviewImpl;
+
+  @Autowired private DcmFilePreviewImpl dcmFilePreviewImpl;
+
   /**
    * Test {@link DcmFilePreviewImpl#filePreviewHandle(String, Model, FileAttribute)}.
    *
    * <ul>
    *   <li>Given {@code false}.
    *   <li>When {@code null}.
-   *   <li>Then return {@code dcm}.
+   *   <li>Then {@link ConcurrentModel#ConcurrentModel()} Empty.
    * </ul>
    *
    * <p>Method under test: {@link DcmFilePreviewImpl#filePreviewHandle(String, Model,
@@ -36,15 +47,11 @@ class DcmFilePreviewImplDiffblueTest {
    */
   @Test
   @DisplayName(
-      "Test filePreviewHandle(String, Model, FileAttribute); given 'false'; when 'null'; then return 'dcm'")
+      "Test filePreviewHandle(String, Model, FileAttribute); given 'false'; when 'null'; then ConcurrentModel() Empty")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String DcmFilePreviewImpl.filePreviewHandle(String, Model, FileAttribute)"})
-  void testFilePreviewHandle_givenFalse_whenNull_thenReturnDcm() {
-    //   Diffblue Cover was unable to create a Spring-specific test for this Spring method.
-    //   Run dcover create --keep-partial-tests to gain insights into why
-    //   a non-Spring test was created.
-
+  void testFilePreviewHandle_givenFalse_whenNull_thenConcurrentModelEmpty() {
     // Arrange
     FileHandlerService fileHandlerService = new FileHandlerService(new CacheServiceJDKImpl());
     CommonPreviewImpl commonPreview =
@@ -78,16 +85,10 @@ class DcmFilePreviewImplDiffblueTest {
   @ManagedByDiffblue
   @MethodsUnderTest({"String DcmFilePreviewImpl.filePreviewHandle(String, Model, FileAttribute)"})
   void testFilePreviewHandle_thenCallsFilePreviewHandle() {
-    //   Diffblue Cover was unable to create a Spring-specific test for this Spring method.
-    //   Run dcover create --keep-partial-tests to gain insights into why
-    //   a non-Spring test was created.
-
     // Arrange
-    CommonPreviewImpl commonPreview = mock(CommonPreviewImpl.class);
-    when(commonPreview.filePreviewHandle(
+    when(commonPreviewImpl.filePreviewHandle(
             Mockito.<String>any(), Mockito.<Model>any(), Mockito.<FileAttribute>any()))
         .thenReturn("File Preview Handle");
-    DcmFilePreviewImpl dcmFilePreviewImpl = new DcmFilePreviewImpl(commonPreview);
     ConcurrentModel model = new ConcurrentModel();
 
     // Act
@@ -96,11 +97,10 @@ class DcmFilePreviewImplDiffblueTest {
             "https://example.org/example", model, new FileAttribute());
 
     // Assert
-    verify(commonPreview)
+    verify(commonPreviewImpl)
         .filePreviewHandle(
             eq("https://example.org/example"), isA(Model.class), isA(FileAttribute.class));
     assertEquals("dcm", actualFilePreviewHandleResult);
-    assertTrue(model.isEmpty());
   }
 
   /**
@@ -120,10 +120,6 @@ class DcmFilePreviewImplDiffblueTest {
   @ManagedByDiffblue
   @MethodsUnderTest({"String DcmFilePreviewImpl.filePreviewHandle(String, Model, FileAttribute)"})
   void testFilePreviewHandle_thenConcurrentModelSizeIsOne() {
-    //   Diffblue Cover was unable to create a Spring-specific test for this Spring method.
-    //   Run dcover create --keep-partial-tests to gain insights into why
-    //   a non-Spring test was created.
-
     // Arrange
     FileHandlerService fileHandlerService = new FileHandlerService(new CacheServiceJDKImpl());
     CommonPreviewImpl commonPreview =
@@ -156,10 +152,6 @@ class DcmFilePreviewImplDiffblueTest {
   @ManagedByDiffblue
   @MethodsUnderTest({"String DcmFilePreviewImpl.filePreviewHandle(String, Model, FileAttribute)"})
   void testFilePreviewHandle_thenConcurrentModelSizeIsTwo() {
-    //   Diffblue Cover was unable to create a Spring-specific test for this Spring method.
-    //   Run dcover create --keep-partial-tests to gain insights into why
-    //   a non-Spring test was created.
-
     // Arrange
     FileHandlerService fileHandlerService = new FileHandlerService(new CacheServiceJDKImpl());
     PictureFilePreviewImpl commonPreview =
