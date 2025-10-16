@@ -4,6 +4,7 @@ import org.redisson.config.Config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.test.context.TestPropertySource;
 
 /**
  * Test configuration for CacheServiceRedisImpl to resolve Spring context issues.
@@ -11,6 +12,10 @@ import org.springframework.context.annotation.Primary;
  * a real Redis connection.
  */
 @Configuration
+@TestPropertySource(properties = {
+    "cache.type=redis",
+    "server.tomcat.uri-encoding=UTF-8"
+})
 public class CacheServiceRedisImplTestConfiguration {
 
     /**
@@ -30,7 +35,8 @@ public class CacheServiceRedisImplTestConfiguration {
                 .setConnectionMinimumIdleSize(2)
                 .setTimeout(3000)
                 .setRetryAttempts(0)  // Don't retry on failure for tests
-                .setRetryInterval(1500);
+                .setRetryInterval(1500)
+                .setConnectTimeout(3000);
 
         return config;
     }
@@ -38,6 +44,7 @@ public class CacheServiceRedisImplTestConfiguration {
     /**
      * Creates a CacheServiceRedisImpl bean for testing.
      * The @Primary annotation ensures this bean is used when autowiring.
+     * This bean is created directly without relying on the conditional expression.
      *
      * @param config the Redisson configuration
      * @return a CacheServiceRedisImpl instance
