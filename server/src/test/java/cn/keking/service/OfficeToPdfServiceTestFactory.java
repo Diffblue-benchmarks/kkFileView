@@ -41,4 +41,24 @@ public class OfficeToPdfServiceTestFactory {
         fileAttribute.setHtmlView(false);
         return fileAttribute;
     }
+
+    /**
+     * Factory method to create a valid OfficeToPdfService instance for testing.
+     * This prevents NullPointerException during test generation for openOfficeToPDF method.
+     *
+     * @return a properly initialized OfficeToPdfService instance
+     */
+    @InterestingTestFactory
+    public static OfficeToPdfService createOfficeToPdfService() {
+        // Initialize ConfigConstants to prevent NPE
+        ConfigConstants.setOfficePageRangeValue("false");
+        ConfigConstants.setOfficeWatermarkValue("false");
+        ConfigConstants.setOfficeQualityValue("80");
+        ConfigConstants.setOfficeMaxImageResolutionValue("150");
+        ConfigConstants.setOfficeExportBookmarksValue(true);
+        ConfigConstants.setOfficeExportNotesValue(true);
+        ConfigConstants.setOfficeDocumentOpenPasswordsValue(true);
+
+        return new OfficeToPdfService();
+    }
 }
