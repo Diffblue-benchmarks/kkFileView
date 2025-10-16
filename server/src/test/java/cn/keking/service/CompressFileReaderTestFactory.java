@@ -37,12 +37,6 @@ public class CompressFileReaderTestFactory {
         // Create FileHandlerService with the mock cache service
         FileHandlerService fileHandlerService = new FileHandlerService(mockCacheService);
 
-        // Initialize BaseUrlFilter (if needed)
-        try {
-            BaseUrlFilter.setBaseUrl("http://localhost:8080");
-        } catch (Exception e) {
-            // Ignore if BaseUrlFilter cannot be set
-        }
 
         return new CompressFileReader(fileHandlerService);
     }
