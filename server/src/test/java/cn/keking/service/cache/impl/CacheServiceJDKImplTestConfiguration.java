@@ -3,6 +3,7 @@ package cn.keking.service.cache.impl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.test.context.TestPropertySource;
 
 /**
  * Test configuration for CacheServiceJDKImpl to resolve Spring context issues.
@@ -13,11 +14,16 @@ import org.springframework.context.annotation.Primary;
  * automatically picked up by component scanning in test contexts.
  */
 @Configuration
+@TestPropertySource(properties = {
+    "cache.type=jdk",
+    "server.tomcat.uri-encoding=UTF-8"
+})
 public class CacheServiceJDKImplTestConfiguration {
 
     /**
      * Creates a CacheServiceJDKImpl bean for testing.
      * The @Primary annotation ensures this bean is used when autowiring.
+     * This bean is created directly without relying on the conditional expression.
      *
      * @return a properly initialized CacheServiceJDKImpl instance
      */
@@ -30,3 +36,4 @@ public class CacheServiceJDKImplTestConfiguration {
         return cacheService;
     }
 }
+
