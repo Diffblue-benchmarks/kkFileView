@@ -38,6 +38,7 @@ class SecurityFilterProxyDiffblueTest {
    * FilterChain)}.
    *
    * <ul>
+   *   <li>Given {@link ServletException#ServletException()}.
    *   <li>Then throw {@link ServletException}.
    * </ul>
    *
@@ -46,19 +47,20 @@ class SecurityFilterProxyDiffblueTest {
    */
   @Test
   @DisplayName(
-      "Test doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain); then throw ServletException")
+      "Test doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain); given ServletException(); then throw ServletException")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({
     "void SecurityFilterProxy.doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)"
   })
-  void testDoFilterInternal_thenThrowServletException() throws IOException, ServletException {
+  void testDoFilterInternal_givenServletException_thenThrowServletException()
+      throws IOException, ServletException {
     // Arrange
     MockHttpServletRequest request = new MockHttpServletRequest();
     MockHttpServletResponse response = new MockHttpServletResponse();
 
     FilterChain filterChain = mock(FilterChain.class);
-    doThrow(new ServletException("An error occurred"))
+    doThrow(new ServletException())
         .when(filterChain)
         .doFilter(Mockito.<ServletRequest>any(), Mockito.<ServletResponse>any());
 

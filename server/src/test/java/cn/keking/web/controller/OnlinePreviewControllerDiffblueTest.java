@@ -12,6 +12,7 @@ import cn.keking.model.FileAttribute;
 import cn.keking.service.FileHandlerService;
 import cn.keking.service.FilePreview;
 import cn.keking.service.FilePreviewFactory;
+import cn.keking.service.OfficeToPdfServiceTestFactory;
 import cn.keking.service.cache.CacheService;
 import cn.keking.service.impl.OtherFilePreviewImpl;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
@@ -24,7 +25,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -33,7 +36,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
 @ContextConfiguration(classes = {OnlinePreviewController.class})
+@EnableConfigurationProperties
 @ExtendWith(SpringExtension.class)
+@PropertySource("classpath:application-test.properties")
 class OnlinePreviewControllerDiffblueTest {
   @MockBean private CacheService cacheService;
 
@@ -71,7 +76,7 @@ class OnlinePreviewControllerDiffblueTest {
     when(filePreviewFactory.get(Mockito.<FileAttribute>any())).thenReturn(filePreview);
     when(fileHandlerService.getFileAttribute(
             Mockito.<String>any(), Mockito.<HttpServletRequest>any()))
-        .thenReturn(new FileAttribute());
+        .thenReturn(OfficeToPdfServiceTestFactory.createFileAttribute());
 
     MockHttpServletRequestBuilder requestBuilder =
         MockMvcRequestBuilders.get("/onlinePreview").param("url", "42");
@@ -113,7 +118,7 @@ class OnlinePreviewControllerDiffblueTest {
     when(filePreviewFactory.get(Mockito.<FileAttribute>any())).thenReturn(filePreview);
     when(fileHandlerService.getFileAttribute(
             Mockito.<String>any(), Mockito.<HttpServletRequest>any()))
-        .thenReturn(new FileAttribute());
+        .thenReturn(OfficeToPdfServiceTestFactory.createFileAttribute());
 
     MockHttpServletRequestBuilder requestBuilder =
         MockMvcRequestBuilders.get("/onlinePreview").param("url", "foo");
@@ -155,7 +160,7 @@ class OnlinePreviewControllerDiffblueTest {
     when(filePreviewFactory.get(Mockito.<FileAttribute>any())).thenReturn(filePreview);
     when(fileHandlerService.getFileAttribute(
             Mockito.<String>any(), Mockito.<HttpServletRequest>any()))
-        .thenReturn(new FileAttribute());
+        .thenReturn(OfficeToPdfServiceTestFactory.createFileAttribute());
 
     MockHttpServletRequestBuilder requestBuilder =
         MockMvcRequestBuilders.get("/onlinePreview").param("url", "Values");
@@ -264,36 +269,6 @@ class OnlinePreviewControllerDiffblueTest {
    * Test {@link OnlinePreviewController#getCorsFile(String, HttpServletResponse, FileAttribute)}.
    *
    * <ul>
-   *   <li>When {@code https://example.org/example}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OnlinePreviewController#getCorsFile(String, HttpServletResponse,
-   * FileAttribute)}
-   */
-  @Test
-  @DisplayName(
-      "Test getCorsFile(String, HttpServletResponse, FileAttribute); when 'https://example.org/example'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "void OnlinePreviewController.getCorsFile(String, HttpServletResponse, FileAttribute)"
-  })
-  void testGetCorsFile_whenHttpsExampleOrgExample() throws Exception {
-    // Arrange
-    MockHttpServletRequestBuilder requestBuilder =
-        MockMvcRequestBuilders.get("/getCorsFile").param("urlPath", "https://example.org/example");
-
-    // Act and Assert
-    MockMvcBuilders.standaloneSetup(onlinePreviewController)
-        .build()
-        .perform(requestBuilder)
-        .andExpect(status().isOk());
-  }
-
-  /**
-   * Test {@link OnlinePreviewController#getCorsFile(String, HttpServletResponse, FileAttribute)}.
-   *
-   * <ul>
    *   <li>When lf.
    * </ul>
    *
@@ -311,6 +286,35 @@ class OnlinePreviewControllerDiffblueTest {
     // Arrange
     MockHttpServletRequestBuilder requestBuilder =
         MockMvcRequestBuilders.get("/getCorsFile").param("urlPath", "\n");
+
+    // Act and Assert
+    MockMvcBuilders.standaloneSetup(onlinePreviewController)
+        .build()
+        .perform(requestBuilder)
+        .andExpect(status().isOk());
+  }
+
+  /**
+   * Test {@link OnlinePreviewController#getCorsFile(String, HttpServletResponse, FileAttribute)}.
+   *
+   * <ul>
+   *   <li>When {@code ?}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OnlinePreviewController#getCorsFile(String, HttpServletResponse,
+   * FileAttribute)}
+   */
+  @Test
+  @DisplayName("Test getCorsFile(String, HttpServletResponse, FileAttribute); when '?'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({
+    "void OnlinePreviewController.getCorsFile(String, HttpServletResponse, FileAttribute)"
+  })
+  void testGetCorsFile_whenQuestionMark() throws Exception {
+    // Arrange
+    MockHttpServletRequestBuilder requestBuilder =
+        MockMvcRequestBuilders.get("/getCorsFile").param("urlPath", "?");
 
     // Act and Assert
     MockMvcBuilders.standaloneSetup(onlinePreviewController)

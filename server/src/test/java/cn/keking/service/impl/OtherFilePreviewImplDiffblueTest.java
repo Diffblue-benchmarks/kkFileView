@@ -2,6 +2,7 @@ package cn.keking.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import cn.keking.model.FileAttribute;
+import cn.keking.service.OfficeToPdfServiceTestFactory;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.jupiter.api.DisplayName;
@@ -20,96 +21,34 @@ class OtherFilePreviewImplDiffblueTest {
   @Autowired private OtherFilePreviewImpl otherFilePreviewImpl;
 
   /**
-   * Test {@link OtherFilePreviewImpl#filePreviewHandle(String, Model, FileAttribute)}.
+   * Test {@link OtherFilePreviewImpl#notSupportedFile(Model, FileAttribute, String)} with {@code
+   * model}, {@code fileAttribute}, {@code errMsg}.
    *
-   * <ul>
-   *   <li>When {@link FileAttribute#FileAttribute()}.
-   *   <li>Then {@link ConcurrentModel#ConcurrentModel()} size is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link OtherFilePreviewImpl#filePreviewHandle(String, Model,
-   * FileAttribute)}
+   * <p>Method under test: {@link OtherFilePreviewImpl#notSupportedFile(Model, FileAttribute,
+   * String)}
    */
   @Test
   @DisplayName(
-      "Test filePreviewHandle(String, Model, FileAttribute); when FileAttribute(); then ConcurrentModel() size is one")
+      "Test notSupportedFile(Model, FileAttribute, String) with 'model', 'fileAttribute', 'errMsg'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
-  @MethodsUnderTest({"String OtherFilePreviewImpl.filePreviewHandle(String, Model, FileAttribute)"})
-  void testFilePreviewHandle_whenFileAttribute_thenConcurrentModelSizeIsOne() {
+  @MethodsUnderTest({"String OtherFilePreviewImpl.notSupportedFile(Model, FileAttribute, String)"})
+  void testNotSupportedFileWithModelFileAttributeErrMsg() {
     // Arrange
     ConcurrentModel model = new ConcurrentModel();
 
-    // Act
-    String actualFilePreviewHandleResult =
-        otherFilePreviewImpl.filePreviewHandle(
-            "https://example.org/example", model, new FileAttribute());
-
-    // Assert
-    assertEquals(1, model.size());
-    assertEquals("系统还不支持该格式文件的在线预览", model.get("msg"));
-    assertEquals("fileNotSupported", actualFilePreviewHandleResult);
-  }
-
-  /**
-   * Test {@link OtherFilePreviewImpl#notSupportedFile(Model, String)} with {@code model}, {@code
-   * errMsg}.
-   *
-   * <ul>
-   *   <li>When {@code Err Msg}.
-   *   <li>Then {@link ConcurrentModel#ConcurrentModel()} size is two.
-   * </ul>
-   *
-   * <p>Method under test: {@link OtherFilePreviewImpl#notSupportedFile(Model, String)}
-   */
-  @Test
-  @DisplayName(
-      "Test notSupportedFile(Model, String) with 'model', 'errMsg'; when 'Err Msg'; then ConcurrentModel() size is two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OtherFilePreviewImpl.notSupportedFile(Model, String)"})
-  void testNotSupportedFileWithModelErrMsg_whenErrMsg_thenConcurrentModelSizeIsTwo() {
-    // Arrange
-    ConcurrentModel model = new ConcurrentModel();
+    FileAttribute fileAttribute = OfficeToPdfServiceTestFactory.createFileAttribute();
+    fileAttribute.setSuffix("not blank");
 
     // Act
-    String actualNotSupportedFileResult = otherFilePreviewImpl.notSupportedFile(model, "Err Msg");
+    String actualNotSupportedFileResult =
+        otherFilePreviewImpl.notSupportedFile(model, fileAttribute, "");
 
     // Assert
     assertEquals(2, model.size());
-    assertEquals("Err Msg", model.get("msg"));
-    assertEquals("未知", model.get("fileType"));
+    assertEquals("", model.get("msg"));
     assertEquals("fileNotSupported", actualNotSupportedFileResult);
-  }
-
-  /**
-   * Test {@link OtherFilePreviewImpl#notSupportedFile(Model, String)} with {@code model}, {@code
-   * errMsg}.
-   *
-   * <ul>
-   *   <li>When {@code null}.
-   *   <li>Then {@link ConcurrentModel#ConcurrentModel()} size is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link OtherFilePreviewImpl#notSupportedFile(Model, String)}
-   */
-  @Test
-  @DisplayName(
-      "Test notSupportedFile(Model, String) with 'model', 'errMsg'; when 'null'; then ConcurrentModel() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OtherFilePreviewImpl.notSupportedFile(Model, String)"})
-  void testNotSupportedFileWithModelErrMsg_whenNull_thenConcurrentModelSizeIsOne() {
-    // Arrange
-    ConcurrentModel model = new ConcurrentModel();
-
-    // Act
-    String actualNotSupportedFileResult = otherFilePreviewImpl.notSupportedFile(model, null);
-
-    // Assert
-    assertEquals(1, model.size());
-    assertEquals("未知", model.get("fileType"));
-    assertEquals("fileNotSupported", actualNotSupportedFileResult);
+    assertEquals("not blank", model.get("fileType"));
   }
 
   /**
@@ -117,7 +56,7 @@ class OtherFilePreviewImplDiffblueTest {
    * model}, {@code fileAttribute}, {@code errMsg}.
    *
    * <ul>
-   *   <li>Then {@link ConcurrentModel#ConcurrentModel()} size is one.
+   *   <li>Then {@link ConcurrentModel#ConcurrentModel()} {@code msg} is {@code Err Msg}.
    * </ul>
    *
    * <p>Method under test: {@link OtherFilePreviewImpl#notSupportedFile(Model, FileAttribute,
@@ -125,21 +64,23 @@ class OtherFilePreviewImplDiffblueTest {
    */
   @Test
   @DisplayName(
-      "Test notSupportedFile(Model, FileAttribute, String) with 'model', 'fileAttribute', 'errMsg'; then ConcurrentModel() size is one")
+      "Test notSupportedFile(Model, FileAttribute, String) with 'model', 'fileAttribute', 'errMsg'; then ConcurrentModel() 'msg' is 'Err Msg'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String OtherFilePreviewImpl.notSupportedFile(Model, FileAttribute, String)"})
-  void testNotSupportedFileWithModelFileAttributeErrMsg_thenConcurrentModelSizeIsOne() {
+  void testNotSupportedFileWithModelFileAttributeErrMsg_thenConcurrentModelMsgIsErrMsg() {
     // Arrange
     ConcurrentModel model = new ConcurrentModel();
 
     // Act
     String actualNotSupportedFileResult =
-        otherFilePreviewImpl.notSupportedFile(model, new FileAttribute(), "Err Msg");
+        otherFilePreviewImpl.notSupportedFile(
+            model, OfficeToPdfServiceTestFactory.createFileAttribute(), "Err Msg");
 
     // Assert
-    assertEquals(1, model.size());
+    assertEquals(2, model.size());
     assertEquals("Err Msg", model.get("msg"));
+    assertEquals("docx", model.get("fileType"));
     assertEquals("fileNotSupported", actualNotSupportedFileResult);
   }
 
@@ -148,28 +89,30 @@ class OtherFilePreviewImplDiffblueTest {
    * {@code fileType}, {@code errMsg}.
    *
    * <ul>
-   *   <li>Then {@link ConcurrentModel#ConcurrentModel()} size is two.
+   *   <li>Then {@link ConcurrentModel#ConcurrentModel()} {@code msg} is empty string.
    * </ul>
    *
    * <p>Method under test: {@link OtherFilePreviewImpl#notSupportedFile(Model, String, String)}
    */
   @Test
   @DisplayName(
-      "Test notSupportedFile(Model, String, String) with 'model', 'fileType', 'errMsg'; then ConcurrentModel() size is two")
+      "Test notSupportedFile(Model, String, String) with 'model', 'fileType', 'errMsg'; then ConcurrentModel() 'msg' is empty string")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String OtherFilePreviewImpl.notSupportedFile(Model, String, String)"})
-  void testNotSupportedFileWithModelFileTypeErrMsg_thenConcurrentModelSizeIsTwo() {
+  void testNotSupportedFileWithModelFileTypeErrMsg_thenConcurrentModelMsgIsEmptyString() {
     // Arrange
     ConcurrentModel model = new ConcurrentModel();
 
     // Act
-    otherFilePreviewImpl.notSupportedFile(model, "File Type", "Err Msg");
+    String actualNotSupportedFileResult =
+        otherFilePreviewImpl.notSupportedFile(model, "not blank", "");
 
     // Assert
     assertEquals(2, model.size());
-    assertEquals("Err Msg", model.get("msg"));
-    assertEquals("File Type", model.get("fileType"));
+    assertEquals("", model.get("msg"));
+    assertEquals("fileNotSupported", actualNotSupportedFileResult);
+    assertEquals("not blank", model.get("fileType"));
   }
 
   /**
@@ -177,25 +120,29 @@ class OtherFilePreviewImplDiffblueTest {
    * {@code fileType}, {@code errMsg}.
    *
    * <ul>
-   *   <li>Then return {@code fileNotSupported}.
+   *   <li>Then {@link ConcurrentModel#ConcurrentModel()} {@code msg} is {@code Err Msg}.
    * </ul>
    *
    * <p>Method under test: {@link OtherFilePreviewImpl#notSupportedFile(Model, String, String)}
    */
   @Test
   @DisplayName(
-      "Test notSupportedFile(Model, String, String) with 'model', 'fileType', 'errMsg'; then return 'fileNotSupported'")
+      "Test notSupportedFile(Model, String, String) with 'model', 'fileType', 'errMsg'; then ConcurrentModel() 'msg' is 'Err Msg'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String OtherFilePreviewImpl.notSupportedFile(Model, String, String)"})
-  void testNotSupportedFileWithModelFileTypeErrMsg_thenReturnFileNotSupported() {
+  void testNotSupportedFileWithModelFileTypeErrMsg_thenConcurrentModelMsgIsErrMsg() {
     // Arrange
     ConcurrentModel model = new ConcurrentModel();
 
-    // Act and Assert
-    assertEquals(
-        "fileNotSupported", otherFilePreviewImpl.notSupportedFile(model, "not blank", null));
-    assertEquals(1, model.size());
-    assertEquals("not blank", model.get("fileType"));
+    // Act
+    String actualNotSupportedFileResult =
+        otherFilePreviewImpl.notSupportedFile(model, "File Type", "Err Msg");
+
+    // Assert
+    assertEquals(2, model.size());
+    assertEquals("Err Msg", model.get("msg"));
+    assertEquals("File Type", model.get("fileType"));
+    assertEquals("fileNotSupported", actualNotSupportedFileResult);
   }
 }
