@@ -13,13 +13,22 @@ import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
 
+@ExtendWith(MockitoExtension.class)
 class FilePreviewFactoryDiffblueTest {
+  @Mock private ApplicationContext applicationContext;
+
+  @InjectMocks private FilePreviewFactory filePreviewFactory;
+
   /**
    * Test {@link FilePreviewFactory#get(FileAttribute)}.
    *
@@ -36,10 +45,8 @@ class FilePreviewFactoryDiffblueTest {
     when(filePreview.filePreviewHandle(
             Mockito.<String>any(), Mockito.<Model>any(), Mockito.<FileAttribute>any()))
         .thenReturn("File Preview Handle");
-
-    ApplicationContext context = mock(ApplicationContext.class);
-    when(context.getBean(Mockito.<String>any(), eq(FilePreview.class))).thenReturn(filePreview);
-    FilePreviewFactory filePreviewFactory = new FilePreviewFactory(context);
+    when(applicationContext.getBean(Mockito.<String>any(), Mockito.<Class<FilePreview>>any()))
+        .thenReturn(filePreview);
     FileAttribute fileAttribute =
         new FileAttribute(FileType.PICTURE, "Suffix", "Name", "https://example.org/example");
 
@@ -51,7 +58,7 @@ class FilePreviewFactoryDiffblueTest {
 
     // Assert
     verify(filePreview).filePreviewHandle(eq("foo"), isA(Model.class), isA(FileAttribute.class));
-    verify(context).getBean(eq("pictureFilePreviewImpl"), isA(Class.class));
+    verify(applicationContext).getBean(eq("pictureFilePreviewImpl"), isA(Class.class));
     assertEquals("File Preview Handle", actualFilePreviewHandleResult);
   }
 }

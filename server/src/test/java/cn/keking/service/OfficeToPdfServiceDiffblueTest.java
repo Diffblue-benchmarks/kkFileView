@@ -39,7 +39,7 @@ class OfficeToPdfServiceDiffblueTest {
     // Arrange, Act and Assert
     assertEquals(
         ".pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf",
-        OfficeToPdfService.getOutputFilePath("/directory/foo.txtUtxt."));
+        OfficeToPdfService.getOutputFilePath("/directory/foo.txtxtxt."));
   }
 
   /**
@@ -105,6 +105,29 @@ class OfficeToPdfServiceDiffblueTest {
     assertEquals(
         ".cn.keking.service.pdf",
         OfficeToPdfService.getOutputFilePath(".cn.keking.service.OfficeToPdfService"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>Then return {@code 创建目录【{}】失败，请检查目录权限！cn.keking.service.pdf}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test getOutputFilePath(String); then return '创建目录【{}】失败，请检查目录权限！cn.keking.service.pdf'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_thenReturnCnKekingServicePdf2() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "创建目录【{}】失败，请检查目录权限！cn.keking.service.pdf",
+        OfficeToPdfService.getOutputFilePath(
+            "创建目录【{}】失败，请检查目录权限！cn.keking.service.OfficeToPdfService"));
   }
 
   /**
@@ -215,29 +238,29 @@ class OfficeToPdfServiceDiffblueTest {
     // Arrange, Act and Assert
     assertEquals(
         "/directory/foo.pdf.pdf/directory/foo.pdf",
-        OfficeToPdfService.getOutputFilePath("/directory/foo.txtUtxt/directory/foo.txt"));
+        OfficeToPdfService.getOutputFilePath("/directory/foo.txtxtxt/directory/foo.txt"));
   }
 
   /**
    * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
    *
    * <ul>
-   *   <li>Then return {@code /directory/foo.pdfU/directory/foo.pdf}.
+   *   <li>Then return {@code /directory/foo.pdfx/directory/foo.pdf}.
    * </ul>
    *
    * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
    */
   @Test
   @DisplayName(
-      "Test getOutputFilePath(String); then return '/directory/foo.pdfU/directory/foo.pdf'")
+      "Test getOutputFilePath(String); then return '/directory/foo.pdfx/directory/foo.pdf'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_thenReturnDirectoryFooPdfUDirectoryFooPdf() {
+  void testGetOutputFilePath_thenReturnDirectoryFooPdfxDirectoryFooPdf() {
     // Arrange, Act and Assert
     assertEquals(
-        "/directory/foo.pdfU/directory/foo.pdf",
-        OfficeToPdfService.getOutputFilePath("/directory/foo.txtU/directory/foo.txt"));
+        "/directory/foo.pdfx/directory/foo.pdf",
+        OfficeToPdfService.getOutputFilePath("/directory/foo.txtx/directory/foo.txt"));
   }
 
   /**
@@ -267,52 +290,6 @@ class OfficeToPdfServiceDiffblueTest {
    * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
    *
    * <ul>
-   *   <li>Then return {@code /directory/foo.txtUcn.keking.service.pdf}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test getOutputFilePath(String); then return '/directory/foo.txtUcn.keking.service.pdf'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_thenReturnDirectoryFooTxtUcnKekingServicePdf() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.txtUcn.keking.service.pdf",
-        OfficeToPdfService.getOutputFilePath(
-            "/directory/foo.txtUcn.keking.service.OfficeToPdfService"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>Then return {@code /directory/foo.txtUtxtcn.keking.service.pdf}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test getOutputFilePath(String); then return '/directory/foo.txtUtxtcn.keking.service.pdf'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_thenReturnDirectoryFooTxtUtxtcnKekingServicePdf() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.txtUtxtcn.keking.service.pdf",
-        OfficeToPdfService.getOutputFilePath(
-            "/directory/foo.txtUtxtcn.keking.service.OfficeToPdfService"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
    *   <li>Then return {@code /directory/foo.txtcn.keking.service.pdf}.
    * </ul>
    *
@@ -330,6 +307,52 @@ class OfficeToPdfServiceDiffblueTest {
         "/directory/foo.txtcn.keking.service.pdf",
         OfficeToPdfService.getOutputFilePath(
             "/directory/foo.txtcn.keking.service.OfficeToPdfService"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>Then return {@code /directory/foo.txtxcn.keking.service.pdf}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test getOutputFilePath(String); then return '/directory/foo.txtxcn.keking.service.pdf'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_thenReturnDirectoryFooTxtxcnKekingServicePdf() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.txtxcn.keking.service.pdf",
+        OfficeToPdfService.getOutputFilePath(
+            "/directory/foo.txtxcn.keking.service.OfficeToPdfService"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>Then return {@code /directory/foo.txtxtxtcn.keking.service.pdf}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test getOutputFilePath(String); then return '/directory/foo.txtxtxtcn.keking.service.pdf'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_thenReturnDirectoryFooTxtxtxtcnKekingServicePdf() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.txtxtxtcn.keking.service.pdf",
+        OfficeToPdfService.getOutputFilePath(
+            "/directory/foo.txtxtxtcn.keking.service.OfficeToPdfService"));
   }
 
   /**
@@ -721,42 +744,63 @@ class OfficeToPdfServiceDiffblueTest {
    * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
    *
    * <ul>
-   *   <li>Then return {@code Ucn.keking.service.pdf}.
+   *   <li>Then return {@code xcn.keking.service.pdf}.
    * </ul>
    *
    * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
    */
   @Test
-  @DisplayName("Test getOutputFilePath(String); then return 'Ucn.keking.service.pdf'")
+  @DisplayName("Test getOutputFilePath(String); then return 'xcn.keking.service.pdf'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_thenReturnUcnKekingServicePdf() {
+  void testGetOutputFilePath_thenReturnXcnKekingServicePdf() {
     // Arrange, Act and Assert
     assertEquals(
-        "Ucn.keking.service.pdf",
-        OfficeToPdfService.getOutputFilePath("Ucn.keking.service.OfficeToPdfService"));
+        "xcn.keking.service.pdf",
+        OfficeToPdfService.getOutputFilePath("xcn.keking.service.OfficeToPdfService"));
   }
 
   /**
    * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
    *
    * <ul>
-   *   <li>Then return {@code Utxtcn.keking.service.pdf}.
+   *   <li>Then return {@code xtxtcn.keking.service.pdf}.
    * </ul>
    *
    * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
    */
   @Test
-  @DisplayName("Test getOutputFilePath(String); then return 'Utxtcn.keking.service.pdf'")
+  @DisplayName("Test getOutputFilePath(String); then return 'xtxtcn.keking.service.pdf'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_thenReturnUtxtcnKekingServicePdf() {
+  void testGetOutputFilePath_thenReturnXtxtcnKekingServicePdf() {
     // Arrange, Act and Assert
     assertEquals(
-        "Utxtcn.keking.service.pdf",
-        OfficeToPdfService.getOutputFilePath("Utxtcn.keking.service.OfficeToPdfService"));
+        "xtxtcn.keking.service.pdf",
+        OfficeToPdfService.getOutputFilePath("xtxtcn.keking.service.OfficeToPdfService"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code 创建目录【{}】失败，请检查目录权限！.}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName("Test getOutputFilePath(String); when '创建目录【{}】失败，请检查目录权限！.'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_when() {
+    // Arrange, Act and Assert
+    assertEquals(
+        ".pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf",
+        OfficeToPdfService.getOutputFilePath("创建目录【{}】失败，请检查目录权限！."));
   }
 
   /**
@@ -1047,48 +1091,6 @@ class OfficeToPdfServiceDiffblueTest {
    * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
    *
    * <ul>
-   *   <li>When {@code OfficeToPdfServiceU}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName("Test getOutputFilePath(String); when 'cn.keking.service.OfficeToPdfServiceU'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenCnKekingServiceOfficeToPdfServiceU() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "cn.keking.service.pdf",
-        OfficeToPdfService.getOutputFilePath("cn.keking.service.OfficeToPdfServiceU"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code OfficeToPdfServiceUtxt}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName("Test getOutputFilePath(String); when 'cn.keking.service.OfficeToPdfServiceUtxt'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenCnKekingServiceOfficeToPdfServiceUtxt() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "cn.keking.service.pdf",
-        OfficeToPdfService.getOutputFilePath("cn.keking.service.OfficeToPdfServiceUtxt"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
    *   <li>When {@code OfficeToPdfService.}.
    *   <li>Then return a string.
    * </ul>
@@ -1128,6 +1130,48 @@ class OfficeToPdfServiceDiffblueTest {
     assertEquals(
         "cn.keking.service.pdf",
         OfficeToPdfService.getOutputFilePath("cn.keking.service.OfficeToPdfServicefalse"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code OfficeToPdfServicex}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName("Test getOutputFilePath(String); when 'cn.keking.service.OfficeToPdfServicex'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenCnKekingServiceOfficeToPdfServicex() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "cn.keking.service.pdf",
+        OfficeToPdfService.getOutputFilePath("cn.keking.service.OfficeToPdfServicex"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code OfficeToPdfServicextxt}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName("Test getOutputFilePath(String); when 'cn.keking.service.OfficeToPdfServicextxt'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenCnKekingServiceOfficeToPdfServicextxt() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "cn.keking.service.pdf",
+        OfficeToPdfService.getOutputFilePath("cn.keking.service.OfficeToPdfServicextxt"));
   }
 
   /**
@@ -1421,48 +1465,6 @@ class OfficeToPdfServiceDiffblueTest {
    * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
    *
    * <ul>
-   *   <li>When {@code /directory/foo.txt/directory/foo.txtU}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txt/directory/foo.txtU'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtDirectoryFooTxtU() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.txt/directory/foo.pdf",
-        OfficeToPdfService.getOutputFilePath("/directory/foo.txt/directory/foo.txtU"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txt/directory/foo.txtUtxt}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txt/directory/foo.txtUtxt'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtDirectoryFooTxtUtxt() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.txt/directory/foo.pdf",
-        OfficeToPdfService.getOutputFilePath("/directory/foo.txt/directory/foo.txtUtxt"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
    *   <li>When {@code /directory/foo.txt/directory/foo.txt.}.
    *   <li>Then return a string.
    * </ul>
@@ -1502,6 +1504,48 @@ class OfficeToPdfServiceDiffblueTest {
     assertEquals(
         "/directory/foo.txt/directory/foo.pdf",
         OfficeToPdfService.getOutputFilePath("/directory/foo.txt/directory/foo.txtfalse"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txt/directory/foo.txtx}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txt/directory/foo.txtx'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtDirectoryFooTxtx() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.txt/directory/foo.pdf",
+        OfficeToPdfService.getOutputFilePath("/directory/foo.txt/directory/foo.txtx"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txt/directory/foo.txtxtxt}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txt/directory/foo.txtxtxt'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtDirectoryFooTxtxtxt() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.txt/directory/foo.pdf",
+        OfficeToPdfService.getOutputFilePath("/directory/foo.txt/directory/foo.txtxtxt"));
   }
 
   /**
@@ -1833,268 +1877,29 @@ class OfficeToPdfServiceDiffblueTest {
    * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
    *
    * <ul>
-   *   <li>When {@code /directory/foo.txtU.}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtU.'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtU() {
-    // Arrange, Act and Assert
-    assertEquals(
-        ".pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf",
-        OfficeToPdfService.getOutputFilePath("/directory/foo.txtU."));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtU42}.
-   *   <li>Then return {@code /directory/foo.pdf}.
+   *   <li>When {@code /directory/foo.txt.x}.
+   *   <li>Then return {@code /directory/foo..pdft.pdf}.
    * </ul>
    *
    * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
    */
   @Test
   @DisplayName(
-      "Test getOutputFilePath(String); when '/directory/foo.txtU42'; then return '/directory/foo.pdf'")
+      "Test getOutputFilePath(String); when '/directory/foo.txt.x'; then return '/directory/foo..pdft.pdf'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtU42_thenReturnDirectoryFooPdf() {
+  void testGetOutputFilePath_whenDirectoryFooTxtX_thenReturnDirectoryFooPdftPdf() {
     // Arrange, Act and Assert
     assertEquals(
-        "/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txtU42"));
+        "/directory/foo..pdft.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txt.x"));
   }
 
   /**
    * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
    *
    * <ul>
-   *   <li>When {@code /directory/foo.txtUDocumentOpenPassword}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtUDocumentOpenPassword'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUDocumentOpenPassword() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf",
-        OfficeToPdfService.getOutputFilePath("/directory/foo.txtUDocumentOpenPassword"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtUEncryptFile}.
-   *   <li>Then return {@code /directory/foo.pdf}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test getOutputFilePath(String); when '/directory/foo.txtUEncryptFile'; then return '/directory/foo.pdf'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUEncryptFile_thenReturnDirectoryFooPdf() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf",
-        OfficeToPdfService.getOutputFilePath("/directory/foo.txtUEncryptFile"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtUExportBookmarks}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtUExportBookmarks'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUExportBookmarks() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf",
-        OfficeToPdfService.getOutputFilePath("/directory/foo.txtUExportBookmarks"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtUExportNotes}.
-   *   <li>Then return {@code /directory/foo.pdf}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test getOutputFilePath(String); when '/directory/foo.txtUExportNotes'; then return '/directory/foo.pdf'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUExportNotes_thenReturnDirectoryFooPdf() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf",
-        OfficeToPdfService.getOutputFilePath("/directory/foo.txtUExportNotes"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtUFilterData}.
-   *   <li>Then return {@code /directory/foo.pdf}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test getOutputFilePath(String); when '/directory/foo.txtUFilterData'; then return '/directory/foo.pdf'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUFilterData_thenReturnDirectoryFooPdf() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf",
-        OfficeToPdfService.getOutputFilePath("/directory/foo.txtUFilterData"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtUInput File Path}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtUInput File Path'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUInputFilePath() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf",
-        OfficeToPdfService.getOutputFilePath("/directory/foo.txtUInput File Path"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtUMaxImageResolution}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtUMaxImageResolution'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUMaxImageResolution() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf",
-        OfficeToPdfService.getOutputFilePath("/directory/foo.txtUMaxImageResolution"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtUPageRange}.
-   *   <li>Then return {@code /directory/foo.pdf}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test getOutputFilePath(String); when '/directory/foo.txtUPageRange'; then return '/directory/foo.pdf'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUPageRange_thenReturnDirectoryFooPdf() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txtUPageRange"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtUU}.
-   *   <li>Then return {@code /directory/foo.pdf}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test getOutputFilePath(String); when '/directory/foo.txtUU'; then return '/directory/foo.pdf'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUU_thenReturnDirectoryFooPdf() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txtUU"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtU}.
-   *   <li>Then return {@code /directory/foo.pdf}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test getOutputFilePath(String); when '/directory/foo.txtU'; then return '/directory/foo.pdf'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtU_thenReturnDirectoryFooPdf() {
-    // Arrange, Act and Assert
-    assertEquals("/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txtU"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txt.U}.
+   *   <li>When {@code /directory/foo.txt.xtxt}.
    *   <li>Then return {@code /directory/foo.txt.pdf}.
    * </ul>
    *
@@ -2102,316 +1907,14 @@ class OfficeToPdfServiceDiffblueTest {
    */
   @Test
   @DisplayName(
-      "Test getOutputFilePath(String); when '/directory/foo.txt.U'; then return '/directory/foo.txt.pdf'")
+      "Test getOutputFilePath(String); when '/directory/foo.txt.xtxt'; then return '/directory/foo.txt.pdf'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtU_thenReturnDirectoryFooTxtPdf() {
+  void testGetOutputFilePath_whenDirectoryFooTxtXtxt_thenReturnDirectoryFooTxtPdf() {
     // Arrange, Act and Assert
     assertEquals(
-        "/directory/foo.txt.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txt.U"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtUfalse}.
-   *   <li>Then return {@code /directory/foo.pdf}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test getOutputFilePath(String); when '/directory/foo.txtUfalse'; then return '/directory/foo.pdf'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUfalse_thenReturnDirectoryFooPdf() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txtUfalse"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtUtxt42}.
-   *   <li>Then return {@code /directory/foo.pdf}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test getOutputFilePath(String); when '/directory/foo.txtUtxt42'; then return '/directory/foo.pdf'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUtxt42_thenReturnDirectoryFooPdf() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txtUtxt42"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtUtxtDocumentOpenPassword}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtUtxtDocumentOpenPassword'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUtxtDocumentOpenPassword() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf",
-        OfficeToPdfService.getOutputFilePath("/directory/foo.txtUtxtDocumentOpenPassword"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtUtxtEncryptFile}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtUtxtEncryptFile'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUtxtEncryptFile() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf",
-        OfficeToPdfService.getOutputFilePath("/directory/foo.txtUtxtEncryptFile"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtUtxtExportBookmarks}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtUtxtExportBookmarks'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUtxtExportBookmarks() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf",
-        OfficeToPdfService.getOutputFilePath("/directory/foo.txtUtxtExportBookmarks"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtUtxtExportNotes}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtUtxtExportNotes'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUtxtExportNotes() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf",
-        OfficeToPdfService.getOutputFilePath("/directory/foo.txtUtxtExportNotes"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtUtxtFilterData}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtUtxtFilterData'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUtxtFilterData() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf",
-        OfficeToPdfService.getOutputFilePath("/directory/foo.txtUtxtFilterData"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtUtxtInput File Path}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtUtxtInput File Path'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUtxtInputFilePath() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf",
-        OfficeToPdfService.getOutputFilePath("/directory/foo.txtUtxtInput File Path"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtUtxtMaxImageResolution}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtUtxtMaxImageResolution'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUtxtMaxImageResolution() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf",
-        OfficeToPdfService.getOutputFilePath("/directory/foo.txtUtxtMaxImageResolution"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtUtxtPageRange}.
-   *   <li>Then return {@code /directory/foo.pdf}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test getOutputFilePath(String); when '/directory/foo.txtUtxtPageRange'; then return '/directory/foo.pdf'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUtxtPageRange_thenReturnDirectoryFooPdf() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf",
-        OfficeToPdfService.getOutputFilePath("/directory/foo.txtUtxtPageRange"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtUtxtUtxt}.
-   *   <li>Then return {@code /directory/foo.pdf}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test getOutputFilePath(String); when '/directory/foo.txtUtxtUtxt'; then return '/directory/foo.pdf'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUtxtUtxt_thenReturnDirectoryFooPdf() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txtUtxtUtxt"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtUtxt}.
-   *   <li>Then return {@code /directory/foo.pdf}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test getOutputFilePath(String); when '/directory/foo.txtUtxt'; then return '/directory/foo.pdf'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUtxt_thenReturnDirectoryFooPdf() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txtUtxt"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txt.Utxt}.
-   *   <li>Then return {@code /directory/foo.txt.pdf}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test getOutputFilePath(String); when '/directory/foo.txt.Utxt'; then return '/directory/foo.txt.pdf'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUtxt_thenReturnDirectoryFooTxtPdf() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.txt.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txt.Utxt"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code /directory/foo.txtUtxtfalse}.
-   *   <li>Then return {@code /directory/foo.pdf}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test getOutputFilePath(String); when '/directory/foo.txtUtxtfalse'; then return '/directory/foo.pdf'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenDirectoryFooTxtUtxtfalse_thenReturnDirectoryFooPdf() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txtUtxtfalse"));
+        "/directory/foo.txt.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txt.xtxt"));
   }
 
   /**
@@ -2461,6 +1964,29 @@ class OfficeToPdfServiceDiffblueTest {
    * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
    *
    * <ul>
+   *   <li>When {@code 创建目录【{}】失败，请检查目录权限！/directory/foo.txt}.
+   *   <li>Then return {@code 创建目录【{}】失败，请检查目录权限！/directory/foo.pdf}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test getOutputFilePath(String); when '创建目录【{}】失败，请检查目录权限！/directory/foo.txt'; then return '创建目录【{}】失败，请检查目录权限！/directory/foo.pdf'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxt_thenReturnDirectoryFooPdf3() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "创建目录【{}】失败，请检查目录权限！/directory/foo.pdf",
+        OfficeToPdfService.getOutputFilePath("创建目录【{}】失败，请检查目录权限！/directory/foo.txt"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
    *   <li>When {@code /directory/foo.txtfalse}.
    *   <li>Then return {@code /directory/foo.pdf}.
    * </ul>
@@ -2477,6 +2003,547 @@ class OfficeToPdfServiceDiffblueTest {
     // Arrange, Act and Assert
     assertEquals(
         "/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txtfalse"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtx.}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtx.'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtx() {
+    // Arrange, Act and Assert
+    assertEquals(
+        ".pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf.pdf",
+        OfficeToPdfService.getOutputFilePath("/directory/foo.txtx."));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtx42}.
+   *   <li>Then return {@code /directory/foo.pdf}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test getOutputFilePath(String); when '/directory/foo.txtx42'; then return '/directory/foo.pdf'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtx42_thenReturnDirectoryFooPdf() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txtx42"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxDocumentOpenPassword}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtxDocumentOpenPassword'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxDocumentOpenPassword() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf",
+        OfficeToPdfService.getOutputFilePath("/directory/foo.txtxDocumentOpenPassword"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxEncryptFile}.
+   *   <li>Then return {@code /directory/foo.pdf}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test getOutputFilePath(String); when '/directory/foo.txtxEncryptFile'; then return '/directory/foo.pdf'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxEncryptFile_thenReturnDirectoryFooPdf() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf",
+        OfficeToPdfService.getOutputFilePath("/directory/foo.txtxEncryptFile"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxExportBookmarks}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtxExportBookmarks'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxExportBookmarks() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf",
+        OfficeToPdfService.getOutputFilePath("/directory/foo.txtxExportBookmarks"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxExportNotes}.
+   *   <li>Then return {@code /directory/foo.pdf}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test getOutputFilePath(String); when '/directory/foo.txtxExportNotes'; then return '/directory/foo.pdf'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxExportNotes_thenReturnDirectoryFooPdf() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf",
+        OfficeToPdfService.getOutputFilePath("/directory/foo.txtxExportNotes"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxFilterData}.
+   *   <li>Then return {@code /directory/foo.pdf}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test getOutputFilePath(String); when '/directory/foo.txtxFilterData'; then return '/directory/foo.pdf'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxFilterData_thenReturnDirectoryFooPdf() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf",
+        OfficeToPdfService.getOutputFilePath("/directory/foo.txtxFilterData"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxInput File Path}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtxInput File Path'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxInputFilePath() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf",
+        OfficeToPdfService.getOutputFilePath("/directory/foo.txtxInput File Path"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxMaxImageResolution}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtxMaxImageResolution'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxMaxImageResolution() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf",
+        OfficeToPdfService.getOutputFilePath("/directory/foo.txtxMaxImageResolution"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxPageRange}.
+   *   <li>Then return {@code /directory/foo.pdf}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test getOutputFilePath(String); when '/directory/foo.txtxPageRange'; then return '/directory/foo.pdf'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxPageRange_thenReturnDirectoryFooPdf() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txtxPageRange"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtx}.
+   *   <li>Then return {@code /directory/foo.pdf}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test getOutputFilePath(String); when '/directory/foo.txtx'; then return '/directory/foo.pdf'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtx_thenReturnDirectoryFooPdf() {
+    // Arrange, Act and Assert
+    assertEquals("/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txtx"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxfalse}.
+   *   <li>Then return {@code /directory/foo.pdf}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test getOutputFilePath(String); when '/directory/foo.txtxfalse'; then return '/directory/foo.pdf'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxfalse_thenReturnDirectoryFooPdf() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txtxfalse"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxtxt42}.
+   *   <li>Then return {@code /directory/foo.pdf}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test getOutputFilePath(String); when '/directory/foo.txtxtxt42'; then return '/directory/foo.pdf'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxtxt42_thenReturnDirectoryFooPdf() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txtxtxt42"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxtxtDocumentOpenPassword}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtxtxtDocumentOpenPassword'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxtxtDocumentOpenPassword() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf",
+        OfficeToPdfService.getOutputFilePath("/directory/foo.txtxtxtDocumentOpenPassword"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxtxtEncryptFile}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtxtxtEncryptFile'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxtxtEncryptFile() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf",
+        OfficeToPdfService.getOutputFilePath("/directory/foo.txtxtxtEncryptFile"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxtxtExportBookmarks}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtxtxtExportBookmarks'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxtxtExportBookmarks() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf",
+        OfficeToPdfService.getOutputFilePath("/directory/foo.txtxtxtExportBookmarks"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxtxtExportNotes}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtxtxtExportNotes'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxtxtExportNotes() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf",
+        OfficeToPdfService.getOutputFilePath("/directory/foo.txtxtxtExportNotes"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxtxtFilterData}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtxtxtFilterData'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxtxtFilterData() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf",
+        OfficeToPdfService.getOutputFilePath("/directory/foo.txtxtxtFilterData"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxtxtInput File Path}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtxtxtInput File Path'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxtxtInputFilePath() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf",
+        OfficeToPdfService.getOutputFilePath("/directory/foo.txtxtxtInput File Path"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxtxtMaxImageResolution}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName("Test getOutputFilePath(String); when '/directory/foo.txtxtxtMaxImageResolution'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxtxtMaxImageResolution() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf",
+        OfficeToPdfService.getOutputFilePath("/directory/foo.txtxtxtMaxImageResolution"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxtxtPageRange}.
+   *   <li>Then return {@code /directory/foo.pdf}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test getOutputFilePath(String); when '/directory/foo.txtxtxtPageRange'; then return '/directory/foo.pdf'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxtxtPageRange_thenReturnDirectoryFooPdf() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf",
+        OfficeToPdfService.getOutputFilePath("/directory/foo.txtxtxtPageRange"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxtxt}.
+   *   <li>Then return {@code /directory/foo.pdf}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test getOutputFilePath(String); when '/directory/foo.txtxtxt'; then return '/directory/foo.pdf'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxtxt_thenReturnDirectoryFooPdf() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txtxtxt"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxtxtfalse}.
+   *   <li>Then return {@code /directory/foo.pdf}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test getOutputFilePath(String); when '/directory/foo.txtxtxtfalse'; then return '/directory/foo.pdf'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxtxtfalse_thenReturnDirectoryFooPdf() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txtxtxtfalse"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxtxtxtxt}.
+   *   <li>Then return {@code /directory/foo.pdf}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test getOutputFilePath(String); when '/directory/foo.txtxtxtxtxt'; then return '/directory/foo.pdf'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxtxtxtxt_thenReturnDirectoryFooPdf() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txtxtxtxtxt"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code /directory/foo.txtxx}.
+   *   <li>Then return {@code /directory/foo.pdf}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test getOutputFilePath(String); when '/directory/foo.txtxx'; then return '/directory/foo.pdf'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenDirectoryFooTxtxx_thenReturnDirectoryFooPdf() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("/directory/foo.txtxx"));
   }
 
   /**
@@ -3100,46 +3167,6 @@ class OfficeToPdfServiceDiffblueTest {
    * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
    *
    * <ul>
-   *   <li>When {@code .pdfU}.
-   *   <li>Then return {@code .pdf}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName("Test getOutputFilePath(String); when '.pdfU'; then return '.pdf'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenPdfU_thenReturnPdf() {
-    // Arrange, Act and Assert
-    assertEquals(".pdf", OfficeToPdfService.getOutputFilePath(".pdfU"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code .pdfUtxt}.
-   *   <li>Then return {@code .pdf}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName("Test getOutputFilePath(String); when '.pdfUtxt'; then return '.pdf'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenPdfUtxt_thenReturnPdf() {
-    // Arrange, Act and Assert
-    assertEquals(".pdf", OfficeToPdfService.getOutputFilePath(".pdfUtxt"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
    *   <li>When {@code .pdf.}.
    *   <li>Then return {@code .pdf.pdf.pdf.pdf.pdf}.
    * </ul>
@@ -3180,69 +3207,109 @@ class OfficeToPdfServiceDiffblueTest {
    * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
    *
    * <ul>
-   *   <li>When {@code U/directory/foo.txt}.
-   *   <li>Then return {@code U/directory/foo.pdf}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test getOutputFilePath(String); when 'U/directory/foo.txt'; then return 'U/directory/foo.pdf'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenUDirectoryFooTxt_thenReturnUDirectoryFooPdf() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "U/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("U/directory/foo.txt"));
-  }
-
-  /**
-   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
-   *
-   * <ul>
-   *   <li>When {@code .U}.
+   *   <li>When {@code .pdfx}.
    *   <li>Then return {@code .pdf}.
    * </ul>
    *
    * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
    */
   @Test
-  @DisplayName("Test getOutputFilePath(String); when '.U'; then return '.pdf'")
+  @DisplayName("Test getOutputFilePath(String); when '.pdfx'; then return '.pdf'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenU_thenReturnPdf() {
+  void testGetOutputFilePath_whenPdfx_thenReturnPdf() {
     // Arrange, Act and Assert
-    assertEquals(".pdf", OfficeToPdfService.getOutputFilePath(".U"));
+    assertEquals(".pdf", OfficeToPdfService.getOutputFilePath(".pdfx"));
   }
 
   /**
    * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
    *
    * <ul>
-   *   <li>When {@code U.}.
+   *   <li>When {@code .pdfxtxt}.
+   *   <li>Then return {@code .pdf}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName("Test getOutputFilePath(String); when '.pdfxtxt'; then return '.pdf'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenPdfxtxt_thenReturnPdf() {
+    // Arrange, Act and Assert
+    assertEquals(".pdf", OfficeToPdfService.getOutputFilePath(".pdfxtxt"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code x/directory/foo.txt}.
+   *   <li>Then return {@code x/directory/foo.pdf}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test getOutputFilePath(String); when 'x/directory/foo.txt'; then return 'x/directory/foo.pdf'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenXDirectoryFooTxt_thenReturnXDirectoryFooPdf() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "x/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("x/directory/foo.txt"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code .x}.
+   *   <li>Then return {@code .pdf}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
+   */
+  @Test
+  @DisplayName("Test getOutputFilePath(String); when '.x'; then return '.pdf'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
+  void testGetOutputFilePath_whenX_thenReturnPdf() {
+    // Arrange, Act and Assert
+    assertEquals(".pdf", OfficeToPdfService.getOutputFilePath(".x"));
+  }
+
+  /**
+   * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
+   *
+   * <ul>
+   *   <li>When {@code x.}.
    *   <li>Then return {@code .pdf.pdf}.
    * </ul>
    *
    * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
    */
   @Test
-  @DisplayName("Test getOutputFilePath(String); when 'U.'; then return '.pdf.pdf'")
+  @DisplayName("Test getOutputFilePath(String); when 'x.'; then return '.pdf.pdf'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenU_thenReturnPdfPdf() {
+  void testGetOutputFilePath_whenX_thenReturnPdfPdf() {
     // Arrange, Act and Assert
-    assertEquals(".pdf.pdf", OfficeToPdfService.getOutputFilePath("U."));
+    assertEquals(".pdf.pdf", OfficeToPdfService.getOutputFilePath("x."));
   }
 
   /**
    * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
    *
    * <ul>
-   *   <li>When {@code Utxt/directory/foo.txt}.
+   *   <li>When {@code xtxt/directory/foo.txt}.
    *   <li>Then return {@code .pdf/directory/foo.pdf}.
    * </ul>
    *
@@ -3250,74 +3317,74 @@ class OfficeToPdfServiceDiffblueTest {
    */
   @Test
   @DisplayName(
-      "Test getOutputFilePath(String); when 'Utxt/directory/foo.txt'; then return '.pdf/directory/foo.pdf'")
+      "Test getOutputFilePath(String); when 'xtxt/directory/foo.txt'; then return '.pdf/directory/foo.pdf'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenUtxtDirectoryFooTxt_thenReturnPdfDirectoryFooPdf() {
+  void testGetOutputFilePath_whenXtxtDirectoryFooTxt_thenReturnPdfDirectoryFooPdf() {
     // Arrange, Act and Assert
     assertEquals(
-        ".pdf/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("Utxt/directory/foo.txt"));
+        ".pdf/directory/foo.pdf", OfficeToPdfService.getOutputFilePath("xtxt/directory/foo.txt"));
   }
 
   /**
    * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
    *
    * <ul>
-   *   <li>When {@code .Utxt}.
+   *   <li>When {@code .xtxt}.
    *   <li>Then return {@code .pdf}.
    * </ul>
    *
    * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
    */
   @Test
-  @DisplayName("Test getOutputFilePath(String); when '.Utxt'; then return '.pdf'")
+  @DisplayName("Test getOutputFilePath(String); when '.xtxt'; then return '.pdf'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenUtxt_thenReturnPdf() {
+  void testGetOutputFilePath_whenXtxt_thenReturnPdf() {
     // Arrange, Act and Assert
-    assertEquals(".pdf", OfficeToPdfService.getOutputFilePath(".Utxt"));
+    assertEquals(".pdf", OfficeToPdfService.getOutputFilePath(".xtxt"));
   }
 
   /**
    * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
    *
    * <ul>
-   *   <li>When {@code Utxt.}.
+   *   <li>When {@code xtxt.}.
    *   <li>Then return {@code .pdf.pdf.pdf.pdf.pdf}.
    * </ul>
    *
    * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
    */
   @Test
-  @DisplayName("Test getOutputFilePath(String); when 'Utxt.'; then return '.pdf.pdf.pdf.pdf.pdf'")
+  @DisplayName("Test getOutputFilePath(String); when 'xtxt.'; then return '.pdf.pdf.pdf.pdf.pdf'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenUtxt_thenReturnPdfPdfPdfPdfPdf() {
+  void testGetOutputFilePath_whenXtxt_thenReturnPdfPdfPdfPdfPdf() {
     // Arrange, Act and Assert
-    assertEquals(".pdf.pdf.pdf.pdf.pdf", OfficeToPdfService.getOutputFilePath("Utxt."));
+    assertEquals(".pdf.pdf.pdf.pdf.pdf", OfficeToPdfService.getOutputFilePath("xtxt."));
   }
 
   /**
    * Test {@link OfficeToPdfService#getOutputFilePath(String)}.
    *
    * <ul>
-   *   <li>When {@code Utxt}.
-   *   <li>Then return {@code Utxt}.
+   *   <li>When {@code xtxt}.
+   *   <li>Then return {@code xtxt}.
    * </ul>
    *
    * <p>Method under test: {@link OfficeToPdfService#getOutputFilePath(String)}
    */
   @Test
-  @DisplayName("Test getOutputFilePath(String); when 'Utxt'; then return 'Utxt'")
+  @DisplayName("Test getOutputFilePath(String); when 'xtxt'; then return 'xtxt'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String OfficeToPdfService.getOutputFilePath(String)"})
-  void testGetOutputFilePath_whenUtxt_thenReturnUtxt() {
+  void testGetOutputFilePath_whenXtxt_thenReturnXtxt() {
     // Arrange, Act and Assert
-    assertEquals("Utxt", OfficeToPdfService.getOutputFilePath("Utxt"));
+    assertEquals("xtxt", OfficeToPdfService.getOutputFilePath("xtxt"));
   }
 
   /**

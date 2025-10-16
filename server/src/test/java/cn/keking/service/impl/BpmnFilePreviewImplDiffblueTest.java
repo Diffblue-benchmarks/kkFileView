@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isA;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import cn.keking.model.FileAttribute;
@@ -16,22 +17,51 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
 
-@ContextConfiguration(classes = {BpmnFilePreviewImpl.class})
-@ExtendWith(SpringExtension.class)
 class BpmnFilePreviewImplDiffblueTest {
-  @Autowired private BpmnFilePreviewImpl bpmnFilePreviewImpl;
+  /**
+   * Test {@link BpmnFilePreviewImpl#filePreviewHandle(String, Model, FileAttribute)}.
+   *
+   * <ul>
+   *   <li>Given {@code false}.
+   *   <li>Then {@link ConcurrentModel#ConcurrentModel()} {@code fileName} is {@code Name}.
+   * </ul>
+   *
+   * <p>Method under test: {@link BpmnFilePreviewImpl#filePreviewHandle(String, Model,
+   * FileAttribute)}
+   */
+  @Test
+  @DisplayName(
+      "Test filePreviewHandle(String, Model, FileAttribute); given 'false'; then ConcurrentModel() 'fileName' is 'Name'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String BpmnFilePreviewImpl.filePreviewHandle(String, Model, FileAttribute)"})
+  void testFilePreviewHandle_givenFalse_thenConcurrentModelFileNameIsName() {
+    //   Diffblue Cover was unable to create a Spring-specific test for this Spring method.
+    //   Run dcover create --keep-partial-tests to gain insights into why
+    //   a non-Spring test was created.
 
-  @MockBean(name = "commonPreview")
-  private CommonPreviewImpl commonPreviewImpl;
+    // Arrange
+    FileHandlerService fileHandlerService = new FileHandlerService(new CacheServiceJDKImpl());
+    CommonPreviewImpl commonPreview =
+        new CommonPreviewImpl(fileHandlerService, new OtherFilePreviewImpl());
+    BpmnFilePreviewImpl bpmnFilePreviewImpl = new BpmnFilePreviewImpl(commonPreview);
+    ConcurrentModel model = new ConcurrentModel();
+
+    FileAttribute fileAttribute =
+        new FileAttribute(FileType.PICTURE, "Suffix", "Name", "https://example.org/example");
+    fileAttribute.setCompressFile(false);
+
+    // Act
+    bpmnFilePreviewImpl.filePreviewHandle(null, model, fileAttribute);
+
+    // Assert
+    assertEquals(1, model.size());
+    assertEquals("Name", model.get("fileName"));
+  }
 
   /**
    * Test {@link BpmnFilePreviewImpl#filePreviewHandle(String, Model, FileAttribute)}.
@@ -51,6 +81,10 @@ class BpmnFilePreviewImplDiffblueTest {
   @ManagedByDiffblue
   @MethodsUnderTest({"String BpmnFilePreviewImpl.filePreviewHandle(String, Model, FileAttribute)"})
   void testFilePreviewHandle_thenConcurrentModelCurrentUrlIsHttpsExampleOrgExample() {
+    //   Diffblue Cover was unable to create a Spring-specific test for this Spring method.
+    //   Run dcover create --keep-partial-tests to gain insights into why
+    //   a non-Spring test was created.
+
     // Arrange
     FileHandlerService fileHandlerService = new FileHandlerService(new CacheServiceJDKImpl());
     CommonPreviewImpl commonPreview =
@@ -84,6 +118,10 @@ class BpmnFilePreviewImplDiffblueTest {
   @ManagedByDiffblue
   @MethodsUnderTest({"String BpmnFilePreviewImpl.filePreviewHandle(String, Model, FileAttribute)"})
   void testFilePreviewHandle_thenConcurrentModelSizeIsTwo() {
+    //   Diffblue Cover was unable to create a Spring-specific test for this Spring method.
+    //   Run dcover create --keep-partial-tests to gain insights into why
+    //   a non-Spring test was created.
+
     // Arrange
     FileHandlerService fileHandlerService = new FileHandlerService(new CacheServiceJDKImpl());
     PictureFilePreviewImpl commonPreview =
@@ -120,63 +158,28 @@ class BpmnFilePreviewImplDiffblueTest {
   @ManagedByDiffblue
   @MethodsUnderTest({"String BpmnFilePreviewImpl.filePreviewHandle(String, Model, FileAttribute)"})
   void testFilePreviewHandle_thenReturnBpmn() {
+    //   Diffblue Cover was unable to create a Spring-specific test for this Spring method.
+    //   Run dcover create --keep-partial-tests to gain insights into why
+    //   a non-Spring test was created.
+
     // Arrange
-    when(commonPreviewImpl.filePreviewHandle(
+    CommonPreviewImpl commonPreview = mock(CommonPreviewImpl.class);
+    when(commonPreview.filePreviewHandle(
             Mockito.<String>any(), Mockito.<Model>any(), Mockito.<FileAttribute>any()))
         .thenReturn("File Preview Handle");
-    ConcurrentModel model = new ConcurrentModel();
-
-    FileAttribute fileAttribute =
-        new FileAttribute(FileType.PICTURE, "Suffix", "Name", "https://example.org/example");
-    fileAttribute.setCompressFile(false);
-
-    // Act
-    String actualFilePreviewHandleResult =
-        bpmnFilePreviewImpl.filePreviewHandle("https://example.org/example", model, fileAttribute);
-
-    // Assert
-    verify(commonPreviewImpl)
-        .filePreviewHandle(
-            eq("https://example.org/example"), isA(Model.class), isA(FileAttribute.class));
-    assertEquals(1, model.size());
-    assertEquals("Name", model.get("fileName"));
-    assertEquals("bpmn", actualFilePreviewHandleResult);
-  }
-
-  /**
-   * Test {@link BpmnFilePreviewImpl#filePreviewHandle(String, Model, FileAttribute)}.
-   *
-   * <ul>
-   *   <li>When {@code null}.
-   *   <li>Then {@link ConcurrentModel#ConcurrentModel()} {@code fileName} is {@code Name}.
-   * </ul>
-   *
-   * <p>Method under test: {@link BpmnFilePreviewImpl#filePreviewHandle(String, Model,
-   * FileAttribute)}
-   */
-  @Test
-  @DisplayName(
-      "Test filePreviewHandle(String, Model, FileAttribute); when 'null'; then ConcurrentModel() 'fileName' is 'Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String BpmnFilePreviewImpl.filePreviewHandle(String, Model, FileAttribute)"})
-  void testFilePreviewHandle_whenNull_thenConcurrentModelFileNameIsName() {
-    // Arrange
-    FileHandlerService fileHandlerService = new FileHandlerService(new CacheServiceJDKImpl());
-    CommonPreviewImpl commonPreview =
-        new CommonPreviewImpl(fileHandlerService, new OtherFilePreviewImpl());
     BpmnFilePreviewImpl bpmnFilePreviewImpl = new BpmnFilePreviewImpl(commonPreview);
     ConcurrentModel model = new ConcurrentModel();
 
-    FileAttribute fileAttribute =
-        new FileAttribute(FileType.PICTURE, "Suffix", "Name", "https://example.org/example");
-    fileAttribute.setCompressFile(false);
-
     // Act
-    bpmnFilePreviewImpl.filePreviewHandle(null, model, fileAttribute);
+    String actualFilePreviewHandleResult =
+        bpmnFilePreviewImpl.filePreviewHandle(
+            "https://example.org/example", model, new FileAttribute());
 
     // Assert
-    assertEquals(1, model.size());
-    assertEquals("Name", model.get("fileName"));
+    verify(commonPreview)
+        .filePreviewHandle(
+            eq("https://example.org/example"), isA(Model.class), isA(FileAttribute.class));
+    assertEquals("bpmn", actualFilePreviewHandleResult);
+    assertTrue(model.isEmpty());
   }
 }

@@ -264,6 +264,36 @@ class OnlinePreviewControllerDiffblueTest {
    * Test {@link OnlinePreviewController#getCorsFile(String, HttpServletResponse, FileAttribute)}.
    *
    * <ul>
+   *   <li>When {@code https://example.org/example}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OnlinePreviewController#getCorsFile(String, HttpServletResponse,
+   * FileAttribute)}
+   */
+  @Test
+  @DisplayName(
+      "Test getCorsFile(String, HttpServletResponse, FileAttribute); when 'https://example.org/example'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({
+    "void OnlinePreviewController.getCorsFile(String, HttpServletResponse, FileAttribute)"
+  })
+  void testGetCorsFile_whenHttpsExampleOrgExample() throws Exception {
+    // Arrange
+    MockHttpServletRequestBuilder requestBuilder =
+        MockMvcRequestBuilders.get("/getCorsFile").param("urlPath", "https://example.org/example");
+
+    // Act and Assert
+    MockMvcBuilders.standaloneSetup(onlinePreviewController)
+        .build()
+        .perform(requestBuilder)
+        .andExpect(status().isOk());
+  }
+
+  /**
+   * Test {@link OnlinePreviewController#getCorsFile(String, HttpServletResponse, FileAttribute)}.
+   *
+   * <ul>
    *   <li>When lf.
    * </ul>
    *
@@ -281,35 +311,6 @@ class OnlinePreviewControllerDiffblueTest {
     // Arrange
     MockHttpServletRequestBuilder requestBuilder =
         MockMvcRequestBuilders.get("/getCorsFile").param("urlPath", "\n");
-
-    // Act and Assert
-    MockMvcBuilders.standaloneSetup(onlinePreviewController)
-        .build()
-        .perform(requestBuilder)
-        .andExpect(status().isOk());
-  }
-
-  /**
-   * Test {@link OnlinePreviewController#getCorsFile(String, HttpServletResponse, FileAttribute)}.
-   *
-   * <ul>
-   *   <li>When {@code ?}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OnlinePreviewController#getCorsFile(String, HttpServletResponse,
-   * FileAttribute)}
-   */
-  @Test
-  @DisplayName("Test getCorsFile(String, HttpServletResponse, FileAttribute); when '?'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "void OnlinePreviewController.getCorsFile(String, HttpServletResponse, FileAttribute)"
-  })
-  void testGetCorsFile_whenQuestionMark() throws Exception {
-    // Arrange
-    MockHttpServletRequestBuilder requestBuilder =
-        MockMvcRequestBuilders.get("/getCorsFile").param("urlPath", "?");
 
     // Act and Assert
     MockMvcBuilders.standaloneSetup(onlinePreviewController)
