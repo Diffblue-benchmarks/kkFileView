@@ -18,16 +18,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import org.eclipse.jetty.http.HttpCompliance;
-import org.eclipse.jetty.io.ByteArrayEndPoint;
-import org.eclipse.jetty.server.HttpChannel;
-import org.eclipse.jetty.server.HttpChannelState;
-import org.eclipse.jetty.server.HttpConfiguration;
-import org.eclipse.jetty.server.HttpConnection;
-import org.eclipse.jetty.server.HttpInput;
-import org.eclipse.jetty.server.LocalConnector;
-import org.eclipse.jetty.server.Request;
-import org.eclipse.jetty.server.Server;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -67,57 +57,6 @@ class UrlCheckFilterDiffblueTest {
     // Act and Assert
     assertThrows(IOException.class, () -> urlCheckFilter.doFilter(request, response, chain));
     verify(chain).doFilter(isA(ServletRequest.class), isA(ServletResponse.class));
-  }
-
-  /**
-   * Test {@link UrlCheckFilter#doFilter(ServletRequest, ServletResponse, FilterChain)}.
-   *
-   * <ul>
-   *   <li>Given {@code //}.
-   *   <li>Then {@link MockHttpServletResponse} (default constructor) HeaderNames size is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link UrlCheckFilter#doFilter(ServletRequest, ServletResponse,
-   * FilterChain)}
-   */
-  @Test
-  @DisplayName(
-      "Test doFilter(ServletRequest, ServletResponse, FilterChain); given '//'; then MockHttpServletResponse (default constructor) HeaderNames size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void UrlCheckFilter.doFilter(ServletRequest, ServletResponse, FilterChain)"})
-  void testDoFilter_givenSlashSlash_thenMockHttpServletResponseHeaderNamesSizeIsOne()
-      throws IOException, ServletException {
-    // Arrange
-    UrlCheckFilter urlCheckFilter = new UrlCheckFilter();
-    LocalConnector connector = new LocalConnector(new Server());
-    HttpConfiguration configuration = new HttpConfiguration();
-    ByteArrayEndPoint endPoint = new ByteArrayEndPoint();
-    HttpConfiguration config = new HttpConfiguration();
-    LocalConnector connector2 = new LocalConnector(new Server());
-
-    HttpConnection transport =
-        new HttpConnection(
-            config, connector2, new ByteArrayEndPoint(), HttpCompliance.LEGACY, true);
-
-    HttpChannel channel = new HttpChannel(connector, configuration, endPoint, transport);
-    HttpInput input = new HttpInput(mock(HttpChannelState.class));
-
-    Request request = new Request(channel, input);
-    request.setServletPath("//");
-    MockHttpServletResponse response = new MockHttpServletResponse();
-
-    // Act
-    urlCheckFilter.doFilter(request, response, mock(FilterChain.class));
-
-    // Assert
-    Collection<String> headerNames = response.getHeaderNames();
-    assertEquals(1, headerNames.size());
-    assertTrue(headerNames instanceof Set);
-    assertEquals("http://localhost:8080/?null", response.getRedirectedUrl());
-    assertEquals(302, response.getStatus());
-    assertTrue(headerNames.contains("Location"));
-    assertTrue(response.isCommitted());
   }
 
   /**

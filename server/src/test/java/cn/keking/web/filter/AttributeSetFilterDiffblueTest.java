@@ -321,6 +321,44 @@ class AttributeSetFilterDiffblueTest {
    * Test {@link AttributeSetFilter#doFilter(ServletRequest, ServletResponse, FilterChain)}.
    *
    * <ul>
+   *   <li>Given {@code watermarkWidth}.
+   * </ul>
+   *
+   * <p>Method under test: {@link AttributeSetFilter#doFilter(ServletRequest, ServletResponse,
+   * FilterChain)}
+   */
+  @Test
+  @DisplayName(
+      "Test doFilter(ServletRequest, ServletResponse, FilterChain); given 'watermarkWidth'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({
+    "void AttributeSetFilter.doFilter(ServletRequest, ServletResponse, FilterChain)"
+  })
+  void testDoFilter_givenWatermarkWidth() throws IOException, ServletException {
+    // Arrange
+    AttributeSetFilter attributeSetFilter = new AttributeSetFilter();
+
+    MockHttpServletRequest request = new MockHttpServletRequest();
+    request.addParameter("watermarkXSpace", "42");
+    request.addParameter("watermarkWidth", "42");
+    MockHttpServletResponse response = new MockHttpServletResponse();
+
+    FilterChain filterChain = mock(FilterChain.class);
+    doThrow(new IOException())
+        .when(filterChain)
+        .doFilter(Mockito.<ServletRequest>any(), Mockito.<ServletResponse>any());
+
+    // Act and Assert
+    assertThrows(
+        IOException.class, () -> attributeSetFilter.doFilter(request, response, filterChain));
+    verify(filterChain).doFilter(isA(ServletRequest.class), isA(ServletResponse.class));
+  }
+
+  /**
+   * Test {@link AttributeSetFilter#doFilter(ServletRequest, ServletResponse, FilterChain)}.
+   *
+   * <ul>
    *   <li>When {@link MockHttpServletRequest#MockHttpServletRequest()}.
    * </ul>
    *

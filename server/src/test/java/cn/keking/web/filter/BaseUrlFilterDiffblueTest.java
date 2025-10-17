@@ -1,5 +1,6 @@
 package cn.keking.web.filter;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.doNothing;
@@ -22,6 +23,21 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 class BaseUrlFilterDiffblueTest {
+  /**
+   * Test {@link BaseUrlFilter#getBaseUrl()}.
+   *
+   * <p>Method under test: {@link BaseUrlFilter#getBaseUrl()}
+   */
+  @Test
+  @DisplayName("Test getBaseUrl()")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"java.lang.String BaseUrlFilter.getBaseUrl()"})
+  void testGetBaseUrl() {
+    // Arrange, Act and Assert
+    assertEquals("http://localhost:8080/", BaseUrlFilter.getBaseUrl());
+  }
+
   /**
    * Test {@link BaseUrlFilter#doFilter(ServletRequest, ServletResponse, FilterChain)}.
    *

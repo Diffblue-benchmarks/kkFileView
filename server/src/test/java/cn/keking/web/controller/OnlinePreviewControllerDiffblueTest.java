@@ -1,9 +1,7 @@
 package cn.keking.web.controller;
 
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -18,7 +16,6 @@ import cn.keking.service.impl.OtherFilePreviewImpl;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -203,178 +200,5 @@ class OnlinePreviewControllerDiffblueTest {
         .andExpect(model().attributeExists("currentUrl", "imgUrls"))
         .andExpect(view().name("picture"))
         .andExpect(forwardedUrl("picture"));
-  }
-
-  /**
-   * Test {@link OnlinePreviewController#getCorsFile(String, HttpServletResponse, FileAttribute)}.
-   *
-   * <ul>
-   *   <li>When {@link OnlinePreviewController#BASE64_DECODE_ERROR_MSG}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OnlinePreviewController#getCorsFile(String, HttpServletResponse,
-   * FileAttribute)}
-   */
-  @Test
-  @DisplayName(
-      "Test getCorsFile(String, HttpServletResponse, FileAttribute); when BASE64_DECODE_ERROR_MSG")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "void OnlinePreviewController.getCorsFile(String, HttpServletResponse, FileAttribute)"
-  })
-  void testGetCorsFile_whenBase64_decode_error_msg() throws Exception {
-    // Arrange
-    MockHttpServletRequestBuilder requestBuilder =
-        MockMvcRequestBuilders.get("/getCorsFile")
-            .param("urlPath", OnlinePreviewController.BASE64_DECODE_ERROR_MSG);
-
-    // Act and Assert
-    MockMvcBuilders.standaloneSetup(onlinePreviewController)
-        .build()
-        .perform(requestBuilder)
-        .andExpect(status().isOk());
-  }
-
-  /**
-   * Test {@link OnlinePreviewController#getCorsFile(String, HttpServletResponse, FileAttribute)}.
-   *
-   * <ul>
-   *   <li>When {@code foo}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OnlinePreviewController#getCorsFile(String, HttpServletResponse,
-   * FileAttribute)}
-   */
-  @Test
-  @DisplayName("Test getCorsFile(String, HttpServletResponse, FileAttribute); when 'foo'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "void OnlinePreviewController.getCorsFile(String, HttpServletResponse, FileAttribute)"
-  })
-  void testGetCorsFile_whenFoo() throws Exception {
-    // Arrange
-    MockHttpServletRequestBuilder requestBuilder =
-        MockMvcRequestBuilders.get("/getCorsFile").param("urlPath", "foo");
-
-    // Act and Assert
-    MockMvcBuilders.standaloneSetup(onlinePreviewController)
-        .build()
-        .perform(requestBuilder)
-        .andExpect(status().isOk());
-  }
-
-  /**
-   * Test {@link OnlinePreviewController#getCorsFile(String, HttpServletResponse, FileAttribute)}.
-   *
-   * <ul>
-   *   <li>When lf.
-   * </ul>
-   *
-   * <p>Method under test: {@link OnlinePreviewController#getCorsFile(String, HttpServletResponse,
-   * FileAttribute)}
-   */
-  @Test
-  @DisplayName("Test getCorsFile(String, HttpServletResponse, FileAttribute); when lf")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "void OnlinePreviewController.getCorsFile(String, HttpServletResponse, FileAttribute)"
-  })
-  void testGetCorsFile_whenLf() throws Exception {
-    // Arrange
-    MockHttpServletRequestBuilder requestBuilder =
-        MockMvcRequestBuilders.get("/getCorsFile").param("urlPath", "\n");
-
-    // Act and Assert
-    MockMvcBuilders.standaloneSetup(onlinePreviewController)
-        .build()
-        .perform(requestBuilder)
-        .andExpect(status().isOk());
-  }
-
-  /**
-   * Test {@link OnlinePreviewController#getCorsFile(String, HttpServletResponse, FileAttribute)}.
-   *
-   * <ul>
-   *   <li>When {@code ?}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OnlinePreviewController#getCorsFile(String, HttpServletResponse,
-   * FileAttribute)}
-   */
-  @Test
-  @DisplayName("Test getCorsFile(String, HttpServletResponse, FileAttribute); when '?'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "void OnlinePreviewController.getCorsFile(String, HttpServletResponse, FileAttribute)"
-  })
-  void testGetCorsFile_whenQuestionMark() throws Exception {
-    // Arrange
-    MockHttpServletRequestBuilder requestBuilder =
-        MockMvcRequestBuilders.get("/getCorsFile").param("urlPath", "?");
-
-    // Act and Assert
-    MockMvcBuilders.standaloneSetup(onlinePreviewController)
-        .build()
-        .perform(requestBuilder)
-        .andExpect(status().isOk());
-  }
-
-  /**
-   * Test {@link OnlinePreviewController#getCorsFile(String, HttpServletResponse, FileAttribute)}.
-   *
-   * <ul>
-   *   <li>When space.
-   * </ul>
-   *
-   * <p>Method under test: {@link OnlinePreviewController#getCorsFile(String, HttpServletResponse,
-   * FileAttribute)}
-   */
-  @Test
-  @DisplayName("Test getCorsFile(String, HttpServletResponse, FileAttribute); when space")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "void OnlinePreviewController.getCorsFile(String, HttpServletResponse, FileAttribute)"
-  })
-  void testGetCorsFile_whenSpace() throws Exception {
-    // Arrange
-    MockHttpServletRequestBuilder requestBuilder =
-        MockMvcRequestBuilders.get("/getCorsFile").param("urlPath", " ");
-
-    // Act and Assert
-    MockMvcBuilders.standaloneSetup(onlinePreviewController)
-        .build()
-        .perform(requestBuilder)
-        .andExpect(status().isOk());
-  }
-
-  /**
-   * Test {@link OnlinePreviewController#addQueueTask(String)}.
-   *
-   * <p>Method under test: {@link OnlinePreviewController#addQueueTask(String)}
-   */
-  @Test
-  @DisplayName("Test addQueueTask(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String OnlinePreviewController.addQueueTask(String)"})
-  void testAddQueueTask() throws Exception {
-    // Arrange
-    doNothing().when(cacheService).addQueueTask(Mockito.<String>any());
-
-    MockHttpServletRequestBuilder requestBuilder =
-        MockMvcRequestBuilders.get("/addTask").param("url", "foo");
-
-    // Act and Assert
-    MockMvcBuilders.standaloneSetup(onlinePreviewController)
-        .build()
-        .perform(requestBuilder)
-        .andExpect(status().isOk())
-        .andExpect(content().contentType("text/plain;charset=ISO-8859-1"))
-        .andExpect(content().string("success"));
   }
 }

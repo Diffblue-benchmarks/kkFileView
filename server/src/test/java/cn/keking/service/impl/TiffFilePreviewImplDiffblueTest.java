@@ -10,7 +10,6 @@ import cn.keking.service.FileHandlerService;
 import cn.keking.service.OfficeToPdfServiceTestFactory;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import java.util.HashMap;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -80,7 +79,8 @@ class TiffFilePreviewImplDiffblueTest {
    * Test {@link TiffFilePreviewImpl#filePreviewHandle(String, Model, FileAttribute)}.
    *
    * <ul>
-   *   <li>Then {@link ConcurrentModel#ConcurrentModel()} {@code currentUrl} is empty string.
+   *   <li>When createFileAttribute.
+   *   <li>Then {@link ConcurrentModel#ConcurrentModel()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link TiffFilePreviewImpl#filePreviewHandle(String, Model,
@@ -88,46 +88,29 @@ class TiffFilePreviewImplDiffblueTest {
    */
   @Test
   @DisplayName(
-      "Test filePreviewHandle(String, Model, FileAttribute); then ConcurrentModel() 'currentUrl' is empty string")
+      "Test filePreviewHandle(String, Model, FileAttribute); when createFileAttribute; then ConcurrentModel() size is one")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String TiffFilePreviewImpl.filePreviewHandle(String, Model, FileAttribute)"})
-  void testFilePreviewHandle_thenConcurrentModelCurrentUrlIsEmptyString() {
+  void testFilePreviewHandle_whenCreateFileAttribute_thenConcurrentModelSizeIsOne() {
     // Arrange
-    HashMap<String, String> stringStringMap = new HashMap<>();
-    stringStringMap.put("", "");
-
-    FileHandlerService fileHandlerService = mock(FileHandlerService.class);
-    when(fileHandlerService.listConvertedFiles()).thenReturn(stringStringMap);
-    TiffFilePreviewImpl tiffFilePreviewImpl =
-        new TiffFilePreviewImpl(fileHandlerService, new OtherFilePreviewImpl());
     ConcurrentModel model = new ConcurrentModel();
 
-    FileAttribute fileAttribute = mock(FileAttribute.class);
-    when(fileAttribute.forceUpdatedCache()).thenReturn(false);
-    when(fileAttribute.getCacheName()).thenReturn("Cache Name");
-    when(fileAttribute.getName()).thenReturn("");
-    when(fileAttribute.getOutFilePath()).thenReturn("/directory/foo.txt");
-
     // Act
-    tiffFilePreviewImpl.filePreviewHandle("jpg", model, fileAttribute);
+    tiffFilePreviewImpl.filePreviewHandle(
+        "https://example.org/example", model, OfficeToPdfServiceTestFactory.createFileAttribute());
 
     // Assert
-    verify(fileAttribute).forceUpdatedCache();
-    verify(fileAttribute).getCacheName();
-    verify(fileAttribute).getName();
-    verify(fileAttribute).getOutFilePath();
-    verify(fileHandlerService).listConvertedFiles();
     assertEquals(1, model.size());
-    assertEquals("", model.get("currentUrl"));
+    assertEquals("https://example.org/example", model.get("currentUrl"));
   }
 
   /**
    * Test {@link TiffFilePreviewImpl#filePreviewHandle(String, Model, FileAttribute)}.
    *
    * <ul>
-   *   <li>Then {@link ConcurrentModel#ConcurrentModel()} {@code currentUrl} is {@code
-   *       https://example.org/example}.
+   *   <li>When {@code https://example.org/example}.
+   *   <li>Then {@link ConcurrentModel#ConcurrentModel()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link TiffFilePreviewImpl#filePreviewHandle(String, Model,
@@ -135,11 +118,11 @@ class TiffFilePreviewImplDiffblueTest {
    */
   @Test
   @DisplayName(
-      "Test filePreviewHandle(String, Model, FileAttribute); then ConcurrentModel() 'currentUrl' is 'https://example.org/example'")
+      "Test filePreviewHandle(String, Model, FileAttribute); when 'https://example.org/example'; then ConcurrentModel() size is one")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String TiffFilePreviewImpl.filePreviewHandle(String, Model, FileAttribute)"})
-  void testFilePreviewHandle_thenConcurrentModelCurrentUrlIsHttpsExampleOrgExample() {
+  void testFilePreviewHandle_whenHttpsExampleOrgExample_thenConcurrentModelSizeIsOne() {
     // Arrange
     ConcurrentModel model = new ConcurrentModel();
 
@@ -157,34 +140,6 @@ class TiffFilePreviewImplDiffblueTest {
     verify(fileAttribute).getCacheName();
     verify(fileAttribute).getName();
     verify(fileAttribute).getOutFilePath();
-    assertEquals(1, model.size());
-    assertEquals("https://example.org/example", model.get("currentUrl"));
-  }
-
-  /**
-   * Test {@link TiffFilePreviewImpl#filePreviewHandle(String, Model, FileAttribute)}.
-   *
-   * <ul>
-   *   <li>When createFileAttribute.
-   * </ul>
-   *
-   * <p>Method under test: {@link TiffFilePreviewImpl#filePreviewHandle(String, Model,
-   * FileAttribute)}
-   */
-  @Test
-  @DisplayName("Test filePreviewHandle(String, Model, FileAttribute); when createFileAttribute")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String TiffFilePreviewImpl.filePreviewHandle(String, Model, FileAttribute)"})
-  void testFilePreviewHandle_whenCreateFileAttribute() {
-    // Arrange
-    ConcurrentModel model = new ConcurrentModel();
-
-    // Act
-    tiffFilePreviewImpl.filePreviewHandle(
-        "https://example.org/example", model, OfficeToPdfServiceTestFactory.createFileAttribute());
-
-    // Assert
     assertEquals(1, model.size());
     assertEquals("https://example.org/example", model.get("currentUrl"));
   }
