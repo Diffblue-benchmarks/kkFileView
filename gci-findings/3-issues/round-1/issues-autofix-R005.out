@@ -1,0 +1,281 @@
+INFO  Diffblue Cover 2026.01.01-SNAPSHOT-363c8f3-dev
+INFO  
+INFO  Command: issues
+INFO  Output a prioritized list of issues.
+INFO  
+INFO  Discovered modules:
+INFO  - cn.keking:kkFileView
+INFO  
+INFO  
+INFO  [1/1] Diagnosing issues for module: cn.keking:kkFileView
+INFO  ========================================================
+INFO  
+INFO  Detected Java version 1.8.0_472
+INFO  Selected build system: Maven
+INFO  Reading report file '/home/ubuntu/kkFileView/server/.diffblue/reports/report.json'
+INFO  Copied report file to '/home/ubuntu/kkFileView/server/.diffblue/reports/report-20260116T111526.json'
+INFO  
+INFO  R005: Unable to load class
+      Class: org.springframework.session.config.annotation.web.http.SpringHttpSessionConfiguration
+      Please check that the class is available on your test runtime classpath.
+      See https://diff.blue/R005 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.config.ConfigRefreshComponent$ConfigRefreshThread.<init>:()V
+      cn.keking.config.ConfigRefreshComponent$ConfigRefreshThread.run:()V
+      cn.keking.config.WatermarkConfigConstants.<init>:()V
+      cn.keking.config.WatermarkConfigConstants.getWatermarkAlpha:()Ljava/lang/String;
+      cn.keking.config.WatermarkConfigConstants.getWatermarkAngle:()Ljava/lang/String;
+      cn.keking.config.WatermarkConfigConstants.getWatermarkColor:()Ljava/lang/String;
+      cn.keking.config.WatermarkConfigConstants.getWatermarkFont:()Ljava/lang/String;
+      cn.keking.config.WatermarkConfigConstants.getWatermarkFontsize:()Ljava/lang/String;
+      cn.keking.config.WatermarkConfigConstants.getWatermarkHeight:()Ljava/lang/String;
+      cn.keking.config.WatermarkConfigConstants.getWatermarkTxt:()Ljava/lang/String;
+      cn.keking.config.WatermarkConfigConstants.getWatermarkWidth:()Ljava/lang/String;
+      cn.keking.config.WatermarkConfigConstants.getWatermarkXSpace:()Ljava/lang/String;
+      cn.keking.config.WatermarkConfigConstants.getWatermarkYSpace:()Ljava/lang/String;
+      cn.keking.config.WatermarkConfigConstants.setWatermarkAlpha:(Ljava/lang/String;)V
+      cn.keking.config.WatermarkConfigConstants.setWatermarkAlphaValue:(Ljava/lang/String;)V
+      cn.keking.config.WatermarkConfigConstants.setWatermarkAngle:(Ljava/lang/String;)V
+      cn.keking.config.WatermarkConfigConstants.setWatermarkAngleValue:(Ljava/lang/String;)V
+      cn.keking.config.WatermarkConfigConstants.setWatermarkColor:(Ljava/lang/String;)V
+      cn.keking.config.WatermarkConfigConstants.setWatermarkColorValue:(Ljava/lang/String;)V
+      cn.keking.config.WatermarkConfigConstants.setWatermarkFont:(Ljava/lang/String;)V
+      cn.keking.config.WatermarkConfigConstants.setWatermarkFontValue:(Ljava/lang/String;)V
+      cn.keking.config.WatermarkConfigConstants.setWatermarkFontsize:(Ljava/lang/String;)V
+      cn.keking.config.WatermarkConfigConstants.setWatermarkFontsizeValue:(Ljava/lang/String;)V
+      cn.keking.config.WatermarkConfigConstants.setWatermarkHeight:(Ljava/lang/String;)V
+      cn.keking.config.WatermarkConfigConstants.setWatermarkHeightValue:(Ljava/lang/String;)V
+      cn.keking.config.WatermarkConfigConstants.setWatermarkTxt:(Ljava/lang/String;)V
+      cn.keking.config.WatermarkConfigConstants.setWatermarkTxtValue:(Ljava/lang/String;)V
+      cn.keking.config.WatermarkConfigConstants.setWatermarkWidth:(Ljava/lang/String;)V
+      cn.keking.config.WatermarkConfigConstants.setWatermarkWidthValue:(Ljava/lang/String;)V
+      cn.keking.config.WatermarkConfigConstants.setWatermarkXSpace:(Ljava/lang/String;)V
+      cn.keking.config.WatermarkConfigConstants.setWatermarkXSpaceValue:(Ljava/lang/String;)V
+      cn.keking.config.WatermarkConfigConstants.setWatermarkYSpace:(Ljava/lang/String;)V
+      cn.keking.config.WatermarkConfigConstants.setWatermarkYSpaceValue:(Ljava/lang/String;)V
+      cn.keking.model.FileAttribute.<init>:()V
+      cn.keking.model.FileAttribute.<init>:(Lcn/keking/model/FileType;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+      cn.keking.model.FileAttribute.<init>:(Lcn/keking/model/FileType;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+      cn.keking.model.FileAttribute.forceUpdatedCache:()Ljava/lang/Boolean;
+      cn.keking.model.FileAttribute.getCacheListName:()Ljava/lang/String;
+      cn.keking.model.FileAttribute.getCacheName:()Ljava/lang/String;
+      cn.keking.model.FileAttribute.getCompressFileKey:()Ljava/lang/String;
+      cn.keking.model.FileAttribute.getFilePassword:()Ljava/lang/String;
+      cn.keking.model.FileAttribute.getKkProxyAuthorization:()Ljava/lang/String;
+      cn.keking.model.FileAttribute.getName:()Ljava/lang/String;
+      cn.keking.model.FileAttribute.getOfficePreviewType:()Ljava/lang/String;
+      cn.keking.model.FileAttribute.getOriginFilePath:()Ljava/lang/String;
+      cn.keking.model.FileAttribute.getOutFilePath:()Ljava/lang/String;
+      cn.keking.model.FileAttribute.getSkipDownLoad:()Ljava/lang/Boolean;
+      cn.keking.model.FileAttribute.getSuffix:()Ljava/lang/String;
+      cn.keking.model.FileAttribute.getTifPreviewType:()Ljava/lang/String;
+      cn.keking.model.FileAttribute.getType:()Lcn/keking/model/FileType;
+      cn.keking.model.FileAttribute.getUrl:()Ljava/lang/String;
+      cn.keking.model.FileAttribute.getUsePasswordCache:()Z
+      cn.keking.model.FileAttribute.isCompressFile:()Z
+      cn.keking.model.FileAttribute.isHtmlView:()Z
+      cn.keking.model.FileAttribute.setCacheListName:(Ljava/lang/String;)V
+      cn.keking.model.FileAttribute.setCacheName:(Ljava/lang/String;)V
+      cn.keking.model.FileAttribute.setCompressFile:(Z)V
+      cn.keking.model.FileAttribute.setCompressFileKey:(Ljava/lang/String;)V
+      cn.keking.model.FileAttribute.setFilePassword:(Ljava/lang/String;)V
+      cn.keking.model.FileAttribute.setForceUpdatedCache:(Ljava/lang/Boolean;)V
+      cn.keking.model.FileAttribute.setHtmlView:(Z)V
+      cn.keking.model.FileAttribute.setKkProxyAuthorization:(Ljava/lang/String;)V
+      cn.keking.model.FileAttribute.setName:(Ljava/lang/String;)V
+      cn.keking.model.FileAttribute.setOfficePreviewType:(Ljava/lang/String;)V
+      cn.keking.model.FileAttribute.setOriginFilePath:(Ljava/lang/String;)V
+      cn.keking.model.FileAttribute.setOutFilePath:(Ljava/lang/String;)V
+      cn.keking.model.FileAttribute.setSkipDownLoad:(Ljava/lang/Boolean;)V
+      cn.keking.model.FileAttribute.setSuffix:(Ljava/lang/String;)V
+      cn.keking.model.FileAttribute.setTifPreviewType:(Ljava/lang/String;)V
+      cn.keking.model.FileAttribute.setType:(Lcn/keking/model/FileType;)V
+      cn.keking.model.FileAttribute.setUrl:(Ljava/lang/String;)V
+      cn.keking.model.FileAttribute.setUsePasswordCache:(Z)V
+      cn.keking.model.FileType.getInstanceName:()Ljava/lang/String;
+      cn.keking.model.FileType.typeFromFileName:(Ljava/lang/String;)Lcn/keking/model/FileType;
+      cn.keking.model.FileType.typeFromUrl:(Ljava/lang/String;)Lcn/keking/model/FileType;
+      cn.keking.model.ReturnResponse.<init>:(ILjava/lang/String;Ljava/lang/Object;)V
+      cn.keking.model.ReturnResponse.failure:()Lcn/keking/model/ReturnResponse;
+      cn.keking.model.ReturnResponse.failure:(Ljava/lang/String;)Lcn/keking/model/ReturnResponse;
+      cn.keking.model.ReturnResponse.getCode:()I
+      cn.keking.model.ReturnResponse.getContent:()Ljava/lang/Object;
+      cn.keking.model.ReturnResponse.getMsg:()Ljava/lang/String;
+      cn.keking.model.ReturnResponse.isFailure:()Z
+      cn.keking.model.ReturnResponse.isSuccess:()Z
+      cn.keking.model.ReturnResponse.setCode:(I)V
+      cn.keking.model.ReturnResponse.setContent:(Ljava/lang/Object;)V
+      cn.keking.model.ReturnResponse.setMsg:(Ljava/lang/String;)V
+      cn.keking.model.ReturnResponse.success:()Lcn/keking/model/ReturnResponse;
+      cn.keking.model.ReturnResponse.success:(Ljava/lang/Object;)Lcn/keking/model/ReturnResponse;
+      cn.keking.service.FileConvertQueueTask$ConvertTask.<init>:(Lcn/keking/service/FilePreviewFactory;Lcn/keking/service/cache/CacheService;Lcn/keking/service/FileHandlerService;)V
+      cn.keking.service.FileConvertQueueTask$ConvertTask.isNeedConvert:(Lcn/keking/model/FileType;)Z
+      cn.keking.service.FileConvertQueueTask$ConvertTask.run:()V
+      cn.keking.utils.BytesEncodingDetect.<init>:()V
+      cn.keking.utils.BytesEncodingDetect.ascii_probability:([B)I
+      cn.keking.utils.BytesEncodingDetect.big5_probability:([B)I
+      cn.keking.utils.BytesEncodingDetect.big5plus_probability:([B)I
+      cn.keking.utils.BytesEncodingDetect.cp949_probability:([B)I
+      cn.keking.utils.BytesEncodingDetect.detectEncoding:(Ljava/net/URL;)I
+      cn.keking.utils.BytesEncodingDetect.detectEncoding:([B)I
+      cn.keking.utils.BytesEncodingDetect.euc_jp_probability:([B)I
+      cn.keking.utils.BytesEncodingDetect.euc_kr_probability:([B)I
+      cn.keking.utils.BytesEncodingDetect.euc_tw_probability:([B)I
+      cn.keking.utils.BytesEncodingDetect.gb18030_probability:([B)I
+      cn.keking.utils.BytesEncodingDetect.gb2312_probability:([B)I
+      cn.keking.utils.BytesEncodingDetect.gbk_probability:([B)I
+      cn.keking.utils.BytesEncodingDetect.hz_probability:([B)I
+      cn.keking.utils.BytesEncodingDetect.initialize_frequencies:()V
+      cn.keking.utils.BytesEncodingDetect.iso_2022_cn_probability:([B)I
+      cn.keking.utils.BytesEncodingDetect.iso_2022_jp_probability:([B)I
+      cn.keking.utils.BytesEncodingDetect.iso_2022_kr_probability:([B)I
+      cn.keking.utils.BytesEncodingDetect.sjis_probability:([B)I
+      cn.keking.utils.BytesEncodingDetect.utf16_probability:([B)I
+      cn.keking.utils.BytesEncodingDetect.utf8_probability:([B)I
+      cn.keking.utils.CaptchaUtil.<init>:()V
+      cn.keking.utils.CaptchaUtil.generateCaptchaCode:()Ljava/lang/String;
+      cn.keking.utils.CaptchaUtil.generateCaptchaPic:(Ljava/lang/String;)Ljava/awt/image/BufferedImage;
+      cn.keking.utils.ConfigUtils.<init>:()V
+      cn.keking.utils.ConfigUtils.getCustomizedConfigPath:()Ljava/lang/String;
+      cn.keking.utils.ConfigUtils.getHomePath:()Ljava/lang/String;
+      cn.keking.utils.ConfigUtils.getUserDir:()Ljava/lang/String;
+      cn.keking.utils.ConfigUtils.restorePropertiesFromEnvFormat:(Ljava/util/Properties;)V
+      cn.keking.utils.ConvertPicUtil.<init>:()V
+      cn.keking.utils.ConvertPicUtil.convertJpg2Pdf:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      cn.keking.utils.ConvertPicUtil.convertTif2Jpg:(Ljava/lang/String;Ljava/lang/String;Z)Ljava/util/List;
+      cn.keking.utils.DateUtils.<init>:()V
+      cn.keking.utils.DateUtils.calculateCurrentTimeDifference:(J)J
+      cn.keking.utils.DateUtils.getCurrentSecond:()J
+      cn.keking.utils.DownloadUtils.<init>:()V
+      cn.keking.utils.DownloadUtils.downLoad:(Lcn/keking/model/FileAttribute;Ljava/lang/String;)Lcn/keking/model/ReturnResponse;
+      cn.keking.utils.Encoding.<init>:()V
+      cn.keking.utils.EncodingDetects.<init>:()V
+      cn.keking.utils.EncodingDetects.getJavaEncode:(Ljava/io/File;)Ljava/lang/String;
+      cn.keking.utils.EncodingDetects.getJavaEncode:(Ljava/lang/String;)Ljava/lang/String;
+      cn.keking.utils.EncodingDetects.getJavaEncode:([B)Ljava/lang/String;
+      cn.keking.utils.FtpUtils.<init>:()V
+      cn.keking.utils.FtpUtils.connect:(Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lorg/apache/commons/net/ftp/FTPClient;
+      cn.keking.utils.FtpUtils.download:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+      cn.keking.utils.KkFileUtils.<init>:()V
+      cn.keking.utils.KkFileUtils.deleteDirectory:(Ljava/lang/String;)Z
+      cn.keking.utils.KkFileUtils.deleteFileByName:(Ljava/lang/String;)Z
+      cn.keking.utils.KkFileUtils.deleteFileByPath:(Ljava/lang/String;)V
+      cn.keking.utils.KkFileUtils.htmlEscape:(Ljava/lang/String;)Ljava/lang/String;
+      cn.keking.utils.KkFileUtils.isAllowedUpload:(Ljava/lang/String;)Z
+      cn.keking.utils.KkFileUtils.isExist:(Ljava/lang/String;)Z
+      cn.keking.utils.KkFileUtils.isFtpUrl:(Ljava/net/URL;)Z
+      cn.keking.utils.KkFileUtils.isHttpUrl:(Ljava/net/URL;)Z
+      cn.keking.utils.KkFileUtils.isIllegalFileName:(Ljava/lang/String;)Z
+      cn.keking.utils.KkFileUtils.isInteger:(Ljava/lang/String;)Z
+      cn.keking.utils.KkFileUtils.suffixFromFileName:(Ljava/lang/String;)Ljava/lang/String;
+      cn.keking.utils.LocalOfficeUtils.<init>:()V
+      cn.keking.utils.LocalOfficeUtils.getDefaultOfficeHome:()Ljava/io/File;
+      cn.keking.utils.OfficeUtils.<init>:()V
+      cn.keking.utils.OfficeUtils.isCompatible:(Ljava/lang/String;Ljava/lang/String;)Z
+      cn.keking.utils.OfficeUtils.isPwdProtected:(Ljava/lang/String;)Z
+      cn.keking.utils.RarUtils.<init>:()V
+      cn.keking.utils.RarUtils.getTree:(Ljava/lang/String;)Ljava/util/List;
+      cn.keking.utils.RarUtils.getUTF8BytesFromGBKString:(Ljava/lang/String;)[B
+      cn.keking.utils.RarUtils.getUtf8String:(Ljava/lang/String;)Ljava/lang/String;
+      cn.keking.utils.RarUtils.isMessyCode:(Ljava/lang/String;)Z
+      cn.keking.utils.RarUtils.judge:(C)Z
+      cn.keking.utils.RarUtils.specialSymbols:(Ljava/lang/String;)Ljava/lang/String;
+      cn.keking.utils.SimpleEncodingDetects.<init>:()V
+      cn.keking.utils.SimpleEncodingDetects.getJavaEncode:([B)Ljava/lang/String;
+      cn.keking.utils.SimpleEncodingDetects.readFile:(Ljava/lang/String;Ljava/lang/String;)V
+      cn.keking.utils.SslUtils.<init>:()V
+      cn.keking.utils.SslUtils.ignoreSsl:()V
+      cn.keking.utils.UrlEncoderUtils.<init>:()V
+      cn.keking.utils.UrlEncoderUtils.hasUrlEncoded:(Ljava/lang/String;)Z
+      cn.keking.utils.WebUtils.<init>:()V
+      cn.keking.utils.WebUtils.clearFullfilenameParam:(Ljava/lang/String;)Ljava/lang/String;
+      cn.keking.utils.WebUtils.decodeBase64String:(Ljava/lang/String;Ljava/nio/charset/Charset;)Ljava/lang/String;
+      cn.keking.utils.WebUtils.decodeUrl:(Ljava/lang/String;)Ljava/lang/String;
+      cn.keking.utils.WebUtils.encodeFileName:(Ljava/lang/String;)Ljava/lang/String;
+      cn.keking.utils.WebUtils.encodeUrlFileName:(Ljava/lang/String;)Ljava/lang/String;
+      cn.keking.utils.WebUtils.getFileNameFromMultipartFile:(Lorg/springframework/web/multipart/MultipartFile;)Ljava/lang/String;
+      cn.keking.utils.WebUtils.getFileNameFromURL:(Ljava/lang/String;)Ljava/lang/String;
+      cn.keking.utils.WebUtils.getHost:(Ljava/lang/String;)Ljava/lang/String;
+      cn.keking.utils.WebUtils.getLongSessionAttr:(Ljavax/servlet/http/HttpServletRequest;Ljava/lang/String;)J
+      cn.keking.utils.WebUtils.getSessionAttr:(Ljavax/servlet/http/HttpServletRequest;Ljava/lang/String;)Ljava/lang/String;
+      cn.keking.utils.WebUtils.getSourceUrl:(Ljavax/servlet/ServletRequest;)Ljava/lang/String;
+      cn.keking.utils.WebUtils.getUrlParameterReg:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      cn.keking.utils.WebUtils.isValidUrl:(Ljava/lang/String;)Z
+      cn.keking.utils.WebUtils.normalizedURL:(Ljava/lang/String;)Ljava/net/URL;
+      cn.keking.utils.WebUtils.removeSessionAttr:(Ljavax/servlet/http/HttpServletRequest;Ljava/lang/String;)V
+      cn.keking.utils.WebUtils.setSessionAttr:(Ljavax/servlet/http/HttpServletRequest;Ljava/lang/String;Ljava/lang/Object;)V
+      cn.keking.utils.WebUtils.suffixFromUrl:(Ljava/lang/String;)Ljava/lang/String;
+      cn.keking.utils.WebUtils.urlEncoderencode:(Ljava/lang/String;)Ljava/lang/String;
+      cn.keking.web.filter.AttributeSetFilter.<init>:()V
+      cn.keking.web.filter.AttributeSetFilter.destroy:()V
+      cn.keking.web.filter.AttributeSetFilter.doFilter:(Ljavax/servlet/ServletRequest;Ljavax/servlet/ServletResponse;Ljavax/servlet/FilterChain;)V
+      cn.keking.web.filter.AttributeSetFilter.init:(Ljavax/servlet/FilterConfig;)V
+      cn.keking.web.filter.BaseUrlFilter.<init>:()V
+      cn.keking.web.filter.BaseUrlFilter.destroy:()V
+      cn.keking.web.filter.BaseUrlFilter.doFilter:(Ljavax/servlet/ServletRequest;Ljavax/servlet/ServletResponse;Ljavax/servlet/FilterChain;)V
+      cn.keking.web.filter.BaseUrlFilter.getBaseUrl:()Ljava/lang/String;
+      cn.keking.web.filter.BaseUrlFilter.init:(Ljavax/servlet/FilterConfig;)V
+      cn.keking.web.filter.ChinesePathFilter.<init>:()V
+      cn.keking.web.filter.ChinesePathFilter.destroy:()V
+      cn.keking.web.filter.ChinesePathFilter.doFilter:(Ljavax/servlet/ServletRequest;Ljavax/servlet/ServletResponse;Ljavax/servlet/FilterChain;)V
+      cn.keking.web.filter.ChinesePathFilter.init:(Ljavax/servlet/FilterConfig;)V
+      cn.keking.web.filter.TrustDirFilter.<init>:()V
+      cn.keking.web.filter.TrustDirFilter.destroy:()V
+      cn.keking.web.filter.TrustDirFilter.doFilter:(Ljavax/servlet/ServletRequest;Ljavax/servlet/ServletResponse;Ljavax/servlet/FilterChain;)V
+      cn.keking.web.filter.TrustDirFilter.init:(Ljavax/servlet/FilterConfig;)V
+      cn.keking.web.filter.TrustHostFilter.<init>:()V
+      cn.keking.web.filter.TrustHostFilter.destroy:()V
+      cn.keking.web.filter.TrustHostFilter.doFilter:(Ljavax/servlet/ServletRequest;Ljavax/servlet/ServletResponse;Ljavax/servlet/FilterChain;)V
+      cn.keking.web.filter.TrustHostFilter.init:(Ljavax/servlet/FilterConfig;)V
+      cn.keking.web.filter.TrustHostFilter.isNotTrustHost:(Ljava/lang/String;)Z
+      cn.keking.web.filter.UrlCheckFilter.<init>:()V
+      cn.keking.web.filter.UrlCheckFilter.doFilter:(Ljavax/servlet/ServletRequest;Ljavax/servlet/ServletResponse;Ljavax/servlet/FilterChain;)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      R005: Unable to load class: org.springframework.session.config.annotation.web.http.SpringHttpSessionConfiguration
+      
+      This class is required for test generation but is not available on the test runtime classpath.
+      
+      Note: You are testing module 'cn.keking:kkFileView'
+      
+      
+      RESOLUTION:
+      
+      Add the missing dependency as a test dependency.
+      
+      IMPORTANT: Always use test scope for dependencies needed only for testing.
+      
+      If it exists but isn't on the classpath, it may be optional, excluded,
+      or only in dependency management.
+      
+      See https://diff.blue/R005 for more information.
+      
+INFO  
+INFO  1 issues were found and displayed
+INFO  Rerun without --prompts to summarise all the issues
+INFO  Actioning all 1 listed issues via agent
+INFO  Executing prompt with Claude Code agent...
+INFO  [Claude Code] Perfect! I've successfully resolved the issue. Here's what I did:
+INFO  [Claude Code] 
+INFO  [Claude Code] ## Summary
+INFO  [Claude Code] 
+INFO  [Claude Code] I've resolved the R005 issue by adding the missing `spring-session-core` dependency to the test classpath.
+INFO  [Claude Code] 
+INFO  [Claude Code] ### Changes Made
+INFO  [Claude Code] 
+INFO  [Claude Code] 1. **Added Spring Session dependency** in `server/pom.xml:323-327`:
+INFO  [Claude Code]    - Added `org.springframework.session:spring-session-core` with `test` scope
+INFO  [Claude Code]    - The dependency version (2.4.1) is automatically managed by the Spring Boot dependency management (Spring Boot 2.4.2)
+INFO  [Claude Code] 
+INFO  [Claude Code] 2. **Updated the classpath**:
+INFO  [Claude Code]    - Ran `mvn install -DskipTests` successfully
+INFO  [Claude Code]    - The dependency was downloaded from Maven Central
+INFO  [Claude Code]    - Build completed successfully with all modules compiled
+INFO  [Claude Code] 
+INFO  [Claude Code] The missing class `org.springframework.session.config.annotation.web.http.SpringHttpSessionConfiguration` should now be available on the test runtime classpath, allowing the Cover tool to proceed with test generation.
+INFO  Claude Code agent completed successfully.
+INFO  
+INFO  Log file: /home/ubuntu/kkFileView/.diffblue/log/user-20260116T125732.log
+INFO  Finished in 1m 47s

@@ -1,1 +1,1 @@
---exclude cn.keking.service.OfficeToPdfService
+--exclude cn.keking.service.OfficeToPdfService --exclude cn.keking.service.FileConvertQueueTask
