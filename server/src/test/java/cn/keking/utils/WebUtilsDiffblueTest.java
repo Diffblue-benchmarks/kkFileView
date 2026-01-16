@@ -22,40 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 class WebUtilsDiffblueTest {
   /**
-   * Test {@link WebUtils#encodeFileName(String)}.
-   *
-   * <p>Method under test: {@link WebUtils#encodeFileName(String)}
-   */
-  @Test
-  @DisplayName("Test encodeFileName(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.encodeFileName(String)"})
-  void testEncodeFileName() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "ftp%3A%2F%2Flocalhost%2Ftest%2Ffile.txt",
-        WebUtils.encodeFileName(FtpUtilsFactory.createValidFtpUrl()));
-  }
-
-  /**
-   * Test {@link WebUtils#clearFullfilenameParam(String)}.
-   *
-   * <p>Method under test: {@link WebUtils#clearFullfilenameParam(String)}
-   */
-  @Test
-  @DisplayName("Test clearFullfilenameParam(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.clearFullfilenameParam(String)"})
-  void testClearFullfilenameParam() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "ftp://localhost/test/file.txt",
-        WebUtils.clearFullfilenameParam(FtpUtilsFactory.createValidFtpUrl()));
-  }
-
-  /**
    * Test {@link WebUtils#urlEncoderencode(String)}.
    *
    * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
@@ -70,23 +36,6 @@ class WebUtilsDiffblueTest {
     assertEquals(
         "https://example.org/examplehttps://example.org/exampleUrl%20Str",
         WebUtils.urlEncoderencode("https://example.org/examplehttps://example.org/exampleUrl Str"));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName("Test urlEncoderencode(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode2() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "https://example.org/exampleUrl%20Strcn.keking.utils.WebUtils",
-        WebUtils.urlEncoderencode("https://example.org/exampleUrl Strcn.keking.utils.WebUtils"));
   }
 
   /**
@@ -125,48 +74,6 @@ class WebUtilsDiffblueTest {
   void testUrlEncoderencode_thenReturn2b5b5d2() {
     // Arrange, Act and Assert
     assertEquals("%2B%5B=%5D", WebUtils.urlEncoderencode("+[=]"));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
-   *   <li>Then return {@code %5B?%5DWebUtils}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName("Test urlEncoderencode(String); then return '%5B?%5Dcn.keking.utils.WebUtils'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_thenReturn5b5DcnKekingUtilsWebUtils() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "%5B?%5Dcn.keking.utils.WebUtils",
-        WebUtils.urlEncoderencode("[?]cn.keking.utils.WebUtils"));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
-   *   <li>Then return {@code %5B=%5DWebUtils}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName("Test urlEncoderencode(String); then return '%5B=%5Dcn.keking.utils.WebUtils'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_thenReturn5b5DcnKekingUtilsWebUtils2() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "%5B=%5Dcn.keking.utils.WebUtils",
-        WebUtils.urlEncoderencode("[=]cn.keking.utils.WebUtils"));
   }
 
   /**
@@ -441,90 +348,6 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#urlEncoderencode(String)}.
    *
    * <ul>
-   *   <li>Then return {@code WebUtils%5B?%5D}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName("Test urlEncoderencode(String); then return 'cn.keking.utils.WebUtils%5B?%5D'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_thenReturnCnKekingUtilsWebUtils5b5d() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "cn.keking.utils.WebUtils%5B?%5D",
-        WebUtils.urlEncoderencode("cn.keking.utils.WebUtils[?]"));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
-   *   <li>Then return {@code WebUtils%5B=%5D}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName("Test urlEncoderencode(String); then return 'cn.keking.utils.WebUtils%5B=%5D'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_thenReturnCnKekingUtilsWebUtils5b5d2() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "cn.keking.utils.WebUtils%5B=%5D",
-        WebUtils.urlEncoderencode("cn.keking.utils.WebUtils[=]"));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
-   *   <li>Then return {@code WebUtilsUrl%20Str}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName("Test urlEncoderencode(String); then return 'cn.keking.utils.WebUtilsUrl%20Str'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_thenReturnCnKekingUtilsWebUtilsUrl20Str() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "cn.keking.utils.WebUtilsUrl%20Str",
-        WebUtils.urlEncoderencode("cn.keking.utils.WebUtilsUrl Str"));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
-   *   <li>Then return {@code WebUtilsfile:}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName("Test urlEncoderencode(String); then return 'cn.keking.utils.WebUtilsfile:'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_thenReturnCnKekingUtilsWebUtilsfile() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "cn.keking.utils.WebUtilsfile:",
-        WebUtils.urlEncoderencode("cn.keking.utils.WebUtilsfile:"));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
    *   <li>Then return {@code file:https://example.org/example}.
    * </ul>
    *
@@ -540,6 +363,262 @@ class WebUtilsDiffblueTest {
     assertEquals(
         "file:https://example.org/example",
         WebUtils.urlEncoderencode("file:https://example.org/example"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>Then return {@code fullfilename%5B?%5Dfullfilename}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName("Test urlEncoderencode(String); then return 'fullfilename%5B?%5Dfullfilename'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_thenReturnFullfilename5b5Dfullfilename() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "fullfilename%5B?%5Dfullfilename",
+        WebUtils.urlEncoderencode("fullfilename[?]fullfilename"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>Then return {@code fullfilename%5B?%5Dhttps://example.org/example}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); then return 'fullfilename%5B?%5Dhttps://example.org/example'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_thenReturnFullfilename5b5DhttpsExampleOrgExample() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "fullfilename%5B?%5Dhttps://example.org/example",
+        WebUtils.urlEncoderencode("fullfilename[?]https://example.org/example"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>Then return {@code fullfilenamefile:fullfilename}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName("Test urlEncoderencode(String); then return 'fullfilenamefile:fullfilename'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_thenReturnFullfilenamefileFullfilename() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "fullfilenamefile:fullfilename",
+        WebUtils.urlEncoderencode("fullfilenamefile:fullfilename"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>Then return {@code fullfilenamefile:Url%20Str}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName("Test urlEncoderencode(String); then return 'fullfilenamefile:Url%20Str'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_thenReturnFullfilenamefileUrl20Str() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "fullfilenamefile:Url%20Str", WebUtils.urlEncoderencode("fullfilenamefile:Url Str"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>Then return {@code fullfilenamefullfilename%5B?%5D}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName("Test urlEncoderencode(String); then return 'fullfilenamefullfilename%5B?%5D'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_thenReturnFullfilenamefullfilename5b5d() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "fullfilenamefullfilename%5B?%5D",
+        WebUtils.urlEncoderencode("fullfilenamefullfilename[?]"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>Then return {@code fullfilenamefullfilename%5B=%5D}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName("Test urlEncoderencode(String); then return 'fullfilenamefullfilename%5B=%5D'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_thenReturnFullfilenamefullfilename5b5d2() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "fullfilenamefullfilename%5B=%5D",
+        WebUtils.urlEncoderencode("fullfilenamefullfilename[=]"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>Then return {@code fullfilenamefullfilenameUrl%20Str}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName("Test urlEncoderencode(String); then return 'fullfilenamefullfilenameUrl%20Str'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_thenReturnFullfilenamefullfilenameUrl20Str() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "fullfilenamefullfilenameUrl%20Str",
+        WebUtils.urlEncoderencode("fullfilenamefullfilenameUrl Str"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>Then return {@code fullfilenamefullfilenamefile:}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName("Test urlEncoderencode(String); then return 'fullfilenamefullfilenamefile:'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_thenReturnFullfilenamefullfilenamefile() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "fullfilenamefullfilenamefile:",
+        WebUtils.urlEncoderencode("fullfilenamefullfilenamefile:"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>Then return {@code fullfilenamehttps://example.org/example%5B?%5D}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); then return 'fullfilenamehttps://example.org/example%5B?%5D'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_thenReturnFullfilenamehttpsExampleOrgExample5b5d() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "fullfilenamehttps://example.org/example%5B?%5D",
+        WebUtils.urlEncoderencode("fullfilenamehttps://example.org/example[?]"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>Then return {@code fullfilenamehttps://example.org/example%5B=%5D}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); then return 'fullfilenamehttps://example.org/example%5B=%5D'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_thenReturnFullfilenamehttpsExampleOrgExample5b5d2() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "fullfilenamehttps://example.org/example%5B=%5D",
+        WebUtils.urlEncoderencode("fullfilenamehttps://example.org/example[=]"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>Then return {@code fullfilenamehttps://example.org/exampleUrl%20Str}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); then return 'fullfilenamehttps://example.org/exampleUrl%20Str'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_thenReturnFullfilenamehttpsExampleOrgExampleUrl20Str() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "fullfilenamehttps://example.org/exampleUrl%20Str",
+        WebUtils.urlEncoderencode("fullfilenamehttps://example.org/exampleUrl Str"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>Then return {@code fullfilenamehttps://example.org/examplefile:}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); then return 'fullfilenamehttps://example.org/examplefile:'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_thenReturnFullfilenamehttpsExampleOrgExamplefile() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "fullfilenamehttps://example.org/examplefile:",
+        WebUtils.urlEncoderencode("fullfilenamehttps://example.org/examplefile:"));
   }
 
   /**
@@ -719,50 +798,6 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#urlEncoderencode(String)}.
    *
    * <ul>
-   *   <li>Then return {@code https://example.org/example%5B?%5DWebUtils}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test urlEncoderencode(String); then return 'https://example.org/example%5B?%5Dcn.keking.utils.WebUtils'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_thenReturnHttpsExampleOrgExample5b5DcnKekingUtilsWebUtils() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "https://example.org/example%5B?%5Dcn.keking.utils.WebUtils",
-        WebUtils.urlEncoderencode("https://example.org/example[?]cn.keking.utils.WebUtils"));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
-   *   <li>Then return {@code https://example.org/example%5B=%5DWebUtils}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test urlEncoderencode(String); then return 'https://example.org/example%5B=%5Dcn.keking.utils.WebUtils'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_thenReturnHttpsExampleOrgExample5b5DcnKekingUtilsWebUtils2() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "https://example.org/example%5B=%5Dcn.keking.utils.WebUtils",
-        WebUtils.urlEncoderencode("https://example.org/example[=]cn.keking.utils.WebUtils"));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
    *   <li>Then return {@code https://example.org/example%5B?%5Dfile:}.
    * </ul>
    *
@@ -867,50 +902,6 @@ class WebUtilsDiffblueTest {
     assertEquals(
         "https://example.org/example%5B?%5Dhttps://example.org/example",
         WebUtils.urlEncoderencode("https://example.org/example[?]https://example.org/example"));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
-   *   <li>Then return {@code https://example.org/example%5B?%5DurlPath}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test urlEncoderencode(String); then return 'https://example.org/example%5B?%5DurlPath'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_thenReturnHttpsExampleOrgExample5b5DurlPath() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "https://example.org/example%5B?%5DurlPath",
-        WebUtils.urlEncoderencode("https://example.org/example[?]urlPath"));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
-   *   <li>Then return {@code https://example.org/example%5B=%5DurlPath}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test urlEncoderencode(String); then return 'https://example.org/example%5B=%5DurlPath'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_thenReturnHttpsExampleOrgExample5b5DurlPath2() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "https://example.org/example%5B=%5DurlPath",
-        WebUtils.urlEncoderencode("https://example.org/example[=]urlPath"));
   }
 
   /**
@@ -1581,22 +1572,88 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#urlEncoderencode(String)}.
    *
    * <ul>
-   *   <li>Then return {@code https://example.org/exampleUrl%20StrurlPath}.
+   *   <li>Then return {@code https://example.org/examplebase64Url%20Str}.
    * </ul>
    *
    * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
    */
   @Test
   @DisplayName(
-      "Test urlEncoderencode(String); then return 'https://example.org/exampleUrl%20StrurlPath'")
+      "Test urlEncoderencode(String); then return 'https://example.org/examplebase64Url%20Str'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_thenReturnHttpsExampleOrgExampleUrl20StrurlPath() {
+  void testUrlEncoderencode_thenReturnHttpsExampleOrgExamplebase64Url20Str() {
     // Arrange, Act and Assert
     assertEquals(
-        "https://example.org/exampleUrl%20StrurlPath",
-        WebUtils.urlEncoderencode("https://example.org/exampleUrl StrurlPath"));
+        "https://example.org/examplebase64Url%20Str",
+        WebUtils.urlEncoderencode("https://example.org/examplebase64Url Str"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>Then return {@code https://example.org/examplebase64file:}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); then return 'https://example.org/examplebase64file:'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_thenReturnHttpsExampleOrgExamplebase64file() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "https://example.org/examplebase64file:",
+        WebUtils.urlEncoderencode("https://example.org/examplebase64file:"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>Then return {@code https://example.org/examplebase64%5B?%5D}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); then return 'https://example.org/examplebase64%5B?%5D'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_thenReturnHttpsExampleOrgExamplebase645b5d() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "https://example.org/examplebase64%5B?%5D",
+        WebUtils.urlEncoderencode("https://example.org/examplebase64[?]"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>Then return {@code https://example.org/examplebase64%5B=%5D}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); then return 'https://example.org/examplebase64%5B=%5D'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_thenReturnHttpsExampleOrgExamplebase645b5d2() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "https://example.org/examplebase64%5B=%5D",
+        WebUtils.urlEncoderencode("https://example.org/examplebase64[=]"));
   }
 
   /**
@@ -1753,28 +1810,6 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#urlEncoderencode(String)}.
    *
    * <ul>
-   *   <li>Then return {@code https://example.org/examplefile:WebUtils}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test urlEncoderencode(String); then return 'https://example.org/examplefile:cn.keking.utils.WebUtils'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_thenReturnHttpsExampleOrgExamplefileCnKekingUtilsWebUtils() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "https://example.org/examplefile:cn.keking.utils.WebUtils",
-        WebUtils.urlEncoderencode("https://example.org/examplefile:cn.keking.utils.WebUtils"));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
    *   <li>Then return {@code https://example.org/examplefile:file:}.
    * </ul>
    *
@@ -1834,28 +1869,6 @@ class WebUtilsDiffblueTest {
     assertEquals(
         "https://example.org/examplefile:Url%20Str",
         WebUtils.urlEncoderencode("https://example.org/examplefile:Url Str"));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
-   *   <li>Then return {@code https://example.org/examplefile:urlPath}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test urlEncoderencode(String); then return 'https://example.org/examplefile:urlPath'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_thenReturnHttpsExampleOrgExamplefileUrlPath() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "https://example.org/examplefile:urlPath",
-        WebUtils.urlEncoderencode("https://example.org/examplefile:urlPath"));
   }
 
   /**
@@ -2010,27 +2023,6 @@ class WebUtilsDiffblueTest {
     assertEquals(
         "https://example.org/examplehttps://example.org/examplefile:",
         WebUtils.urlEncoderencode("https://example.org/examplehttps://example.org/examplefile:"));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
-   *   <li>Then return {@code Url%20StrWebUtils}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName("Test urlEncoderencode(String); then return 'Url%20Strcn.keking.utils.WebUtils'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_thenReturnUrl20StrcnKekingUtilsWebUtils() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "Url%20Strcn.keking.utils.WebUtils",
-        WebUtils.urlEncoderencode("Url Strcn.keking.utils.WebUtils"));
   }
 
   /**
@@ -2277,29 +2269,6 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#urlEncoderencode(String)}.
    *
    * <ul>
-   *   <li>When createValidFtpUrl.
-   *   <li>Then return {@code ftp://localhost/test/file.txt}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test urlEncoderencode(String); when createValidFtpUrl; then return 'ftp://localhost/test/file.txt'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_whenCreateValidFtpUrl_thenReturnFtpLocalhostTestFileTxt() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "ftp://localhost/test/file.txt",
-        WebUtils.urlEncoderencode(FtpUtilsFactory.createValidFtpUrl()));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
    *   <li>When {@code file:file:}.
    *   <li>Then return {@code file:file:}.
    * </ul>
@@ -2440,6 +2409,91 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#urlEncoderencode(String)}.
    *
    * <ul>
+   *   <li>When {@code fullfilename[?]42}.
+   *   <li>Then return {@code fullfilename%5B?%5D42}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); when 'fullfilename[?]42'; then return 'fullfilename%5B?%5D42'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_whenFullfilename42_thenReturnFullfilename5b5d42() {
+    // Arrange, Act and Assert
+    assertEquals("fullfilename%5B?%5D42", WebUtils.urlEncoderencode("fullfilename[?]42"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>When {@code fullfilename[?]base64}.
+   *   <li>Then return {@code fullfilename%5B?%5Dbase64}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); when 'fullfilename[?]base64'; then return 'fullfilename%5B?%5Dbase64'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_whenFullfilenameBase64_thenReturnFullfilename5b5Dbase64() {
+    // Arrange, Act and Assert
+    assertEquals("fullfilename%5B?%5Dbase64", WebUtils.urlEncoderencode("fullfilename[?]base64"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>When {@code fullfilename[?]file:}.
+   *   <li>Then return {@code fullfilename%5B?%5Dfile:}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); when 'fullfilename[?]file:'; then return 'fullfilename%5B?%5Dfile:'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_whenFullfilenameFile_thenReturnFullfilename5b5Dfile() {
+    // Arrange, Act and Assert
+    assertEquals("fullfilename%5B?%5Dfile:", WebUtils.urlEncoderencode("fullfilename[?]file:"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>When {@code fullfilename[?]Url Str}.
+   *   <li>Then return {@code fullfilename%5B?%5DUrl%20Str}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); when 'fullfilename[?]Url Str'; then return 'fullfilename%5B?%5DUrl%20Str'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_whenFullfilenameUrlStr_thenReturnFullfilename5b5DUrl20Str() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "fullfilename%5B?%5DUrl%20Str", WebUtils.urlEncoderencode("fullfilename[?]Url Str"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
    *   <li>When {@code fullfilenameUrl Str}.
    *   <li>Then return {@code fullfilenameUrl%20Str}.
    * </ul>
@@ -2545,6 +2599,195 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#urlEncoderencode(String)}.
    *
    * <ul>
+   *   <li>When {@code fullfilename[?]+}.
+   *   <li>Then return {@code fullfilename%5B?%5D%2B}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); when 'fullfilename[?]+'; then return 'fullfilename%5B?%5D%2B'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_whenFullfilename_thenReturnFullfilename5b5d2b() {
+    // Arrange, Act and Assert
+    assertEquals("fullfilename%5B?%5D%2B", WebUtils.urlEncoderencode("fullfilename[?]+"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>When {@code fullfilename[?]?}.
+   *   <li>Then return {@code fullfilename%5B?%5D?}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); when 'fullfilename[?]?'; then return 'fullfilename%5B?%5D?'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_whenFullfilename_thenReturnFullfilename5b5d3() {
+    // Arrange, Act and Assert
+    assertEquals("fullfilename%5B?%5D?", WebUtils.urlEncoderencode("fullfilename[?]?"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>When {@code fullfilename[?]/}.
+   *   <li>Then return {@code fullfilename%5B?%5D/}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); when 'fullfilename[?]/'; then return 'fullfilename%5B?%5D/'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_whenFullfilename_thenReturnFullfilename5b5d4() {
+    // Arrange, Act and Assert
+    assertEquals("fullfilename%5B?%5D/", WebUtils.urlEncoderencode("fullfilename[?]/"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>When {@code fullfilename/[?]}.
+   *   <li>Then return {@code fullfilename/%5B?%5D}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); when 'fullfilename/[?]'; then return 'fullfilename/%5B?%5D'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_whenFullfilename_thenReturnFullfilename5b5d5() {
+    // Arrange, Act and Assert
+    assertEquals("fullfilename/%5B?%5D", WebUtils.urlEncoderencode("fullfilename/[?]"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>When {@code fullfilename[?][?]}.
+   *   <li>Then return {@code fullfilename%5B?%5D%5B?%5D}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); when 'fullfilename[?][?]'; then return 'fullfilename%5B?%5D%5B?%5D'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_whenFullfilename_thenReturnFullfilename5b5d5b5d() {
+    // Arrange, Act and Assert
+    assertEquals("fullfilename%5B?%5D%5B?%5D", WebUtils.urlEncoderencode("fullfilename[?][?]"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>When {@code fullfilename[?][=]}.
+   *   <li>Then return {@code fullfilename%5B?%5D%5B=%5D}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); when 'fullfilename[?][=]'; then return 'fullfilename%5B?%5D%5B=%5D'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_whenFullfilename_thenReturnFullfilename5b5d5b5d2() {
+    // Arrange, Act and Assert
+    assertEquals("fullfilename%5B?%5D%5B=%5D", WebUtils.urlEncoderencode("fullfilename[?][=]"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>When {@code fullfilenamefile:42}.
+   *   <li>Then return {@code fullfilenamefile:42}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); when 'fullfilenamefile:42'; then return 'fullfilenamefile:42'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_whenFullfilenamefile42_thenReturnFullfilenamefile42() {
+    // Arrange, Act and Assert
+    assertEquals("fullfilenamefile:42", WebUtils.urlEncoderencode("fullfilenamefile:42"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>When {@code fullfilenamefile:base64}.
+   *   <li>Then return {@code fullfilenamefile:base64}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); when 'fullfilenamefile:base64'; then return 'fullfilenamefile:base64'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_whenFullfilenamefileBase64_thenReturnFullfilenamefileBase64() {
+    // Arrange, Act and Assert
+    assertEquals("fullfilenamefile:base64", WebUtils.urlEncoderencode("fullfilenamefile:base64"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>When {@code fullfilenamefile:file:}.
+   *   <li>Then return {@code fullfilenamefile:file:}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); when 'fullfilenamefile:file:'; then return 'fullfilenamefile:file:'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_whenFullfilenamefileFile_thenReturnFullfilenamefileFile() {
+    // Arrange, Act and Assert
+    assertEquals("fullfilenamefile:file:", WebUtils.urlEncoderencode("fullfilenamefile:file:"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
    *   <li>When {@code fullfilenamefile:}.
    *   <li>Then return {@code fullfilenamefile:}.
    * </ul>
@@ -2566,6 +2809,90 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#urlEncoderencode(String)}.
    *
    * <ul>
+   *   <li>When {@code fullfilenamefile:?}.
+   *   <li>Then return {@code fullfilenamefile:?}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); when 'fullfilenamefile:?'; then return 'fullfilenamefile:?'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_whenFullfilenamefile_thenReturnFullfilenamefile2() {
+    // Arrange, Act and Assert
+    assertEquals("fullfilenamefile:?", WebUtils.urlEncoderencode("fullfilenamefile:?"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>When {@code fullfilenamefile:+}.
+   *   <li>Then return {@code fullfilenamefile:%2B}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); when 'fullfilenamefile:+'; then return 'fullfilenamefile:%2B'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_whenFullfilenamefile_thenReturnFullfilenamefile2b() {
+    // Arrange, Act and Assert
+    assertEquals("fullfilenamefile:%2B", WebUtils.urlEncoderencode("fullfilenamefile:+"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>When {@code fullfilenamefile:[?]}.
+   *   <li>Then return {@code fullfilenamefile:%5B?%5D}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); when 'fullfilenamefile:[?]'; then return 'fullfilenamefile:%5B?%5D'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_whenFullfilenamefile_thenReturnFullfilenamefile5b5d() {
+    // Arrange, Act and Assert
+    assertEquals("fullfilenamefile:%5B?%5D", WebUtils.urlEncoderencode("fullfilenamefile:[?]"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
+   *   <li>When {@code fullfilenamefile:[=]}.
+   *   <li>Then return {@code fullfilenamefile:%5B=%5D}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); when 'fullfilenamefile:[=]'; then return 'fullfilenamefile:%5B=%5D'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_whenFullfilenamefile_thenReturnFullfilenamefile5b5d2() {
+    // Arrange, Act and Assert
+    assertEquals("fullfilenamefile:%5B=%5D", WebUtils.urlEncoderencode("fullfilenamefile:[=]"));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
    *   <li>When {@code ?}.
    *   <li>Then return {@code ?}.
    * </ul>
@@ -2580,127 +2907,6 @@ class WebUtilsDiffblueTest {
   void testUrlEncoderencode_whenQuestionMark_thenReturnQuestionMark() {
     // Arrange, Act and Assert
     assertEquals("?", WebUtils.urlEncoderencode("?"));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
-   *   <li>When {@code urlPathUrl Str}.
-   *   <li>Then return {@code urlPathUrl%20Str}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test urlEncoderencode(String); when 'urlPathUrl Str'; then return 'urlPathUrl%20Str'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_whenUrlPathUrlStr_thenReturnUrlPathUrl20Str() {
-    // Arrange, Act and Assert
-    assertEquals("urlPathUrl%20Str", WebUtils.urlEncoderencode("urlPathUrl Str"));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
-   *   <li>When {@code [?]urlPath}.
-   *   <li>Then return {@code %5B?%5DurlPath}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName("Test urlEncoderencode(String); when '[?]urlPath'; then return '%5B?%5DurlPath'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_whenUrlPath_thenReturn5b5DurlPath() {
-    // Arrange, Act and Assert
-    assertEquals("%5B?%5DurlPath", WebUtils.urlEncoderencode("[?]urlPath"));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
-   *   <li>When {@code [=]urlPath}.
-   *   <li>Then return {@code %5B=%5DurlPath}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName("Test urlEncoderencode(String); when '[=]urlPath'; then return '%5B=%5DurlPath'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_whenUrlPath_thenReturn5b5DurlPath2() {
-    // Arrange, Act and Assert
-    assertEquals("%5B=%5DurlPath", WebUtils.urlEncoderencode("[=]urlPath"));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
-   *   <li>When {@code urlPath[?]}.
-   *   <li>Then return {@code urlPath%5B?%5D}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName("Test urlEncoderencode(String); when 'urlPath[?]'; then return 'urlPath%5B?%5D'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_whenUrlPath_thenReturnUrlPath5b5d() {
-    // Arrange, Act and Assert
-    assertEquals("urlPath%5B?%5D", WebUtils.urlEncoderencode("urlPath[?]"));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
-   *   <li>When {@code urlPath[=]}.
-   *   <li>Then return {@code urlPath%5B=%5D}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName("Test urlEncoderencode(String); when 'urlPath[=]'; then return 'urlPath%5B=%5D'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_whenUrlPath_thenReturnUrlPath5b5d2() {
-    // Arrange, Act and Assert
-    assertEquals("urlPath%5B=%5D", WebUtils.urlEncoderencode("urlPath[=]"));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
-   *   <li>When {@code urlPathfile:}.
-   *   <li>Then return {@code urlPathfile:}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName("Test urlEncoderencode(String); when 'urlPathfile:'; then return 'urlPathfile:'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_whenUrlPathfile_thenReturnUrlPathfile() {
-    // Arrange, Act and Assert
-    assertEquals("urlPathfile:", WebUtils.urlEncoderencode("urlPathfile:"));
   }
 
   /**
@@ -2986,27 +3192,6 @@ class WebUtilsDiffblueTest {
   }
 
   /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
-   *   <li>When {@code Url StrurlPath}.
-   *   <li>Then return {@code Url%20StrurlPath}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test urlEncoderencode(String); when 'Url StrurlPath'; then return 'Url%20StrurlPath'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_whenUrlStrurlPath_thenReturnUrl20StrurlPath() {
-    // Arrange, Act and Assert
-    assertEquals("Url%20StrurlPath", WebUtils.urlEncoderencode("Url StrurlPath"));
-  }
-
-  /**
    * Test {@link WebUtils#getUrlParameterReg(String, String)}.
    *
    * <ul>
@@ -3228,29 +3413,6 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#encodeUrlFileName(String)}.
    *
    * <ul>
-   *   <li>When createValidFtpUrl.
-   *   <li>Then return {@code ftp://localhost/test/file.txt}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#encodeUrlFileName(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test encodeUrlFileName(String); when createValidFtpUrl; then return 'ftp://localhost/test/file.txt'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.encodeUrlFileName(String)"})
-  void testEncodeUrlFileName_whenCreateValidFtpUrl_thenReturnFtpLocalhostTestFileTxt() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "ftp://localhost/test/file.txt",
-        WebUtils.encodeUrlFileName(FtpUtilsFactory.createValidFtpUrl()));
-  }
-
-  /**
-   * Test {@link WebUtils#encodeUrlFileName(String)}.
-   *
-   * <ul>
    *   <li>When {@code ?}.
    *   <li>Then return {@code ?}.
    * </ul>
@@ -3313,6 +3475,26 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#isValidUrl(String)}.
    *
    * <ul>
+   *   <li>When createValidFtpHost.
+   *   <li>Then return {@code false}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#isValidUrl(String)}
+   */
+  @Test
+  @DisplayName("Test isValidUrl(String); when createValidFtpHost; then return 'false'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"boolean WebUtils.isValidUrl(String)"})
+  void testIsValidUrl_whenCreateValidFtpHost_thenReturnFalse() {
+    // Arrange, Act and Assert
+    assertFalse(WebUtils.isValidUrl(FtpUtilsFactory.createValidFtpHost()));
+  }
+
+  /**
+   * Test {@link WebUtils#isValidUrl(String)}.
+   *
+   * <ul>
    *   <li>When createValidFtpUrl.
    *   <li>Then return {@code true}.
    * </ul>
@@ -3327,27 +3509,6 @@ class WebUtilsDiffblueTest {
   void testIsValidUrl_whenCreateValidFtpUrl_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(WebUtils.isValidUrl(FtpUtilsFactory.createValidFtpUrl()));
-  }
-
-  /**
-   * Test {@link WebUtils#isValidUrl(String)}.
-   *
-   * <ul>
-   *   <li>When {@code ^((https|http|ftp|rtsp|mms|file)://)}.
-   *   <li>Then return {@code false}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#isValidUrl(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test isValidUrl(String); when '^((https|http|ftp|rtsp|mms|file)://)'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean WebUtils.isValidUrl(String)"})
-  void testIsValidUrl_whenHttpsHttpFtpRtspMmsFile_thenReturnFalse() {
-    // Arrange, Act and Assert
-    assertFalse(WebUtils.isValidUrl("^((https|http|ftp|rtsp|mms|file)://)"));
   }
 
   /**
@@ -3392,37 +3553,7 @@ class WebUtilsDiffblueTest {
   @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
   void testDecodeUrl3() {
     // Arrange, Act and Assert
-    assertEquals("~�e~)^���", WebUtils.decodeUrl("\nfullfilename"));
-  }
-
-  /**
-   * Test {@link WebUtils#decodeUrl(String)}.
-   *
-   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
-   */
-  @Test
-  @DisplayName("Test decodeUrl(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl4() {
-    // Arrange, Act and Assert
     assertEquals("J��q�", WebUtils.decodeUrl("Source "));
-  }
-
-  /**
-   * Test {@link WebUtils#decodeUrl(String)}.
-   *
-   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
-   */
-  @Test
-  @DisplayName("Test decodeUrl(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl5() {
-    // Arrange, Act and Assert
-    assertEquals("~�e~)^���", WebUtils.decodeUrl("fullfilename\n"));
   }
 
   /**
@@ -3694,126 +3825,6 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#decodeUrl(String)}.
    *
    * <ul>
-   *   <li>When {@code file:}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
-   */
-  @Test
-  @DisplayName("Test decodeUrl(String); when 'file:'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenFile_thenReturnNull() {
-    // Arrange, Act and Assert
-    assertNull(WebUtils.decodeUrl(" file:"));
-  }
-
-  /**
-   * Test {@link WebUtils#decodeUrl(String)}.
-   *
-   * <ul>
-   *   <li>When {@code file:}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
-   */
-  @Test
-  @DisplayName("Test decodeUrl(String); when 'file:'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenFile_thenReturnNull2() {
-    // Arrange, Act and Assert
-    assertNull(WebUtils.decodeUrl("\nfile:"));
-  }
-
-  /**
-   * Test {@link WebUtils#decodeUrl(String)}.
-   *
-   * <ul>
-   *   <li>When {@code file:}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
-   */
-  @Test
-  @DisplayName("Test decodeUrl(String); when 'file:'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenFile_thenReturnNull3() {
-    // Arrange, Act and Assert
-    assertNull(WebUtils.decodeUrl("file: "));
-  }
-
-  /**
-   * Test {@link WebUtils#decodeUrl(String)}.
-   *
-   * <ul>
-   *   <li>When {@code file:}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
-   */
-  @Test
-  @DisplayName("Test decodeUrl(String); when 'file:'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenFile_thenReturnNull4() {
-    // Arrange, Act and Assert
-    assertNull(WebUtils.decodeUrl("file:\n"));
-  }
-
-  /**
-   * Test {@link WebUtils#decodeUrl(String)}.
-   *
-   * <ul>
-   *   <li>When {@code fullfilename}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
-   */
-  @Test
-  @DisplayName("Test decodeUrl(String); when 'fullfilename'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenFullfilename_thenReturnNull() {
-    // Arrange, Act and Assert
-    assertNull(WebUtils.decodeUrl(" fullfilename"));
-  }
-
-  /**
-   * Test {@link WebUtils#decodeUrl(String)}.
-   *
-   * <ul>
-   *   <li>When {@code fullfilename}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
-   */
-  @Test
-  @DisplayName("Test decodeUrl(String); when 'fullfilename'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenFullfilename_thenReturnNull2() {
-    // Arrange, Act and Assert
-    assertNull(WebUtils.decodeUrl("fullfilename "));
-  }
-
-  /**
-   * Test {@link WebUtils#decodeUrl(String)}.
-   *
-   * <ul>
    *   <li>When {@code https://example.org/example 42}.
    *   <li>Then return {@code null}.
    * </ul>
@@ -3888,6 +3899,26 @@ class WebUtilsDiffblueTest {
   void testDecodeUrl_whenHttpsExampleOrgExample42_thenReturnNull4() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("https://example.org/example42\n"));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/example42}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName("Test decodeUrl(String); when 'https://example.org/example42'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExample42_thenReturnNull5() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl(" https://example.org/example42"));
   }
 
   /**
@@ -3972,90 +4003,6 @@ class WebUtilsDiffblueTest {
   void testDecodeUrl_whenHttpsExampleOrgExampleCnKekingUtilsWebUtils_thenReturnNull2() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("https://example.org/example\ncn.keking.utils.WebUtils"));
-  }
-
-  /**
-   * Test {@link WebUtils#decodeUrl(String)}.
-   *
-   * <ul>
-   *   <li>When {@code https://example.org/example file:}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test decodeUrl(String); when 'https://example.org/example file:'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExampleFile_thenReturnNull() {
-    // Arrange, Act and Assert
-    assertNull(WebUtils.decodeUrl("https://example.org/example file:"));
-  }
-
-  /**
-   * Test {@link WebUtils#decodeUrl(String)}.
-   *
-   * <ul>
-   *   <li>When {@code https://example.org/example file:}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test decodeUrl(String); when 'https://example.org/example file:'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExampleFile_thenReturnNull2() {
-    // Arrange, Act and Assert
-    assertNull(WebUtils.decodeUrl("https://example.org/example\nfile:"));
-  }
-
-  /**
-   * Test {@link WebUtils#decodeUrl(String)}.
-   *
-   * <ul>
-   *   <li>When {@code https://example.org/example fullfilename}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test decodeUrl(String); when 'https://example.org/example fullfilename'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExampleFullfilename_thenReturnNull() {
-    // Arrange, Act and Assert
-    assertNull(WebUtils.decodeUrl("https://example.org/example fullfilename"));
-  }
-
-  /**
-   * Test {@link WebUtils#decodeUrl(String)}.
-   *
-   * <ul>
-   *   <li>When {@code https://example.org/example fullfilename}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test decodeUrl(String); when 'https://example.org/example fullfilename'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExampleFullfilename_thenReturnNull2() {
-    // Arrange, Act and Assert
-    assertNull(WebUtils.decodeUrl("https://example.org/example\nfullfilename"));
   }
 
   /**
@@ -4182,6 +4129,27 @@ class WebUtilsDiffblueTest {
   void testDecodeUrl_whenHttpsExampleOrgExampleSource_thenReturnNull4() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("https://example.org/exampleSource\n"));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/exampleSource}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test decodeUrl(String); when 'https://example.org/exampleSource'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExampleSource_thenReturnNull5() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl(" https://example.org/exampleSource"));
   }
 
   /**
@@ -4550,6 +4518,246 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#decodeUrl(String)}.
    *
    * <ul>
+   *   <li>When {@code https://example.org/example?}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName("Test decodeUrl(String); when 'https://example.org/example?'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull17() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl("https://example.org/example? "));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/example?}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName("Test decodeUrl(String); when 'https://example.org/example?'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull18() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl("https://example.org/example?\n"));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/example[=]}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName("Test decodeUrl(String); when 'https://example.org/example[=]'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull19() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl("https://example.org/example[=] "));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/example[=]}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName("Test decodeUrl(String); when 'https://example.org/example[=]'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull20() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl("https://example.org/example[=]\n"));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/example[?]}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName("Test decodeUrl(String); when 'https://example.org/example[?]'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull21() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl("https://example.org/example[?] "));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/example[?]}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName("Test decodeUrl(String); when 'https://example.org/example[?]'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull22() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl("https://example.org/example[?]\n"));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/example}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName("Test decodeUrl(String); when 'https://example.org/example'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull23() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl(" https://example.org/example "));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/example}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName("Test decodeUrl(String); when 'https://example.org/example'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull24() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl(" https://example.org/example\n"));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/example+}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName("Test decodeUrl(String); when 'https://example.org/example+'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull25() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl(" https://example.org/example+"));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/example?}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName("Test decodeUrl(String); when 'https://example.org/example?'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull26() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl(" https://example.org/example?"));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/example[=]}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName("Test decodeUrl(String); when 'https://example.org/example[=]'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull27() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl(" https://example.org/example[=]"));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/example[?]}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName("Test decodeUrl(String); when 'https://example.org/example[?]'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull28() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl(" https://example.org/example[?]"));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
    *   <li>When {@code https://example.org/examplebase64}.
    *   <li>Then return {@code null}.
    * </ul>
@@ -4586,6 +4794,90 @@ class WebUtilsDiffblueTest {
   void testDecodeUrl_whenHttpsExampleOrgExamplebase64_thenReturnNull2() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("https://example.org/examplebase64\n"));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/examplebase64}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test decodeUrl(String); when 'https://example.org/examplebase64'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExamplebase64_thenReturnNull3() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl(" https://example.org/examplebase64"));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/exampleWebUtils}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test decodeUrl(String); when 'https://example.org/examplecn.keking.utils.WebUtils'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExamplecnKekingUtilsWebUtils_thenReturnNull() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl("https://example.org/examplecn.keking.utils.WebUtils "));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/exampleWebUtils}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test decodeUrl(String); when 'https://example.org/examplecn.keking.utils.WebUtils'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExamplecnKekingUtilsWebUtils_thenReturnNull2() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl("https://example.org/examplecn.keking.utils.WebUtils\n"));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/exampleWebUtils}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test decodeUrl(String); when 'https://example.org/examplecn.keking.utils.WebUtils'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExamplecnKekingUtilsWebUtils_thenReturnNull3() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl(" https://example.org/examplecn.keking.utils.WebUtils"));
   }
 
   /**
@@ -4634,6 +4926,27 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#decodeUrl(String)}.
    *
    * <ul>
+   *   <li>When {@code https://example.org/examplehttps://example.org/example}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test decodeUrl(String); when 'https://example.org/examplehttps://example.org/example'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExamplehttpsExampleOrgExample_thenReturnNull3() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl(" https://example.org/examplehttps://example.org/example"));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
    *   <li>When {@code https://example.org/exampleurl解码异常，接入方法错误未使用BASE64}.
    *   <li>Then return {@code null}.
    * </ul>
@@ -4670,6 +4983,27 @@ class WebUtilsDiffblueTest {
   void testDecodeUrl_whenHttpsExampleOrgExampleurlBase64_thenReturnNull2() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("https://example.org/exampleurl解码异常，接入方法错误未使用BASE64\n"));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/exampleurl解码异常，接入方法错误未使用BASE64}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test decodeUrl(String); when 'https://example.org/exampleurl解码异常，接入方法错误未使用BASE64'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExampleurlBase64_thenReturnNull3() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl(" https://example.org/exampleurl解码异常，接入方法错误未使用BASE64"));
   }
 
   /**
@@ -5285,40 +5619,20 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#getHost(String)}.
    *
    * <ul>
-   *   <li>When createValidFtpUrl.
-   *   <li>Then return {@code localhost}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#getHost(String)}
-   */
-  @Test
-  @DisplayName("Test getHost(String); when createValidFtpUrl; then return 'localhost'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.getHost(String)"})
-  void testGetHost_whenCreateValidFtpUrl_thenReturnLocalhost() {
-    // Arrange, Act and Assert
-    assertEquals("localhost", WebUtils.getHost(FtpUtilsFactory.createValidFtpUrl()));
-  }
-
-  /**
-   * Test {@link WebUtils#getHost(String)}.
-   *
-   * <ul>
-   *   <li>When {@code Url Str}.
+   *   <li>When createValidFtpHost.
    *   <li>Then return {@code null}.
    * </ul>
    *
    * <p>Method under test: {@link WebUtils#getHost(String)}
    */
   @Test
-  @DisplayName("Test getHost(String); when 'Url Str'; then return 'null'")
+  @DisplayName("Test getHost(String); when createValidFtpHost; then return 'null'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.getHost(String)"})
-  void testGetHost_whenUrlStr_thenReturnNull() {
+  void testGetHost_whenCreateValidFtpHost_thenReturnNull() {
     // Arrange, Act and Assert
-    assertNull(WebUtils.getHost("Url Str"));
+    assertNull(WebUtils.getHost(FtpUtilsFactory.createValidFtpHost()));
   }
 
   /**

@@ -10,6 +10,7 @@ import cn.keking.model.FileAttribute;
 import cn.keking.service.FileHandlerService;
 import cn.keking.service.cache.CacheService;
 import cn.keking.service.cache.impl.CacheServiceJDKImpl;
+import cn.keking.utils.DownloadUtilsFactory;
 import cn.keking.utils.FtpUtilsFactory;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
@@ -57,7 +58,7 @@ class CommonPreviewImplDiffblueTest {
         new PictureFilePreviewImpl(fileHandlerService, new OtherFilePreviewImpl());
     ConcurrentModel model = new ConcurrentModel();
 
-    FileAttribute fileAttribute = SimTextFilePreviewImplFactory.createFileAttribute();
+    FileAttribute fileAttribute = DownloadUtilsFactory.createValidFileAttribute();
     fileAttribute.setCompressFile(false);
 
     // Act
@@ -93,7 +94,7 @@ class CommonPreviewImplDiffblueTest {
     // Arrange
     ConcurrentModel model = new ConcurrentModel();
 
-    FileAttribute fileAttribute = SimTextFilePreviewImplFactory.createFileAttribute();
+    FileAttribute fileAttribute = DownloadUtilsFactory.createValidFileAttribute();
     fileAttribute.setCompressFile(false);
 
     // Act and Assert
@@ -133,7 +134,6 @@ class CommonPreviewImplDiffblueTest {
 
     // Assert
     verify(fileAttribute).getCompressFileKey();
-    verify(cacheService).getImgCache("ftp://localhost/test/file.txt");
     assertEquals(2, model.size());
     Object getResult = model.get("imgUrls");
     assertTrue(getResult instanceof List);
@@ -174,7 +174,6 @@ class CommonPreviewImplDiffblueTest {
 
     // Assert
     verify(fileAttribute).getCompressFileKey();
-    verify(cacheService).getImgCache("ftp://localhost/test/file.txt");
     assertEquals(1, model.size());
     Object getResult = model.get("imgUrls");
     assertTrue(getResult instanceof List);

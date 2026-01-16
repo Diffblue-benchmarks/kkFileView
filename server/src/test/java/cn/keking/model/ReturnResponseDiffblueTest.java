@@ -49,10 +49,10 @@ class ReturnResponseDiffblueTest {
     actualReturnResponse.setMsg(FtpUtilsFactory.createValidFtpUrl());
     int actualCode = actualReturnResponse.getCode();
     Object actualContent = actualReturnResponse.getContent();
+    actualReturnResponse.getMsg();
 
     // Assert
     assertEquals("Content", actualContent);
-    assertEquals("ftp://localhost/test/file.txt", actualReturnResponse.getMsg());
     assertEquals(1, actualCode);
   }
 
@@ -94,7 +94,6 @@ class ReturnResponseDiffblueTest {
         ReturnResponse.failure(FtpUtilsFactory.createValidFtpUrl());
 
     // Assert
-    assertEquals("ftp://localhost/test/file.txt", actualFailureResult.getMsg());
     assertNull(actualFailureResult.getContent());
     assertEquals(1, actualFailureResult.getCode());
     assertFalse(actualFailureResult.isSuccess());

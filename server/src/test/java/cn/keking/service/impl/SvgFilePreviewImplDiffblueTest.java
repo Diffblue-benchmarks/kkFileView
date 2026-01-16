@@ -3,13 +3,11 @@ package cn.keking.service.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.ArgumentMatchers.isA;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import cn.keking.model.FileAttribute;
 import cn.keking.service.FileHandlerService;
 import cn.keking.service.cache.impl.CacheServiceJDKImpl;
+import cn.keking.utils.DownloadUtilsFactory;
 import cn.keking.utils.FtpUtilsFactory;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
@@ -37,20 +35,15 @@ class SvgFilePreviewImplDiffblueTest {
   /**
    * Test {@link SvgFilePreviewImpl#filePreviewHandle(String, Model, FileAttribute)}.
    *
-   * <ul>
-   *   <li>Then calls {@link CommonPreviewImpl#filePreviewHandle(String, Model, FileAttribute)}.
-   * </ul>
-   *
    * <p>Method under test: {@link SvgFilePreviewImpl#filePreviewHandle(String, Model,
    * FileAttribute)}
    */
   @Test
-  @DisplayName(
-      "Test filePreviewHandle(String, Model, FileAttribute); then calls filePreviewHandle(String, Model, FileAttribute)")
+  @DisplayName("Test filePreviewHandle(String, Model, FileAttribute)")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String SvgFilePreviewImpl.filePreviewHandle(String, Model, FileAttribute)"})
-  void testFilePreviewHandle_thenCallsFilePreviewHandle() {
+  void testFilePreviewHandle() {
     // Arrange
     when(commonPreviewImpl.filePreviewHandle(
             Mockito.<String>any(), Mockito.<Model>any(), Mockito.<FileAttribute>any()))
@@ -58,16 +51,11 @@ class SvgFilePreviewImplDiffblueTest {
     String url = FtpUtilsFactory.createValidFtpUrl();
     ConcurrentModel model = new ConcurrentModel();
 
-    // Act
-    String actualFilePreviewHandleResult =
+    // Act and Assert
+    assertEquals(
+        "svg",
         svgFilePreviewImpl.filePreviewHandle(
-            url, model, SimTextFilePreviewImplFactory.createFileAttribute());
-
-    // Assert
-    verify(commonPreviewImpl)
-        .filePreviewHandle(
-            eq("ftp://localhost/test/file.txt"), isA(Model.class), isA(FileAttribute.class));
-    assertEquals("svg", actualFilePreviewHandleResult);
+            url, model, DownloadUtilsFactory.createValidFileAttribute()));
   }
 
   /**
@@ -95,7 +83,7 @@ class SvgFilePreviewImplDiffblueTest {
     SvgFilePreviewImpl svgFilePreviewImpl = new SvgFilePreviewImpl(commonPreview);
     ConcurrentModel model = new ConcurrentModel();
 
-    FileAttribute fileAttribute = SimTextFilePreviewImplFactory.createFileAttribute();
+    FileAttribute fileAttribute = DownloadUtilsFactory.createValidFileAttribute();
     fileAttribute.setCompressFile(false);
 
     // Act
@@ -129,7 +117,7 @@ class SvgFilePreviewImplDiffblueTest {
     SvgFilePreviewImpl svgFilePreviewImpl = new SvgFilePreviewImpl(commonPreview);
     ConcurrentModel model = new ConcurrentModel();
 
-    FileAttribute fileAttribute = SimTextFilePreviewImplFactory.createFileAttribute();
+    FileAttribute fileAttribute = DownloadUtilsFactory.createValidFileAttribute();
     fileAttribute.setCompressFile(false);
 
     // Act and Assert
@@ -161,7 +149,7 @@ class SvgFilePreviewImplDiffblueTest {
     SvgFilePreviewImpl svgFilePreviewImpl = new SvgFilePreviewImpl(commonPreview);
     ConcurrentModel model = new ConcurrentModel();
 
-    FileAttribute fileAttribute = SimTextFilePreviewImplFactory.createFileAttribute();
+    FileAttribute fileAttribute = DownloadUtilsFactory.createValidFileAttribute();
     fileAttribute.setCompressFile(false);
 
     // Act

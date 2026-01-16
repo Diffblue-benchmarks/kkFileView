@@ -65,4 +65,8 @@ public class TrustHostFilter implements Filter {
 
     }
 
+    public String getNotTrustHostHtmlView() {
+        return notTrustHostHtmlView;
+    }
+
 }

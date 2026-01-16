@@ -13,6 +13,26 @@ class UrlEncoderUtilsDiffblueTest {
    * Test {@link UrlEncoderUtils#hasUrlEncoded(String)}.
    *
    * <ul>
+   *   <li>When createValidFtpHost.
+   *   <li>Then return {@code true}.
+   * </ul>
+   *
+   * <p>Method under test: {@link UrlEncoderUtils#hasUrlEncoded(String)}
+   */
+  @Test
+  @DisplayName("Test hasUrlEncoded(String); when createValidFtpHost; then return 'true'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"boolean UrlEncoderUtils.hasUrlEncoded(String)"})
+  void testHasUrlEncoded_whenCreateValidFtpHost_thenReturnTrue() {
+    // Arrange, Act and Assert
+    assertTrue(UrlEncoderUtils.hasUrlEncoded(FtpUtilsFactory.createValidFtpHost()));
+  }
+
+  /**
+   * Test {@link UrlEncoderUtils#hasUrlEncoded(String)}.
+   *
+   * <ul>
    *   <li>When createValidFtpUrl.
    *   <li>Then return {@code false}.
    * </ul>
@@ -27,25 +47,5 @@ class UrlEncoderUtilsDiffblueTest {
   void testHasUrlEncoded_whenCreateValidFtpUrl_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(UrlEncoderUtils.hasUrlEncoded(FtpUtilsFactory.createValidFtpUrl()));
-  }
-
-  /**
-   * Test {@link UrlEncoderUtils#hasUrlEncoded(String)}.
-   *
-   * <ul>
-   *   <li>When {@code Str}.
-   *   <li>Then return {@code true}.
-   * </ul>
-   *
-   * <p>Method under test: {@link UrlEncoderUtils#hasUrlEncoded(String)}
-   */
-  @Test
-  @DisplayName("Test hasUrlEncoded(String); when 'Str'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean UrlEncoderUtils.hasUrlEncoded(String)"})
-  void testHasUrlEncoded_whenStr_thenReturnTrue() {
-    // Arrange, Act and Assert
-    assertTrue(UrlEncoderUtils.hasUrlEncoded("Str"));
   }
 }

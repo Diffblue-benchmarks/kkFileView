@@ -55,6 +55,14 @@ public class TrustDirFilter implements Filter {
 
     }
 
+    public String getNotTrustDirView() {
+        return notTrustDirView;
+    }
+
+    public Logger getLogger() {
+        return logger;
+    }
+
     private boolean allowPreview(String urlPath) {
         //判断URL是否合法
         if(!StringUtils.hasText(urlPath) || !WebUtils.isValidUrl(urlPath)) {

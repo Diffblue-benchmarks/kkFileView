@@ -1,6 +1,8 @@
 package cn.keking.web.filter;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.doNothing;
@@ -13,6 +15,7 @@ import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.IOException;
 import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -21,8 +24,75 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.mock.web.MockFilterConfig;
 
 class TrustHostFilterDiffblueTest {
+  /**
+   * Test {@link TrustHostFilter#init(FilterConfig)}.
+   *
+   * <p>Method under test: {@link TrustHostFilter#init(FilterConfig)}
+   */
+  @Test
+  @DisplayName("Test init(FilterConfig)")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"void TrustHostFilter.init(FilterConfig)"})
+  void testInit() {
+    // Arrange
+    TrustHostFilter trustHostFilter = new TrustHostFilter();
+
+    // Act
+    trustHostFilter.init(new MockFilterConfig());
+
+    // Assert
+    assertEquals(
+        "<!DOCTYPE html>\n"
+            + "<html lang=\"en\">\n"
+            + "<head>\n"
+            + "    <meta charset=\"utf-8\" />\n"
+            + "    <style type=\"text/css\">\n"
+            + "        body {\n"
+            + "            margin: 0 auto;\n"
+            + "            width: 900px;\n"
+            + "            background-color: #CCB;\n"
+            + "        }\n"
+            + "\n"
+            + "        .container {\n"
+            + "            width: 700px;\n"
+            + "            height: 700px;\n"
+            + "            margin: 0 auto;\n"
+            + "        }\n"
+            + "\n"
+            + "        img {\n"
+            + "            width: auto;\n"
+            + "            height: auto;\n"
+            + "            max-width: 100%;\n"
+            + "            max-height: 100%;\n"
+            + "            padding-bottom: 36px;\n"
+            + "        }\n"
+            + "\n"
+            + "        p {\n"
+            + "            display: block;\n"
+            + "            font-size: 20px;\n"
+            + "            color: blue;\n"
+            + "        }\n"
+            + "    </style>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<div class=\"container\">\n"
+            + "    <img src=\"images/sorry.jpg\" />\n"
+            + "    <p>\n"
+            + "        预览源文件来自不受信任的站点：<span style=\"color: red; display: inline;\">${current_host}</span>"
+            + " 请联系管理员！<br>\n"
+            + "        有任何疑问，请加入kk开源社区知识星球咨询：<a href=\"https://t.zsxq.com/09ZHSXbsQ\">https://t.zsxq.com/09ZHSXbsQ</a><br>"
+            + "\n"
+            + "    </p>\n"
+            + "</div>\n"
+            + "</body>\n"
+            + "</html>\n",
+        trustHostFilter.getNotTrustHostHtmlView());
+  }
+
   /**
    * Test {@link TrustHostFilter#doFilter(ServletRequest, ServletResponse, FilterChain)}.
    *
@@ -106,5 +176,34 @@ class TrustHostFilterDiffblueTest {
 
     // Act and Assert
     assertFalse(trustHostFilter.isNotTrustHost(FtpUtilsFactory.createValidFtpUrl()));
+  }
+
+  /**
+   * Test getters and setters.
+   *
+   * <p>Methods under test:
+   *
+   * <ul>
+   *   <li>default or parameterless constructor of {@link TrustHostFilter}
+   *   <li>{@link TrustHostFilter#destroy()}
+   *   <li>{@link TrustHostFilter#getNotTrustHostHtmlView()}
+   * </ul>
+   */
+  @Test
+  @DisplayName("Test getters and setters")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({
+    "void TrustHostFilter.<init>()",
+    "void TrustHostFilter.destroy()",
+    "String TrustHostFilter.getNotTrustHostHtmlView()"
+  })
+  void testGettersAndSetters() {
+    // Arrange and Act
+    TrustHostFilter actualTrustHostFilter = new TrustHostFilter();
+    actualTrustHostFilter.destroy();
+
+    // Assert
+    assertNull(actualTrustHostFilter.getNotTrustHostHtmlView());
   }
 }

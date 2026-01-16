@@ -5,6 +5,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import cn.keking.model.FileAttribute;
 import cn.keking.service.FileHandlerService;
+import cn.keking.utils.DownloadUtilsFactory;
 import cn.keking.utils.FtpUtilsFactory;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
@@ -58,7 +59,7 @@ class CadFilePreviewImplDiffblueTest {
         RuntimeException.class,
         () ->
             cadFilePreviewImpl.filePreviewHandle(
-                url, model, SimTextFilePreviewImplFactory.createFileAttribute()));
+                url, model, DownloadUtilsFactory.createValidFileAttribute()));
     verify(fileHandlerService).listConvertedFiles();
   }
 }

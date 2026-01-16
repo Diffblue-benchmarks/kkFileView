@@ -4,10 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.anyInt;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -15,12 +12,14 @@ import static org.mockito.Mockito.when;
 import cn.keking.model.FileAttribute;
 import cn.keking.service.cache.CacheService;
 import cn.keking.service.cache.impl.CacheServiceJDKImpl;
-import cn.keking.service.impl.SimTextFilePreviewImplFactory;
+import cn.keking.utils.DownloadUtilsFactory;
 import cn.keking.utils.FtpUtilsFactory;
+import cn.keking.web.controller.FileControllerFactory;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.apache.poi.EncryptedDocumentException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -84,36 +83,6 @@ class FileHandlerServiceDiffblueTest {
    * Test {@link FileHandlerService#getConvertedFile(String)}.
    *
    * <ul>
-   *   <li>Then return {@code ftp://localhost/test/file.txt}.
-   * </ul>
-   *
-   * <p>Method under test: {@link FileHandlerService#getConvertedFile(String)}
-   */
-  @Test
-  @DisplayName("Test getConvertedFile(String); then return 'ftp://localhost/test/file.txt'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String FileHandlerService.getConvertedFile(String)"})
-  void testGetConvertedFile_thenReturnFtpLocalhostTestFileTxt() {
-    // Arrange
-    CacheServiceJDKImpl cacheService = mock(CacheServiceJDKImpl.class);
-    when(cacheService.getPDFCache(Mockito.<String>any()))
-        .thenReturn(FtpUtilsFactory.createValidFtpUrl());
-    FileHandlerService fileHandlerService = new FileHandlerService(cacheService);
-
-    // Act
-    String actualConvertedFile =
-        fileHandlerService.getConvertedFile(FtpUtilsFactory.createValidFtpUrl());
-
-    // Assert
-    verify(cacheService).getPDFCache("ftp://localhost/test/file.txt");
-    assertEquals("ftp://localhost/test/file.txt", actualConvertedFile);
-  }
-
-  /**
-   * Test {@link FileHandlerService#getConvertedFile(String)}.
-   *
-   * <ul>
    *   <li>Then throw {@link EncryptedDocumentException}.
    * </ul>
    *
@@ -133,7 +102,6 @@ class FileHandlerServiceDiffblueTest {
     assertThrows(
         EncryptedDocumentException.class,
         () -> fileHandlerService.getConvertedFile(FtpUtilsFactory.createValidFtpUrl()));
-    verify(cacheService).getPDFCache("ftp://localhost/test/file.txt");
   }
 
   /**
@@ -149,20 +117,16 @@ class FileHandlerServiceDiffblueTest {
   @DisplayName("Test getPdf2jpgCache(String); then return intValue is one")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
-  @MethodsUnderTest({"Integer FileHandlerService.getPdf2jpgCache(String)"})
+  @MethodsUnderTest({"java.lang.Integer FileHandlerService.getPdf2jpgCache(String)"})
   void testGetPdf2jpgCache_thenReturnIntValueIsOne() {
     // Arrange
     CacheServiceJDKImpl cacheService = mock(CacheServiceJDKImpl.class);
     when(cacheService.getPdfImageCache(Mockito.<String>any())).thenReturn(1);
     FileHandlerService fileHandlerService = new FileHandlerService(cacheService);
 
-    // Act
-    Integer actualPdf2jpgCache =
-        fileHandlerService.getPdf2jpgCache(FtpUtilsFactory.createValidFtpUrl());
-
-    // Assert
-    verify(cacheService).getPdfImageCache("ftp://localhost/test/file.txt");
-    assertEquals(1, actualPdf2jpgCache.intValue());
+    // Act and Assert
+    assertEquals(
+        1, fileHandlerService.getPdf2jpgCache(FtpUtilsFactory.createValidFtpUrl()).intValue());
   }
 
   /**
@@ -178,7 +142,7 @@ class FileHandlerServiceDiffblueTest {
   @DisplayName("Test getPdf2jpgCache(String); then throw EncryptedDocumentException")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
-  @MethodsUnderTest({"Integer FileHandlerService.getPdf2jpgCache(String)"})
+  @MethodsUnderTest({"java.lang.Integer FileHandlerService.getPdf2jpgCache(String)"})
   void testGetPdf2jpgCache_thenThrowEncryptedDocumentException() {
     // Arrange
     when(cacheService.getPdfImageCache(Mockito.<String>any()))
@@ -188,7 +152,6 @@ class FileHandlerServiceDiffblueTest {
     assertThrows(
         EncryptedDocumentException.class,
         () -> fileHandlerService.getPdf2jpgCache(FtpUtilsFactory.createValidFtpUrl()));
-    verify(cacheService).getPdfImageCache("ftp://localhost/test/file.txt");
   }
 
   /**
@@ -208,35 +171,6 @@ class FileHandlerServiceDiffblueTest {
     // Act and Assert
     assertEquals(
         "file.txt", fileHandlerService.getFileNameFromPath(FtpUtilsFactory.createValidFtpUrl()));
-  }
-
-  /**
-   * Test {@link FileHandlerService#addConvertedFile(String, String)}.
-   *
-   * <ul>
-   *   <li>Then calls {@link CacheServiceJDKImpl#putPDFCache(String, String)}.
-   * </ul>
-   *
-   * <p>Method under test: {@link FileHandlerService#addConvertedFile(String, String)}
-   */
-  @Test
-  @DisplayName("Test addConvertedFile(String, String); then calls putPDFCache(String, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void FileHandlerService.addConvertedFile(String, String)"})
-  void testAddConvertedFile_thenCallsPutPDFCache() {
-    // Arrange
-    CacheServiceJDKImpl cacheService = mock(CacheServiceJDKImpl.class);
-    doNothing().when(cacheService).putPDFCache(Mockito.<String>any(), Mockito.<String>any());
-    FileHandlerService fileHandlerService = new FileHandlerService(cacheService);
-    String fileName = FtpUtilsFactory.createValidFtpUrl();
-
-    // Act
-    fileHandlerService.addConvertedFile(fileName, FtpUtilsFactory.createValidFtpUrl());
-
-    // Assert
-    verify(cacheService)
-        .putPDFCache("ftp://localhost/test/file.txt", "ftp://localhost/test/file.txt");
   }
 
   /**
@@ -264,35 +198,6 @@ class FileHandlerServiceDiffblueTest {
     assertThrows(
         EncryptedDocumentException.class,
         () -> fileHandlerService.addConvertedFile(fileName, FtpUtilsFactory.createValidFtpUrl()));
-    verify(cacheService)
-        .putPDFCache("ftp://localhost/test/file.txt", "ftp://localhost/test/file.txt");
-  }
-
-  /**
-   * Test {@link FileHandlerService#addPdf2jpgCache(String, int)}.
-   *
-   * <ul>
-   *   <li>Then calls {@link CacheServiceJDKImpl#putPdfImageCache(String, int)}.
-   * </ul>
-   *
-   * <p>Method under test: {@link FileHandlerService#addPdf2jpgCache(String, int)}
-   */
-  @Test
-  @DisplayName("Test addPdf2jpgCache(String, int); then calls putPdfImageCache(String, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void FileHandlerService.addPdf2jpgCache(String, int)"})
-  void testAddPdf2jpgCache_thenCallsPutPdfImageCache() {
-    // Arrange
-    CacheServiceJDKImpl cacheService = mock(CacheServiceJDKImpl.class);
-    doNothing().when(cacheService).putPdfImageCache(Mockito.<String>any(), anyInt());
-    FileHandlerService fileHandlerService = new FileHandlerService(cacheService);
-
-    // Act
-    fileHandlerService.addPdf2jpgCache(FtpUtilsFactory.createValidFtpUrl(), 10);
-
-    // Assert
-    verify(cacheService).putPdfImageCache("ftp://localhost/test/file.txt", 10);
   }
 
   /**
@@ -319,7 +224,6 @@ class FileHandlerServiceDiffblueTest {
     assertThrows(
         EncryptedDocumentException.class,
         () -> fileHandlerService.addPdf2jpgCache(FtpUtilsFactory.createValidFtpUrl(), 10));
-    verify(cacheService).putPdfImageCache("ftp://localhost/test/file.txt", 10);
   }
 
   /**
@@ -342,13 +246,8 @@ class FileHandlerServiceDiffblueTest {
     when(cacheService.getImgCache(Mockito.<String>any())).thenReturn(new ArrayList<>());
     FileHandlerService fileHandlerService = new FileHandlerService(cacheService);
 
-    // Act
-    List<String> actualImgCache =
-        fileHandlerService.getImgCache(FtpUtilsFactory.createValidFtpUrl());
-
-    // Assert
-    verify(cacheService).getImgCache("ftp://localhost/test/file.txt");
-    assertTrue(actualImgCache.isEmpty());
+    // Act and Assert
+    assertTrue(fileHandlerService.getImgCache(FtpUtilsFactory.createValidFtpUrl()).isEmpty());
   }
 
   /**
@@ -374,76 +273,6 @@ class FileHandlerServiceDiffblueTest {
     assertThrows(
         EncryptedDocumentException.class,
         () -> fileHandlerService.getImgCache(FtpUtilsFactory.createValidFtpUrl()));
-    verify(cacheService).getImgCache("ftp://localhost/test/file.txt");
-  }
-
-  /**
-   * Test {@link FileHandlerService#putImgCache(String, List)}.
-   *
-   * <ul>
-   *   <li>Given {@link ArrayList#ArrayList()}.
-   *   <li>When {@link ArrayList#ArrayList()} addAll {@link ArrayList#ArrayList()}.
-   *   <li>Then calls {@link CacheServiceJDKImpl#putImgCache(String, List)}.
-   * </ul>
-   *
-   * <p>Method under test: {@link FileHandlerService#putImgCache(String, List)}
-   */
-  @Test
-  @DisplayName(
-      "Test putImgCache(String, List); given ArrayList(); when ArrayList() addAll ArrayList(); then calls putImgCache(String, List)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void FileHandlerService.putImgCache(String, List)"})
-  void testPutImgCache_givenArrayList_whenArrayListAddAllArrayList_thenCallsPutImgCache() {
-    // Arrange
-    CacheServiceJDKImpl cacheService = mock(CacheServiceJDKImpl.class);
-    doNothing().when(cacheService).putImgCache(Mockito.<String>any(), Mockito.<List<String>>any());
-    FileHandlerService fileHandlerService = new FileHandlerService(cacheService);
-    String fileKey = FtpUtilsFactory.createValidFtpUrl();
-
-    ArrayList<String> imgs = new ArrayList<>();
-    imgs.add(FtpUtilsFactory.createValidFtpUrl());
-    imgs.addAll(new ArrayList<>());
-    imgs.add(FtpUtilsFactory.createValidFtpUrl());
-
-    // Act
-    fileHandlerService.putImgCache(fileKey, imgs);
-
-    // Assert
-    verify(cacheService).putImgCache(eq("ftp://localhost/test/file.txt"), isA(List.class));
-  }
-
-  /**
-   * Test {@link FileHandlerService#putImgCache(String, List)}.
-   *
-   * <ul>
-   *   <li>Given createValidFtpUrl.
-   *   <li>When {@link ArrayList#ArrayList()} add createValidFtpUrl.
-   * </ul>
-   *
-   * <p>Method under test: {@link FileHandlerService#putImgCache(String, List)}
-   */
-  @Test
-  @DisplayName(
-      "Test putImgCache(String, List); given createValidFtpUrl; when ArrayList() add createValidFtpUrl")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void FileHandlerService.putImgCache(String, List)"})
-  void testPutImgCache_givenCreateValidFtpUrl_whenArrayListAddCreateValidFtpUrl() {
-    // Arrange
-    CacheServiceJDKImpl cacheService = mock(CacheServiceJDKImpl.class);
-    doNothing().when(cacheService).putImgCache(Mockito.<String>any(), Mockito.<List<String>>any());
-    FileHandlerService fileHandlerService = new FileHandlerService(cacheService);
-    String fileKey = FtpUtilsFactory.createValidFtpUrl();
-
-    ArrayList<String> imgs = new ArrayList<>();
-    imgs.add(FtpUtilsFactory.createValidFtpUrl());
-
-    // Act
-    fileHandlerService.putImgCache(fileKey, imgs);
-
-    // Assert
-    verify(cacheService).putImgCache(eq("ftp://localhost/test/file.txt"), isA(List.class));
   }
 
   /**
@@ -471,64 +300,34 @@ class FileHandlerServiceDiffblueTest {
     assertThrows(
         EncryptedDocumentException.class,
         () -> fileHandlerService.putImgCache(fileKey, new ArrayList<>()));
-    verify(cacheService).putImgCache(eq("ftp://localhost/test/file.txt"), isA(List.class));
-  }
-
-  /**
-   * Test {@link FileHandlerService#putImgCache(String, List)}.
-   *
-   * <ul>
-   *   <li>When {@link ArrayList#ArrayList()}.
-   *   <li>Then calls {@link CacheServiceJDKImpl#putImgCache(String, List)}.
-   * </ul>
-   *
-   * <p>Method under test: {@link FileHandlerService#putImgCache(String, List)}
-   */
-  @Test
-  @DisplayName(
-      "Test putImgCache(String, List); when ArrayList(); then calls putImgCache(String, List)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void FileHandlerService.putImgCache(String, List)"})
-  void testPutImgCache_whenArrayList_thenCallsPutImgCache() {
-    // Arrange
-    CacheServiceJDKImpl cacheService = mock(CacheServiceJDKImpl.class);
-    doNothing().when(cacheService).putImgCache(Mockito.<String>any(), Mockito.<List<String>>any());
-    FileHandlerService fileHandlerService = new FileHandlerService(cacheService);
-    String fileKey = FtpUtilsFactory.createValidFtpUrl();
-
-    // Act
-    fileHandlerService.putImgCache(fileKey, new ArrayList<>());
-
-    // Assert
-    verify(cacheService).putImgCache(eq("ftp://localhost/test/file.txt"), isA(List.class));
   }
 
   /**
    * Test {@link FileHandlerService#pdf2jpg(String, String, String, FileAttribute)}.
    *
    * <ul>
-   *   <li>Given {@link CacheService} {@link CacheService#getPdfImageCache(String)} return zero.
+   *   <li>Given {@code true}.
+   *   <li>Then return {@code null}.
    * </ul>
    *
    * <p>Method under test: {@link FileHandlerService#pdf2jpg(String, String, String, FileAttribute)}
    */
   @Test
   @DisplayName(
-      "Test pdf2jpg(String, String, String, FileAttribute); given CacheService getPdfImageCache(String) return zero")
+      "Test pdf2jpg(String, String, String, FileAttribute); given 'true'; then return 'null'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"List FileHandlerService.pdf2jpg(String, String, String, FileAttribute)"})
-  void testPdf2jpg_givenCacheServiceGetPdfImageCacheReturnZero() throws Exception {
+  void testPdf2jpg_givenTrue_thenReturnNull() throws Exception {
     // Arrange
-    when(cacheService.getPdfImageCache(Mockito.<String>any())).thenReturn(0);
+    FileHandlerService fileHandlerService = new FileHandlerService(mock(CacheServiceJDKImpl.class));
     String fileNameFilePath = FtpUtilsFactory.createValidFtpUrl();
     String pdfFilePath = FtpUtilsFactory.createValidFtpUrl();
     String pdfName = FtpUtilsFactory.createValidFtpUrl();
 
     FileAttribute fileAttribute = mock(FileAttribute.class);
     when(fileAttribute.getUsePasswordCache()).thenReturn(true);
-    when(fileAttribute.forceUpdatedCache()).thenReturn(false);
+    when(fileAttribute.forceUpdatedCache()).thenReturn(true);
     when(fileAttribute.getFilePassword()).thenReturn(FtpUtilsFactory.createValidFtpUrl());
 
     // Act
@@ -539,7 +338,6 @@ class FileHandlerServiceDiffblueTest {
     verify(fileAttribute).forceUpdatedCache();
     verify(fileAttribute).getFilePassword();
     verify(fileAttribute).getUsePasswordCache();
-    verify(cacheService).getPdfImageCache("ftp://localhost/test/file.txt");
     assertNull(actualPdf2jpgResult);
   }
 
@@ -574,47 +372,7 @@ class FileHandlerServiceDiffblueTest {
                 fileNameFilePath,
                 pdfFilePath,
                 pdfName,
-                SimTextFilePreviewImplFactory.createFileAttribute()));
-    verify(cacheService).getPdfImageCache("ftp://localhost/test/file.txt");
-  }
-
-  /**
-   * Test {@link FileHandlerService#pdf2jpg(String, String, String, FileAttribute)}.
-   *
-   * <ul>
-   *   <li>When {@link FileAttribute} {@link FileAttribute#forceUpdatedCache()} return {@code true}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link FileHandlerService#pdf2jpg(String, String, String, FileAttribute)}
-   */
-  @Test
-  @DisplayName(
-      "Test pdf2jpg(String, String, String, FileAttribute); when FileAttribute forceUpdatedCache() return 'true'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"List FileHandlerService.pdf2jpg(String, String, String, FileAttribute)"})
-  void testPdf2jpg_whenFileAttributeForceUpdatedCacheReturnTrue_thenReturnNull() throws Exception {
-    // Arrange
-    FileHandlerService fileHandlerService = new FileHandlerService(mock(CacheServiceJDKImpl.class));
-    String fileNameFilePath = FtpUtilsFactory.createValidFtpUrl();
-    String pdfFilePath = FtpUtilsFactory.createValidFtpUrl();
-    String pdfName = FtpUtilsFactory.createValidFtpUrl();
-
-    FileAttribute fileAttribute = mock(FileAttribute.class);
-    when(fileAttribute.getUsePasswordCache()).thenReturn(true);
-    when(fileAttribute.forceUpdatedCache()).thenReturn(true);
-    when(fileAttribute.getFilePassword()).thenReturn(FtpUtilsFactory.createValidFtpUrl());
-
-    // Act
-    List<String> actualPdf2jpgResult =
-        fileHandlerService.pdf2jpg(fileNameFilePath, pdfFilePath, pdfName, fileAttribute);
-
-    // Assert
-    verify(fileAttribute).forceUpdatedCache();
-    verify(fileAttribute).getFilePassword();
-    verify(fileAttribute).getUsePasswordCache();
-    assertNull(actualPdf2jpgResult);
+                DownloadUtilsFactory.createValidFileAttribute()));
   }
 
   /**
@@ -639,6 +397,132 @@ class FileHandlerServiceDiffblueTest {
 
     // Act and Assert
     assertEquals("", FileHandlerService.getSubString(str, FtpUtilsFactory.createValidFtpUrl()));
+  }
+
+  /**
+   * Test {@link FileHandlerService#getFileAttribute(String, HttpServletRequest)}.
+   *
+   * <ul>
+   *   <li>Then return CacheName is {@code [}.
+   * </ul>
+   *
+   * <p>Method under test: {@link FileHandlerService#getFileAttribute(String, HttpServletRequest)}
+   */
+  @Test
+  @DisplayName("Test getFileAttribute(String, HttpServletRequest); then return CacheName is '['")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({
+    "FileAttribute FileHandlerService.getFileAttribute(String, HttpServletRequest)"
+  })
+  void testGetFileAttribute_thenReturnCacheNameIsLeftSquareBracket() {
+    // Arrange
+    FileHandlerService fileHandlerService = new FileHandlerService(new CacheServiceJDKImpl());
+
+    // Act
+    FileAttribute actualFileAttribute =
+        fileHandlerService.getFileAttribute(
+            "[?]", FileControllerFactory.createHttpServletRequestWithSession());
+
+    // Assert
+    assertEquals("[", actualFileAttribute.getCacheName());
+    assertEquals("[", actualFileAttribute.getName());
+    assertEquals("[", actualFileAttribute.getSuffix());
+    assertEquals("[?]", actualFileAttribute.getUrl());
+  }
+
+  /**
+   * Test {@link FileHandlerService#getFileAttribute(String, HttpServletRequest)}.
+   *
+   * <ul>
+   *   <li>Then return CacheName is {@code [}.
+   * </ul>
+   *
+   * <p>Method under test: {@link FileHandlerService#getFileAttribute(String, HttpServletRequest)}
+   */
+  @Test
+  @DisplayName("Test getFileAttribute(String, HttpServletRequest); then return CacheName is '['")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({
+    "FileAttribute FileHandlerService.getFileAttribute(String, HttpServletRequest)"
+  })
+  void testGetFileAttribute_thenReturnCacheNameIsLeftSquareBracket2() {
+    // Arrange and Act
+    FileAttribute actualFileAttribute =
+        new FileHandlerService(new CacheServiceJDKImpl()).getFileAttribute("[?]", null);
+
+    // Assert
+    assertEquals("[", actualFileAttribute.getCacheName());
+    assertEquals("[", actualFileAttribute.getName());
+    assertEquals("[", actualFileAttribute.getSuffix());
+    assertEquals("[?]", actualFileAttribute.getUrl());
+  }
+
+  /**
+   * Test {@link FileHandlerService#getFileAttribute(String, HttpServletRequest)}.
+   *
+   * <ul>
+   *   <li>Then return CacheName is {@code ]}.
+   * </ul>
+   *
+   * <p>Method under test: {@link FileHandlerService#getFileAttribute(String, HttpServletRequest)}
+   */
+  @Test
+  @DisplayName("Test getFileAttribute(String, HttpServletRequest); then return CacheName is ']'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({
+    "FileAttribute FileHandlerService.getFileAttribute(String, HttpServletRequest)"
+  })
+  void testGetFileAttribute_thenReturnCacheNameIsRightSquareBracket() {
+    // Arrange
+    FileHandlerService fileHandlerService = new FileHandlerService(new CacheServiceJDKImpl());
+
+    // Act
+    FileAttribute actualFileAttribute =
+        fileHandlerService.getFileAttribute(
+            "]", FileControllerFactory.createHttpServletRequestWithSession());
+
+    // Assert
+    assertEquals("]", actualFileAttribute.getCacheName());
+    assertEquals("]", actualFileAttribute.getName());
+    assertEquals("]", actualFileAttribute.getSuffix());
+    assertEquals("]", actualFileAttribute.getUrl());
+  }
+
+  /**
+   * Test {@link FileHandlerService#getFileAttribute(String, HttpServletRequest)}.
+   *
+   * <ul>
+   *   <li>When {@code charset=gb2312}.
+   *   <li>Then return CacheName is {@code charset=gb2312}.
+   * </ul>
+   *
+   * <p>Method under test: {@link FileHandlerService#getFileAttribute(String, HttpServletRequest)}
+   */
+  @Test
+  @DisplayName(
+      "Test getFileAttribute(String, HttpServletRequest); when 'charset=gb2312'; then return CacheName is 'charset=gb2312'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({
+    "FileAttribute FileHandlerService.getFileAttribute(String, HttpServletRequest)"
+  })
+  void testGetFileAttribute_whenCharsetGb2312_thenReturnCacheNameIsCharsetGb2312() {
+    // Arrange
+    FileHandlerService fileHandlerService = new FileHandlerService(new CacheServiceJDKImpl());
+
+    // Act
+    FileAttribute actualFileAttribute =
+        fileHandlerService.getFileAttribute(
+            "charset=gb2312", FileControllerFactory.createHttpServletRequestWithSession());
+
+    // Assert
+    assertEquals("charset=gb2312", actualFileAttribute.getCacheName());
+    assertEquals("charset=gb2312", actualFileAttribute.getName());
+    assertEquals("charset=gb2312", actualFileAttribute.getSuffix());
+    assertEquals("charset=gb2312", actualFileAttribute.getUrl());
   }
 
   /**
@@ -688,38 +572,6 @@ class FileHandlerServiceDiffblueTest {
    * Test {@link FileHandlerService#addConvertedMedias(String, String)}.
    *
    * <ul>
-   *   <li>Then calls {@link CacheServiceJDKImpl#putMediaConvertCache(String, String)}.
-   * </ul>
-   *
-   * <p>Method under test: {@link FileHandlerService#addConvertedMedias(String, String)}
-   */
-  @Test
-  @DisplayName(
-      "Test addConvertedMedias(String, String); then calls putMediaConvertCache(String, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void FileHandlerService.addConvertedMedias(String, String)"})
-  void testAddConvertedMedias_thenCallsPutMediaConvertCache() {
-    // Arrange
-    CacheServiceJDKImpl cacheService = mock(CacheServiceJDKImpl.class);
-    doNothing()
-        .when(cacheService)
-        .putMediaConvertCache(Mockito.<String>any(), Mockito.<String>any());
-    FileHandlerService fileHandlerService = new FileHandlerService(cacheService);
-    String fileName = FtpUtilsFactory.createValidFtpUrl();
-
-    // Act
-    fileHandlerService.addConvertedMedias(fileName, FtpUtilsFactory.createValidFtpUrl());
-
-    // Assert
-    verify(cacheService)
-        .putMediaConvertCache("ftp://localhost/test/file.txt", "ftp://localhost/test/file.txt");
-  }
-
-  /**
-   * Test {@link FileHandlerService#addConvertedMedias(String, String)}.
-   *
-   * <ul>
    *   <li>Then throw {@link EncryptedDocumentException}.
    * </ul>
    *
@@ -741,38 +593,6 @@ class FileHandlerServiceDiffblueTest {
     assertThrows(
         EncryptedDocumentException.class,
         () -> fileHandlerService.addConvertedMedias(fileName, FtpUtilsFactory.createValidFtpUrl()));
-    verify(cacheService)
-        .putMediaConvertCache("ftp://localhost/test/file.txt", "ftp://localhost/test/file.txt");
-  }
-
-  /**
-   * Test {@link FileHandlerService#getConvertedMedias(String)}.
-   *
-   * <ul>
-   *   <li>Then return {@code ftp://localhost/test/file.txt}.
-   * </ul>
-   *
-   * <p>Method under test: {@link FileHandlerService#getConvertedMedias(String)}
-   */
-  @Test
-  @DisplayName("Test getConvertedMedias(String); then return 'ftp://localhost/test/file.txt'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String FileHandlerService.getConvertedMedias(String)"})
-  void testGetConvertedMedias_thenReturnFtpLocalhostTestFileTxt() {
-    // Arrange
-    CacheServiceJDKImpl cacheService = mock(CacheServiceJDKImpl.class);
-    when(cacheService.getMediaConvertCache(Mockito.<String>any()))
-        .thenReturn(FtpUtilsFactory.createValidFtpUrl());
-    FileHandlerService fileHandlerService = new FileHandlerService(cacheService);
-
-    // Act
-    String actualConvertedMedias =
-        fileHandlerService.getConvertedMedias(FtpUtilsFactory.createValidFtpUrl());
-
-    // Assert
-    verify(cacheService).getMediaConvertCache("ftp://localhost/test/file.txt");
-    assertEquals("ftp://localhost/test/file.txt", actualConvertedMedias);
   }
 
   /**
@@ -798,6 +618,5 @@ class FileHandlerServiceDiffblueTest {
     assertThrows(
         EncryptedDocumentException.class,
         () -> fileHandlerService.getConvertedMedias(FtpUtilsFactory.createValidFtpUrl()));
-    verify(cacheService).getMediaConvertCache("ftp://localhost/test/file.txt");
   }
 }

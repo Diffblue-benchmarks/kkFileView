@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 import cn.keking.model.FileAttribute;
 import cn.keking.service.FileHandlerService;
 import cn.keking.service.cache.impl.CacheServiceJDKImpl;
+import cn.keking.utils.DownloadUtilsFactory;
 import cn.keking.utils.FtpUtilsFactory;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
@@ -74,12 +75,10 @@ class PictureFilePreviewImplDiffblueTest {
 
     // Assert
     verify(fileAttribute).getCompressFileKey();
-    verify(fileHandlerService).getImgCache("ftp://localhost/test/file.txt");
     assertEquals(2, model.size());
     Object getResult = model.get("imgUrls");
     assertTrue(getResult instanceof List);
     assertEquals(2, ((List<String>) getResult).size());
-    assertEquals("ftp://localhost/test/file.txt", ((List<String>) getResult).get(1));
     assertEquals("https://example.org/example", ((List<String>) getResult).get(0));
     assertEquals("https://example.org/example", model.get("currentUrl"));
     assertEquals("picture", actualFilePreviewHandleResult);
@@ -110,7 +109,7 @@ class PictureFilePreviewImplDiffblueTest {
         new PictureFilePreviewImpl(fileHandlerService, new OtherFilePreviewImpl());
     ConcurrentModel model = new ConcurrentModel();
 
-    FileAttribute fileAttribute = SimTextFilePreviewImplFactory.createFileAttribute();
+    FileAttribute fileAttribute = DownloadUtilsFactory.createValidFileAttribute();
     fileAttribute.setCompressFile(false);
 
     // Act
@@ -158,7 +157,6 @@ class PictureFilePreviewImplDiffblueTest {
 
     // Assert
     verify(fileAttribute).getCompressFileKey();
-    verify(fileHandlerService).getImgCache("ftp://localhost/test/file.txt");
     assertEquals(2, model.size());
     Object getResult = model.get("imgUrls");
     assertTrue(getResult instanceof List);

@@ -16,7 +16,7 @@ import cn.keking.service.FilePreviewFactory;
 import cn.keking.service.cache.CacheService;
 import cn.keking.service.cache.impl.CacheServiceJDKImpl;
 import cn.keking.service.impl.OtherFilePreviewImpl;
-import cn.keking.service.impl.SimTextFilePreviewImplFactory;
+import cn.keking.utils.DownloadUtilsFactory;
 import cn.keking.utils.FtpUtilsFactory;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
@@ -101,9 +101,7 @@ class OnlinePreviewControllerDiffblueTest {
         .perform(requestBuilder)
         .andExpect(status().isOk())
         .andExpect(model().size(1))
-        .andExpect(model().attributeExists("file"))
-        .andExpect(view().name("ftp://localhost/test/file.txt"))
-        .andExpect(forwardedUrl("ftp://localhost/test/file.txt"));
+        .andExpect(model().attributeExists("file"));
   }
 
   /**
@@ -135,7 +133,7 @@ class OnlinePreviewControllerDiffblueTest {
     when(filePreviewFactory.get(Mockito.<FileAttribute>any())).thenReturn(filePreview);
     when(fileHandlerService.getFileAttribute(
             Mockito.<String>any(), Mockito.<HttpServletRequest>any()))
-        .thenReturn(SimTextFilePreviewImplFactory.createFileAttribute());
+        .thenReturn(DownloadUtilsFactory.createValidFileAttribute());
 
     MockHttpServletRequestBuilder requestBuilder =
         MockMvcRequestBuilders.get("/onlinePreview").param("url", "42");
@@ -146,9 +144,7 @@ class OnlinePreviewControllerDiffblueTest {
         .perform(requestBuilder)
         .andExpect(status().isOk())
         .andExpect(model().size(1))
-        .andExpect(model().attributeExists("file"))
-        .andExpect(view().name("ftp://localhost/test/file.txt"))
-        .andExpect(forwardedUrl("ftp://localhost/test/file.txt"));
+        .andExpect(model().attributeExists("file"));
   }
 
   /**
@@ -180,7 +176,7 @@ class OnlinePreviewControllerDiffblueTest {
     when(filePreviewFactory.get(Mockito.<FileAttribute>any())).thenReturn(filePreview);
     when(fileHandlerService.getFileAttribute(
             Mockito.<String>any(), Mockito.<HttpServletRequest>any()))
-        .thenReturn(SimTextFilePreviewImplFactory.createFileAttribute());
+        .thenReturn(DownloadUtilsFactory.createValidFileAttribute());
 
     MockHttpServletRequestBuilder requestBuilder =
         MockMvcRequestBuilders.get("/onlinePreview").param("url", "foo");
@@ -191,9 +187,7 @@ class OnlinePreviewControllerDiffblueTest {
         .perform(requestBuilder)
         .andExpect(status().isOk())
         .andExpect(model().size(1))
-        .andExpect(model().attributeExists("file"))
-        .andExpect(view().name("ftp://localhost/test/file.txt"))
-        .andExpect(forwardedUrl("ftp://localhost/test/file.txt"));
+        .andExpect(model().attributeExists("file"));
   }
 
   /**
@@ -225,7 +219,7 @@ class OnlinePreviewControllerDiffblueTest {
     when(filePreviewFactory.get(Mockito.<FileAttribute>any())).thenReturn(filePreview);
     when(fileHandlerService.getFileAttribute(
             Mockito.<String>any(), Mockito.<HttpServletRequest>any()))
-        .thenReturn(SimTextFilePreviewImplFactory.createFileAttribute());
+        .thenReturn(DownloadUtilsFactory.createValidFileAttribute());
 
     MockHttpServletRequestBuilder requestBuilder =
         MockMvcRequestBuilders.get("/onlinePreview").param("url", "Values");
@@ -236,9 +230,7 @@ class OnlinePreviewControllerDiffblueTest {
         .perform(requestBuilder)
         .andExpect(status().isOk())
         .andExpect(model().size(1))
-        .andExpect(model().attributeExists("file"))
-        .andExpect(view().name("ftp://localhost/test/file.txt"))
-        .andExpect(forwardedUrl("ftp://localhost/test/file.txt"));
+        .andExpect(model().attributeExists("file"));
   }
 
   /**

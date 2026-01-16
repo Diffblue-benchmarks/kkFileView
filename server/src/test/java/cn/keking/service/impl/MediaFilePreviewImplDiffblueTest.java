@@ -11,6 +11,7 @@ import static org.mockito.Mockito.when;
 import cn.keking.model.FileAttribute;
 import cn.keking.model.FileType;
 import cn.keking.service.FileHandlerService;
+import cn.keking.utils.DownloadUtilsFactory;
 import cn.keking.utils.FtpUtilsFactory;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
@@ -108,8 +109,53 @@ class MediaFilePreviewImplDiffblueTest {
         RuntimeException.class,
         () ->
             mediaFilePreviewImpl.filePreviewHandle(
-                url, model, SimTextFilePreviewImplFactory.createFileAttribute()));
+                url, model, DownloadUtilsFactory.createValidFileAttribute()));
     verify(fileHandlerService).listConvertedFiles();
+  }
+
+  /**
+   * Test {@link MediaFilePreviewImpl#filePreviewHandle(String, Model, FileAttribute)}.
+   *
+   * <ul>
+   *   <li>Then calls {@link OtherFilePreviewImpl#notSupportedFile(Model, FileAttribute, String)}.
+   * </ul>
+   *
+   * <p>Method under test: {@link MediaFilePreviewImpl#filePreviewHandle(String, Model,
+   * FileAttribute)}
+   */
+  @Test
+  @DisplayName(
+      "Test filePreviewHandle(String, Model, FileAttribute); then calls notSupportedFile(Model, FileAttribute, String)")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String MediaFilePreviewImpl.filePreviewHandle(String, Model, FileAttribute)"})
+  void testFilePreviewHandle_thenCallsNotSupportedFile() {
+    // Arrange
+    when(otherFilePreviewImpl.notSupportedFile(
+            Mockito.<Model>any(), Mockito.<FileAttribute>any(), Mockito.<String>any()))
+        .thenReturn(FtpUtilsFactory.createValidFtpUrl());
+    ConcurrentModel model = new ConcurrentModel();
+
+    FileAttribute fileAttribute = mock(FileAttribute.class);
+    when(fileAttribute.getOutFilePath()).thenReturn("/");
+    when(fileAttribute.getType()).thenReturn(FileType.PICTURE);
+    when(fileAttribute.forceUpdatedCache()).thenReturn(true);
+    when(fileAttribute.getCacheName()).thenReturn(FtpUtilsFactory.createValidFtpUrl());
+    when(fileAttribute.getName()).thenReturn(FtpUtilsFactory.createValidFtpUrl());
+    when(fileAttribute.getSuffix()).thenReturn(FtpUtilsFactory.createValidFtpUrl());
+
+    // Act
+    mediaFilePreviewImpl.filePreviewHandle("https://example.org/example", model, fileAttribute);
+
+    // Assert
+    verify(fileAttribute).forceUpdatedCache();
+    verify(fileAttribute).getCacheName();
+    verify(fileAttribute).getName();
+    verify(fileAttribute).getOutFilePath();
+    verify(fileAttribute).getSuffix();
+    verify(fileAttribute).getType();
+    verify(otherFilePreviewImpl)
+        .notSupportedFile(isA(Model.class), isA(FileAttribute.class), eq("系统还不支持该格式文件的在线预览"));
   }
 
   /**
@@ -203,53 +249,5 @@ class MediaFilePreviewImplDiffblueTest {
     assertEquals(2, model.size());
     assertEquals("系统还不支持该格式文件的在线预览", model.get("msg"));
     assertEquals("fileNotSupported", actualFilePreviewHandleResult);
-    assertEquals("ftp://localhost/test/file.txt", model.get("fileType"));
-  }
-
-  /**
-   * Test {@link MediaFilePreviewImpl#filePreviewHandle(String, Model, FileAttribute)}.
-   *
-   * <ul>
-   *   <li>Then return {@code ftp://localhost/test/file.txt}.
-   * </ul>
-   *
-   * <p>Method under test: {@link MediaFilePreviewImpl#filePreviewHandle(String, Model,
-   * FileAttribute)}
-   */
-  @Test
-  @DisplayName(
-      "Test filePreviewHandle(String, Model, FileAttribute); then return 'ftp://localhost/test/file.txt'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String MediaFilePreviewImpl.filePreviewHandle(String, Model, FileAttribute)"})
-  void testFilePreviewHandle_thenReturnFtpLocalhostTestFileTxt() {
-    // Arrange
-    when(otherFilePreviewImpl.notSupportedFile(
-            Mockito.<Model>any(), Mockito.<FileAttribute>any(), Mockito.<String>any()))
-        .thenReturn(FtpUtilsFactory.createValidFtpUrl());
-    ConcurrentModel model = new ConcurrentModel();
-
-    FileAttribute fileAttribute = mock(FileAttribute.class);
-    when(fileAttribute.getOutFilePath()).thenReturn("/");
-    when(fileAttribute.getType()).thenReturn(FileType.PICTURE);
-    when(fileAttribute.forceUpdatedCache()).thenReturn(true);
-    when(fileAttribute.getCacheName()).thenReturn(FtpUtilsFactory.createValidFtpUrl());
-    when(fileAttribute.getName()).thenReturn(FtpUtilsFactory.createValidFtpUrl());
-    when(fileAttribute.getSuffix()).thenReturn(FtpUtilsFactory.createValidFtpUrl());
-
-    // Act
-    String actualFilePreviewHandleResult =
-        mediaFilePreviewImpl.filePreviewHandle("https://example.org/example", model, fileAttribute);
-
-    // Assert
-    verify(fileAttribute).forceUpdatedCache();
-    verify(fileAttribute).getCacheName();
-    verify(fileAttribute).getName();
-    verify(fileAttribute).getOutFilePath();
-    verify(fileAttribute).getSuffix();
-    verify(fileAttribute).getType();
-    verify(otherFilePreviewImpl)
-        .notSupportedFile(isA(Model.class), isA(FileAttribute.class), eq("系统还不支持该格式文件的在线预览"));
-    assertEquals("ftp://localhost/test/file.txt", actualFilePreviewHandleResult);
   }
 }

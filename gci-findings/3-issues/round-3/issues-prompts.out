@@ -1,0 +1,2174 @@
+INFO  Diffblue Cover 2026.01.01-SNAPSHOT-acf7615-local
+INFO  
+INFO  Command: issues
+INFO  Output a prioritized list of issues.
+INFO  
+INFO  Discovered modules:
+INFO  - cn.keking:kkFileView
+INFO  
+INFO  
+INFO  [1/1] Diagnosing issues for module: cn.keking:kkFileView
+INFO  ========================================================
+INFO  
+INFO  Detected Java version 1.8.0_472
+INFO  Selected build system: Maven
+INFO  Selected classpath from build system maven
+INFO  Reading report file '/home/ubuntu/kkFileView/server/.diffblue/reports/report.json'
+INFO  Copied report file to '/home/ubuntu/kkFileView/server/.diffblue/reports/report-20260116T145122.json'
+INFO  
+INFO  R013: No inputs found that don't throw a trivial exception
+      Diffblue Cover tried to run the arrange/act section, but the test threw
+      java.lang.ArrayIndexOutOfBoundsException: 0
+          at cn.keking.utils.BytesEncodingDetect.utf16_probability(SimpleEncodingDetects.java:688)
+          at cn.keking.utils.BytesEncodingDetect.detectEncoding(SimpleEncodingDetects.java:159)
+          at cn.keking.utils.SimpleEncodingDetects.getJavaEncode(SimpleEncodingDetects.java:41)
+          at cn.keking.utils.EncodingDetects.getJavaEncode(EncodingDetects.java:40)
+          at cn.keking.utils.EncodingDetects.getJavaEncode(EncodingDetects.java:35)
+          at cn.keking.utils.EncodingDetects.getJavaEncode(EncodingDetects.java:24)
+          at cn.keking.service.FileHandlerService.doActionConvertedFile(FileHandlerService.java:166)
+      In order to prevent the method under test
+      from throwing ArrayIndexOutOfBoundsException, add constructors or factory
+      methods that make it easier to construct fully initialized objects used in
+      the method under test.
+      See https://diff.blue/R013 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.FileHandlerService.doActionConvertedFile:(Ljava/lang/String;)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      We are unit testing `cn.keking.service.FileHandlerService.doActionConvertedFile:(Ljava/lang/String;)V`.
+      
+      Create a parameterless factory method for the problematic
+      parameter/this object, determining which by reading the error message below.
+      The new factory method should be in the test classpath, not production.
+      Create a new factory class if there isn't already one for the class under test.
+      Do not create a test yourself, only a factory (don't test the factory either).
+      The factory method must be annotated with 
+      `@com.diffblue.cover.annotations.InterestingTestFactory`.
+      Avoid using mocks, these tend to produce unused stubbing errors or a
+      `java.lang.NullPointerException`.
+      If your environment has internet access then further documentation on
+      factory methods for Cover can be found here:
+      https://docs.diffblue.com/features/tutorials/increase-code-coverage#test-factory-pattern
+      
+      The factory should produce a parameter/this object such that
+      the following exception does not occur:
+      
+      ```
+      java.lang.ArrayIndexOutOfBoundsException: 0
+        at cn.keking.utils.BytesEncodingDetect.utf16_probability(SimpleEncodingDetects.java:688)
+        at cn.keking.utils.BytesEncodingDetect.detectEncoding(SimpleEncodingDetects.java:159)
+        at cn.keking.utils.SimpleEncodingDetects.getJavaEncode(SimpleEncodingDetects.java:41)
+        at cn.keking.utils.EncodingDetects.getJavaEncode(EncodingDetects.java:40)
+        at cn.keking.utils.EncodingDetects.getJavaEncode(EncodingDetects.java:35)
+        at cn.keking.utils.EncodingDetects.getJavaEncode(EncodingDetects.java:24)
+        at cn.keking.service.FileHandlerService.doActionConvertedFile(FileHandlerService.java:166)
+      ```
+      
+      Recompile the project to make sure the new factory / annotation / getter / etc
+      is available to Cover.
+      For example run `mvn install -DskipTests` or `gradle install -x test`.
+      
+INFO  
+INFO  R013: No inputs found that don't throw a trivial exception
+      Diffblue Cover tried to run the arrange/act section, but the test threw
+      java.lang.NullPointerException
+      In order to prevent the method under test
+      from throwing NullPointerException, add constructors or factory
+      methods that make it easier to construct fully initialized objects used in
+      the method under test.
+      See https://diff.blue/R013 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.utils.DownloadUtils.downLoad:(Lcn/keking/model/FileAttribute;Ljava/lang/String;)Lcn/keking/model/ReturnResponse;
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      We are unit testing `cn.keking.utils.DownloadUtils.downLoad:(Lcn/keking/model/FileAttribute;Ljava/lang/String;)Lcn/keking/model/ReturnResponse;`.
+      
+      Create a parameterless factory method for the problematic
+      parameter/this object, determining which by reading the error message below.
+      The new factory method should be in the test classpath, not production.
+      Create a new factory class if there isn't already one for the class under test.
+      Do not create a test yourself, only a factory (don't test the factory either).
+      The factory method must be annotated with 
+      `@com.diffblue.cover.annotations.InterestingTestFactory`.
+      Avoid using mocks, these tend to produce unused stubbing errors or a
+      `java.lang.NullPointerException`.
+      If your environment has internet access then further documentation on
+      factory methods for Cover can be found here:
+      https://docs.diffblue.com/features/tutorials/increase-code-coverage#test-factory-pattern
+      
+      The factory should produce a parameter/this object such that
+      the following exception does not occur:
+      
+      ```
+      java.lang.NullPointerException
+      ```
+      
+      Recompile the project to make sure the new factory / annotation / getter / etc
+      is available to Cover.
+      For example run `mvn install -DskipTests` or `gradle install -x test`.
+      
+INFO  
+INFO  R013: No inputs found that don't throw a trivial exception
+      Diffblue Cover tried to run the arrange/act section, but the test threw
+      java.lang.ArrayIndexOutOfBoundsException
+      In order to prevent the method under test
+      from throwing ArrayIndexOutOfBoundsException, add constructors or factory
+      methods that make it easier to construct fully initialized objects used in
+      the method under test.
+      See https://diff.blue/R013 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.utils.EncodingDetects.getJavaEncode:(Ljava/lang/String;)Ljava/lang/String;
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      We are unit testing `cn.keking.utils.EncodingDetects.getJavaEncode:(Ljava/lang/String;)Ljava/lang/String;`.
+      
+      Create a parameterless factory method for the problematic
+      parameter/this object, determining which by reading the error message below.
+      The new factory method should be in the test classpath, not production.
+      Create a new factory class if there isn't already one for the class under test.
+      Do not create a test yourself, only a factory (don't test the factory either).
+      The factory method must be annotated with 
+      `@com.diffblue.cover.annotations.InterestingTestFactory`.
+      Avoid using mocks, these tend to produce unused stubbing errors or a
+      `java.lang.NullPointerException`.
+      If your environment has internet access then further documentation on
+      factory methods for Cover can be found here:
+      https://docs.diffblue.com/features/tutorials/increase-code-coverage#test-factory-pattern
+      
+      The factory should produce a parameter/this object such that
+      the following exception does not occur:
+      
+      ```
+      java.lang.ArrayIndexOutOfBoundsException
+      ```
+      
+      Recompile the project to make sure the new factory / annotation / getter / etc
+      is available to Cover.
+      For example run `mvn install -DskipTests` or `gradle install -x test`.
+      
+INFO  
+INFO  R013: No inputs found that don't throw a trivial exception
+      Diffblue Cover tried to run the arrange/act section, but the test threw
+      java.net.UnknownHostException: ftp://localhost/test/file.txt: invalid IPv6 address literal
+          at java.net.InetAddress.invalidIPv6LiteralException(InetAddress.java:1149)
+          at java.net.InetAddress.getAllByName(InetAddress.java:1119)
+          at java.net.InetAddress.getAllByName(InetAddress.java:1065)
+          at java.net.InetAddress.getByName(InetAddress.java:1015)
+          at org.apache.commons.net.SocketClient.connect(SocketClient.java:268)
+          at cn.keking.utils.FtpUtils.connect(FtpUtils.java:27)
+      In order to prevent the method under test
+      from throwing UnknownHostException, add constructors or factory
+      methods that make it easier to construct fully initialized objects used in
+      the method under test.
+      See https://diff.blue/R013 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.utils.FtpUtils.connect:(Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lorg/apache/commons/net/ftp/FTPClient;
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      We are unit testing `cn.keking.utils.FtpUtils.connect:(Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lorg/apache/commons/net/ftp/FTPClient;`.
+      
+      Create a parameterless factory method for the problematic
+      parameter/this object, determining which by reading the error message below.
+      The new factory method should be in the test classpath, not production.
+      Create a new factory class if there isn't already one for the class under test.
+      Do not create a test yourself, only a factory (don't test the factory either).
+      The factory method must be annotated with 
+      `@com.diffblue.cover.annotations.InterestingTestFactory`.
+      Avoid using mocks, these tend to produce unused stubbing errors or a
+      `java.lang.NullPointerException`.
+      If your environment has internet access then further documentation on
+      factory methods for Cover can be found here:
+      https://docs.diffblue.com/features/tutorials/increase-code-coverage#test-factory-pattern
+      
+      The factory should produce a parameter/this object such that
+      the following exception does not occur:
+      
+      ```
+      java.net.UnknownHostException: ftp://localhost/test/file.txt: invalid IPv6 address literal
+        at java.net.InetAddress.invalidIPv6LiteralException(InetAddress.java:1149)
+        at java.net.InetAddress.getAllByName(InetAddress.java:1119)
+        at java.net.InetAddress.getAllByName(InetAddress.java:1065)
+        at java.net.InetAddress.getByName(InetAddress.java:1015)
+        at org.apache.commons.net.SocketClient.connect(SocketClient.java:268)
+        at cn.keking.utils.FtpUtils.connect(FtpUtils.java:27)
+      ```
+      
+      Recompile the project to make sure the new factory / annotation / getter / etc
+      is available to Cover.
+      For example run `mvn install -DskipTests` or `gradle install -x test`.
+      
+INFO  
+INFO  R013: No inputs found that don't throw a trivial exception
+      Diffblue Cover tried to run the arrange/act section, but the test threw
+      java.net.MalformedURLException: no protocol: FTP connection url:{}, username:{}, password:{}, controlEncoding:{}, localFilePath:{}
+          at java.net.URL.<init>(URL.java:611)
+          at java.net.URL.<init>(URL.java:508)
+          at java.net.URL.<init>(URL.java:457)
+          at cn.keking.utils.FtpUtils.download(FtpUtils.java:44)
+      In order to prevent the method under test
+      from throwing MalformedURLException, add constructors or factory
+      methods that make it easier to construct fully initialized objects used in
+      the method under test.
+      See https://diff.blue/R013 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.utils.FtpUtils.download:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      We are unit testing `cn.keking.utils.FtpUtils.download:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V`.
+      
+      Create a parameterless factory method for the problematic
+      parameter/this object, determining which by reading the error message below.
+      The new factory method should be in the test classpath, not production.
+      Create a new factory class if there isn't already one for the class under test.
+      Do not create a test yourself, only a factory (don't test the factory either).
+      The factory method must be annotated with 
+      `@com.diffblue.cover.annotations.InterestingTestFactory`.
+      Avoid using mocks, these tend to produce unused stubbing errors or a
+      `java.lang.NullPointerException`.
+      If your environment has internet access then further documentation on
+      factory methods for Cover can be found here:
+      https://docs.diffblue.com/features/tutorials/increase-code-coverage#test-factory-pattern
+      
+      The factory should produce a parameter/this object such that
+      the following exception does not occur:
+      
+      ```
+      java.net.MalformedURLException: no protocol: FTP connection url:{}, username:{}, password:{}, controlEncoding:{}, localFilePath:{}
+        at java.net.URL.<init>(URL.java:611)
+        at java.net.URL.<init>(URL.java:508)
+        at java.net.URL.<init>(URL.java:457)
+        at cn.keking.utils.FtpUtils.download(FtpUtils.java:44)
+      ```
+      
+      Recompile the project to make sure the new factory / annotation / getter / etc
+      is available to Cover.
+      For example run `mvn install -DskipTests` or `gradle install -x test`.
+      
+INFO  
+INFO  R013: No inputs found that don't throw a trivial exception
+      Diffblue Cover tried to run the arrange/act section, but the test threw
+      java.lang.NullPointerException
+          at cn.keking.web.controller.FileController.captcha(FileController.java:100)
+          at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197)
+          at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141)
+          at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+          at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:894)
+          at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+          at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+          at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1060)
+          at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:962)
+          at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+          at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+          at javax.servlet.http.HttpServlet.service(HttpServlet.java:497)
+          at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+          at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72)
+          at javax.servlet.http.HttpServlet.service(HttpServlet.java:584)
+          at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:167)
+          at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:134)
+          at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:183)
+      In order to prevent the method under test
+      from throwing NullPointerException, add constructors or factory
+      methods that make it easier to construct fully initialized objects used in
+      the method under test.
+      See https://diff.blue/R013 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.web.controller.FileController.captcha:(Ljavax/servlet/http/HttpServletRequest;Ljavax/servlet/http/HttpServletResponse;)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      We are unit testing `cn.keking.web.controller.FileController.captcha:(Ljavax/servlet/http/HttpServletRequest;Ljavax/servlet/http/HttpServletResponse;)V`.
+      
+      Create a parameterless factory method for the problematic
+      parameter/this object, determining which by reading the error message below.
+      The new factory method should be in the test classpath, not production.
+      Create a new factory class if there isn't already one for the class under test.
+      Do not create a test yourself, only a factory (don't test the factory either).
+      The factory method must be annotated with 
+      `@com.diffblue.cover.annotations.InterestingTestFactory`.
+      Avoid using mocks, these tend to produce unused stubbing errors or a
+      `java.lang.NullPointerException`.
+      If your environment has internet access then further documentation on
+      factory methods for Cover can be found here:
+      https://docs.diffblue.com/features/tutorials/increase-code-coverage#test-factory-pattern
+      
+      The factory should produce a parameter/this object such that
+      the following exception does not occur:
+      
+      ```
+      java.lang.NullPointerException
+        at cn.keking.web.controller.FileController.captcha(FileController.java:100)
+        at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197)
+        at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141)
+        at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+        at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:894)
+        at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+        at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+        at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1060)
+        at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:962)
+        at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+        at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:497)
+        at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+        at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:584)
+        at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:167)
+        at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:134)
+        at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:183)
+      ```
+      
+      Recompile the project to make sure the new factory / annotation / getter / etc
+      is available to Cover.
+      For example run `mvn install -DskipTests` or `gradle install -x test`.
+      
+INFO  
+INFO  R013: No inputs found that don't throw a trivial exception
+      Diffblue Cover tried to run the arrange/act section, but the test threw
+      org.springframework.web.multipart.MultipartException: Current request is not a multipart request
+          at org.springframework.web.method.annotation.RequestParamMethodArgumentResolver.handleMissingValue(RequestParamMethodArgumentResolver.java:196)
+          at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:114)
+          at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:121)
+          at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:170)
+          at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:137)
+          at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+          at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:894)
+          at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+          at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+          at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1060)
+          at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:962)
+          at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+          at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+          at javax.servlet.http.HttpServlet.service(HttpServlet.java:517)
+          at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+          at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72)
+          at javax.servlet.http.HttpServlet.service(HttpServlet.java:584)
+          at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:167)
+          at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:134)
+          at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:183)
+      In order to prevent the method under test
+      from throwing MultipartException, add constructors or factory
+      methods that make it easier to construct fully initialized objects used in
+      the method under test.
+      See https://diff.blue/R013 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.web.controller.FileController.fileUpload:(Lorg/springframework/web/multipart/MultipartFile;)Lcn/keking/model/ReturnResponse;
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      We are unit testing `cn.keking.web.controller.FileController.fileUpload:(Lorg/springframework/web/multipart/MultipartFile;)Lcn/keking/model/ReturnResponse;`.
+      
+      Create a parameterless factory method for the problematic
+      parameter/this object, determining which by reading the error message below.
+      The new factory method should be in the test classpath, not production.
+      Create a new factory class if there isn't already one for the class under test.
+      Do not create a test yourself, only a factory (don't test the factory either).
+      The factory method must be annotated with 
+      `@com.diffblue.cover.annotations.InterestingTestFactory`.
+      Avoid using mocks, these tend to produce unused stubbing errors or a
+      `java.lang.NullPointerException`.
+      If your environment has internet access then further documentation on
+      factory methods for Cover can be found here:
+      https://docs.diffblue.com/features/tutorials/increase-code-coverage#test-factory-pattern
+      
+      The factory should produce a parameter/this object such that
+      the following exception does not occur:
+      
+      ```
+      org.springframework.web.multipart.MultipartException: Current request is not a multipart request
+        at org.springframework.web.method.annotation.RequestParamMethodArgumentResolver.handleMissingValue(RequestParamMethodArgumentResolver.java:196)
+        at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:114)
+        at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:121)
+        at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:170)
+        at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:137)
+        at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+        at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:894)
+        at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+        at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+        at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1060)
+        at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:962)
+        at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+        at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:517)
+        at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+        at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:584)
+        at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:167)
+        at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:134)
+        at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:183)
+      ```
+      
+      Recompile the project to make sure the new factory / annotation / getter / etc
+      is available to Cover.
+      For example run `mvn install -DskipTests` or `gradle install -x test`.
+      
+INFO  
+INFO  R002: Missing observers
+      Diffblue Cover was unable to create an assertion.
+      There are no fields that could be asserted on.
+      
+INFO  Affected methods:
+      cn.keking.web.filter.UrlCheckFilter.<init>:()V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.web.filter.UrlCheckFilter.<init>:()V
+      
+      Diffblue Cover was unable to create an assertion.
+      There are no fields that could be asserted on.
+      
+INFO  
+INFO  R002: Missing observers
+      Diffblue Cover was unable to create an assertion.
+      There are no fields that could be asserted on.
+      
+INFO  Affected methods:
+      cn.keking.config.ConfigRefreshComponent$ConfigRefreshThread.<init>:()V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.config.ConfigRefreshComponent$ConfigRefreshThread.<init>:()V
+      
+      Diffblue Cover was unable to create an assertion.
+      There are no fields that could be asserted on.
+      
+INFO  
+INFO  R002: Missing observers
+      Diffblue Cover was unable to create an assertion.
+      There are no fields that could be asserted on.
+      
+INFO  Affected methods:
+      cn.keking.web.filter.ChinesePathFilter.<init>:()V
+      cn.keking.web.filter.ChinesePathFilter.destroy:()V
+      cn.keking.web.filter.ChinesePathFilter.init:(Ljavax/servlet/FilterConfig;)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.web.filter.ChinesePathFilter.<init>:()V
+      cn.keking.web.filter.ChinesePathFilter.destroy:()V
+      cn.keking.web.filter.ChinesePathFilter.init:(Ljavax/servlet/FilterConfig;)V
+      
+      Diffblue Cover was unable to create an assertion.
+      There are no fields that could be asserted on.
+      
+INFO  
+INFO  R002: Missing observers
+      Diffblue Cover was unable to create an assertion.
+      There are no fields that could be asserted on.
+      
+INFO  Affected methods:
+      cn.keking.web.filter.AttributeSetFilter.<init>:()V
+      cn.keking.web.filter.AttributeSetFilter.destroy:()V
+      cn.keking.web.filter.AttributeSetFilter.init:(Ljavax/servlet/FilterConfig;)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.web.filter.AttributeSetFilter.<init>:()V
+      cn.keking.web.filter.AttributeSetFilter.destroy:()V
+      cn.keking.web.filter.AttributeSetFilter.init:(Ljavax/servlet/FilterConfig;)V
+      
+      Diffblue Cover was unable to create an assertion.
+      There are no fields that could be asserted on.
+      
+INFO  
+INFO  R002: Missing observers
+      Diffblue Cover was unable to create an assertion.
+      Add getters for the following fields or make them package-private:
+      DefaultResourceCache.colorSpaces
+      DefaultResourceCache.extGStates
+      DefaultResourceCache.fonts
+      DefaultResourceCache.patterns
+      DefaultResourceCache.properties
+      DefaultResourceCache.shadings
+      DefaultResourceCache.xobjects
+      
+INFO  Affected methods:
+      cn.keking.service.cache.NotResourceCache.<init>:()V
+      cn.keking.service.cache.NotResourceCache.put:(Lorg/apache/pdfbox/cos/COSObject;Lorg/apache/pdfbox/pdmodel/documentinterchange/markedcontent/PDPropertyList;)V
+      cn.keking.service.cache.NotResourceCache.put:(Lorg/apache/pdfbox/cos/COSObject;Lorg/apache/pdfbox/pdmodel/graphics/PDXObject;)V
+      cn.keking.service.cache.NotResourceCache.put:(Lorg/apache/pdfbox/cos/COSObject;Lorg/apache/pdfbox/pdmodel/graphics/color/PDColorSpace;)V
+      cn.keking.service.cache.NotResourceCache.put:(Lorg/apache/pdfbox/cos/COSObject;Lorg/apache/pdfbox/pdmodel/graphics/pattern/PDAbstractPattern;)V
+      cn.keking.service.cache.NotResourceCache.put:(Lorg/apache/pdfbox/cos/COSObject;Lorg/apache/pdfbox/pdmodel/graphics/shading/PDShading;)V
+      cn.keking.service.cache.NotResourceCache.put:(Lorg/apache/pdfbox/cos/COSObject;Lorg/apache/pdfbox/pdmodel/graphics/state/PDExtendedGraphicsState;)V
+      
+INFO  To resolve the issue, run the following command in your terminal:
+      
+      dcover refactor
+      
+INFO  
+INFO  R002: Missing observers
+      Diffblue Cover was unable to create an assertion.
+      Add getters for the following fields or make them package-private:
+      BaseUrlFilter.BASE_URL
+      
+INFO  Affected methods:
+      cn.keking.web.filter.BaseUrlFilter.<init>:()V
+      cn.keking.web.filter.BaseUrlFilter.destroy:()V
+      cn.keking.web.filter.BaseUrlFilter.init:(Ljavax/servlet/FilterConfig;)V
+      
+INFO  To resolve the issue, run the following command in your terminal:
+      
+      dcover refactor
+      
+INFO  
+INFO  R002: Missing observers
+      Diffblue Cover was unable to create an assertion.
+      Add getters for the following fields or make them package-private:
+      TrustDirFilter.logger
+      TrustDirFilter.notTrustDirView
+      
+INFO  Affected methods:
+      cn.keking.web.filter.TrustDirFilter.destroy:()V
+      cn.keking.web.filter.TrustDirFilter.<init>:()V
+      cn.keking.web.filter.TrustDirFilter.init:(Ljavax/servlet/FilterConfig;)V
+      
+INFO  To resolve the issue, run the following command in your terminal:
+      
+      dcover refactor
+      
+INFO  
+INFO  R002: Missing observers
+      Diffblue Cover was unable to create an assertion.
+      Add getters for the following fields or make them package-private:
+      TrustHostFilter.notTrustHostHtmlView
+      
+INFO  Affected methods:
+      cn.keking.web.filter.TrustHostFilter.<init>:()V
+      cn.keking.web.filter.TrustHostFilter.destroy:()V
+      cn.keking.web.filter.TrustHostFilter.init:(Ljavax/servlet/FilterConfig;)V
+      
+INFO  To resolve the issue, run the following command in your terminal:
+      
+      dcover refactor
+      
+INFO  
+INFO  R026: Failed to create Spring context
+      Attempt to initialize test context failed with
+      com.diffblue.fuzztest.shared.proxy.BeanInstantiationException: Could not instantiate bean: officePluginManager defined in null
+          at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+          at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+          at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+          at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+          at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+          at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+          at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+      java.lang.IllegalStateException: Failed to load ApplicationContext
+          at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:132)
+          at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+          at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+          at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+          at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+          at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+          at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+          at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+          at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+      org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'officePluginManager': Invocation of init method failed; nested exception is java.lang.RuntimeException: 找不到office组件，请确认'office.home'配置是否有误
+          at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:160)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:429)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1780)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:609)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:531)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+          at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+          at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:944)
+          at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:923)
+          at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:588)
+          at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:127)
+          at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+          at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:275)
+          at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:243)
+          at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+          at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+          at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+          at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+          at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+          at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+          at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+          at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+          at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+          at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+      java.lang.RuntimeException: 找不到office组件，请确认'office.home'配置是否有误
+          at cn.keking.service.OfficePluginManager.startOfficeManager(OfficePluginManager.java:59)
+          at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleElement.invoke(InitDestroyAnnotationBeanPostProcessor.java:389)
+          at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeInitMethods(InitDestroyAnnotationBeanPostProcessor.java:333)
+          at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:157)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:429)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1780)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:609)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:531)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+          at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+          at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:944)
+          at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:923)
+          at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:588)
+          at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:127)
+          at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+          at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:275)
+          at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:243)
+          at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+          at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+          at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+          at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+          at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+          at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+          at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+          at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+          at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+          at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+      when running class:
+      package cn.keking.service;
+      @org.springframework.boot.context.properties.EnableConfigurationProperties
+      @org.springframework.context.annotation.PropertySource(value = "classpath:application-test.properties")
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.OfficePluginManager.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass17740 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.OfficePluginManager officePluginManager;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      To avoid this error, consider adding a custom base class to setup static
+      mocking for sun.reflect.NativeMethodAccessorImpl.
+      For details on how to set up a custom base class, please follow this link:
+      https://docs.diffblue.com/features/cover-cli/writing-tests/custom-test-setup
+      See https://diff.blue/R026 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.OfficePluginManager.destroyOfficeManager:()V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.OfficePluginManager.destroyOfficeManager:()V
+      
+      Attempt to initialize test context failed with
+      com.diffblue.fuzztest.shared.proxy.BeanInstantiationException: Could not instantiate bean: officePluginManager defined in null
+          at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+          at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+          at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+          at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+          at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+          at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+          at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+      java.lang.IllegalStateException: Failed to load ApplicationContext
+          at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:132)
+          at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+          at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+          at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+          at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+          at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+          at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+          at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+          at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+      org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'officePluginManager': Invocation of init method failed; nested exception is java.lang.RuntimeException: 找不到office组件，请确认'office.home'配置是否有误
+          at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:160)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:429)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1780)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:609)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:531)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+          at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+          at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:944)
+          at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:923)
+          at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:588)
+          at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:127)
+          at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+          at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:275)
+          at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:243)
+          at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+          at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+          at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+          at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+          at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+          at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+          at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+          at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+          at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+          at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+      java.lang.RuntimeException: 找不到office组件，请确认'office.home'配置是否有误
+          at cn.keking.service.OfficePluginManager.startOfficeManager(OfficePluginManager.java:59)
+          at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleElement.invoke(InitDestroyAnnotationBeanPostProcessor.java:389)
+          at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeInitMethods(InitDestroyAnnotationBeanPostProcessor.java:333)
+          at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:157)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:429)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1780)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:609)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:531)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+          at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+          at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:944)
+          at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:923)
+          at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:588)
+          at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:127)
+          at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+          at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:275)
+          at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:243)
+          at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+          at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+          at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+          at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+          at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+          at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+          at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+          at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+          at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+          at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+      when running class:
+      package cn.keking.service;
+      @org.springframework.boot.context.properties.EnableConfigurationProperties
+      @org.springframework.context.annotation.PropertySource(value = "classpath:application-test.properties")
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.OfficePluginManager.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass17740 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.OfficePluginManager officePluginManager;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      To avoid this error, consider adding a custom base class to setup static
+      mocking for sun.reflect.NativeMethodAccessorImpl.
+      For details on how to set up a custom base class, please follow this link:
+      https://docs.diffblue.com/features/cover-cli/writing-tests/custom-test-setup
+      See https://diff.blue/R026 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass17767 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.addQueueTask:(Ljava/lang/String;)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.addQueueTask:(Ljava/lang/String;)V
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass17767 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass17863 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.cleanCache:()V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.cleanCache:()V
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass17863 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass17998 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.getMediaConvertCache:(Ljava/lang/String;)Ljava/lang/String;
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.getMediaConvertCache:(Ljava/lang/String;)Ljava/lang/String;
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass17998 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18064 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.getPDFCache:(Ljava/lang/String;)Ljava/lang/String;
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.getPDFCache:(Ljava/lang/String;)Ljava/lang/String;
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18064 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18130 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.getPdfImageCache:(Ljava/lang/String;)Ljava/lang/Integer;
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.getPdfImageCache:(Ljava/lang/String;)Ljava/lang/Integer;
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18130 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18194 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.initCache:()V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.initCache:()V
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18194 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18202 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.initIMGCachePool:(Ljava/lang/Integer;)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.initIMGCachePool:(Ljava/lang/Integer;)V
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18202 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18220 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.initMediaConvertCachePool:(Ljava/lang/Integer;)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.initMediaConvertCachePool:(Ljava/lang/Integer;)V
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18220 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18238 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.initPDFCachePool:(Ljava/lang/Integer;)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.initPDFCachePool:(Ljava/lang/Integer;)V
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18238 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18256 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.initPdfImagesCachePool:(Ljava/lang/Integer;)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.initPdfImagesCachePool:(Ljava/lang/Integer;)V
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18256 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18276 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.putImgCache:(Ljava/lang/String;Ljava/util/List;)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.putImgCache:(Ljava/lang/String;Ljava/util/List;)V
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18276 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18326 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.putMediaConvertCache:(Ljava/lang/String;Ljava/lang/String;)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.putMediaConvertCache:(Ljava/lang/String;Ljava/lang/String;)V
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18326 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18382 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.putPDFCache:(Ljava/lang/String;Ljava/lang/String;)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.putPDFCache:(Ljava/lang/String;Ljava/lang/String;)V
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18382 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18438 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.putPdfImageCache:(Ljava/lang/String;I)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.putPdfImageCache:(Ljava/lang/String;I)V
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18438 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18500 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.takeQueueTask:()Ljava/lang/String;
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceJDKImpl.takeQueueTask:()Ljava/lang/String;
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceJDKImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceJDKImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18500 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceJDKImpl cacheServiceJDKImpl;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R081: Exception in arrange section
+      Diffblue Cover was unable to construct an instance of the class under test using
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.initIMGCachePool(Integer).
+      The arrange section threw
+      java.lang.IllegalArgumentException: server(s) address(es) not defined!
+          at org.redisson.config.ConfigSupport.createConnectionManager(ConfigSupport.java:179)
+          at org.redisson.Redisson.<init>(Redisson.java:114)
+          at org.redisson.Redisson.create(Redisson.java:154)
+          at cn.keking.service.cache.impl.CacheServiceRedisImpl.<init>(CacheServiceRedisImpl.java:27)
+      More information about the exception is provided in the support log.
+      See https://diff.blue/R081 for further troubleshooting of this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.initIMGCachePool:(Ljava/lang/Integer;)V
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.initMediaConvertCachePool:(Ljava/lang/Integer;)V
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.initPDFCachePool:(Ljava/lang/Integer;)V
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.initPdfImagesCachePool:(Ljava/lang/Integer;)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.initIMGCachePool:(Ljava/lang/Integer;)V
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.initMediaConvertCachePool:(Ljava/lang/Integer;)V
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.initPDFCachePool:(Ljava/lang/Integer;)V
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.initPdfImagesCachePool:(Ljava/lang/Integer;)V
+      
+      Diffblue Cover was unable to construct an instance of the class under test using
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.initIMGCachePool(Integer).
+      The arrange section threw
+      java.lang.IllegalArgumentException: server(s) address(es) not defined!
+          at org.redisson.config.ConfigSupport.createConnectionManager(ConfigSupport.java:179)
+          at org.redisson.Redisson.<init>(Redisson.java:114)
+          at org.redisson.Redisson.create(Redisson.java:154)
+          at cn.keking.service.cache.impl.CacheServiceRedisImpl.<init>(CacheServiceRedisImpl.java:27)
+      More information about the exception is provided in the support log.
+      See https://diff.blue/R081 for further troubleshooting of this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18508 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.addQueueTask:(Ljava/lang/String;)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.addQueueTask:(Ljava/lang/String;)V
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass18508 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass19141 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.cleanCache:()V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.cleanCache:()V
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass19141 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass19150 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.getImgCache:()Ljava/util/Map;
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.getImgCache:()Ljava/util/Map;
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass19150 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass19159 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.getImgCache:(Ljava/lang/String;)Ljava/util/List;
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.getImgCache:(Ljava/lang/String;)Ljava/util/List;
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass19159 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass19694 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.getMediaConvertCache:()Ljava/util/Map;
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.getMediaConvertCache:()Ljava/util/Map;
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass19694 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass19703 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.getMediaConvertCache:(Ljava/lang/String;)Ljava/lang/String;
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.getMediaConvertCache:(Ljava/lang/String;)Ljava/lang/String;
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass19703 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass20238 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.getPDFCache:()Ljava/util/Map;
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.getPDFCache:()Ljava/util/Map;
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass20238 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass20247 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.getPDFCache:(Ljava/lang/String;)Ljava/lang/String;
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.getPDFCache:(Ljava/lang/String;)Ljava/lang/String;
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass20247 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass20782 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.getPdfImageCache:(Ljava/lang/String;)Ljava/lang/Integer;
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.getPdfImageCache:(Ljava/lang/String;)Ljava/lang/Integer;
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass20782 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass21317 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.putImgCache:(Ljava/lang/String;Ljava/util/List;)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.putImgCache:(Ljava/lang/String;Ljava/util/List;)V
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass21317 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass21356 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.putMediaConvertCache:(Ljava/lang/String;Ljava/lang/String;)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.putMediaConvertCache:(Ljava/lang/String;Ljava/lang/String;)V
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass21356 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass21409 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.putPDFCache:(Ljava/lang/String;Ljava/lang/String;)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.putPDFCache:(Ljava/lang/String;Ljava/lang/String;)V
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass21409 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass21462 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.putPdfImageCache:(Ljava/lang/String;I)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.putPdfImageCache:(Ljava/lang/String;I)V
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass21462 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R027: Missing beans when creating Spring context
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass21503 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.takeQueueTask:()Ljava/lang/String;
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceRedisImpl.takeQueueTask:()Ljava/lang/String;
+      
+      Failed to create Spring context due to missing beans
+      in the current Spring profile:
+      - cn.keking.service.cache.impl.CacheServiceRedisImpl
+      when running class:
+      package cn.keking.service.cache.impl;
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.cache.impl.CacheServiceRedisImpl.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass21503 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.cache.impl.CacheServiceRedisImpl cacheServiceRedisImpl;
+        @org.springframework.boot.test.mock.mockito.MockBean org.redisson.config.Config config;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      See https://diff.blue/R027 to resolve this issue.
+      
+INFO  
+INFO  R011: Sandboxing policy violation
+      Diffblue Cover ran code in your project that tried
+      to access 'sun.misc' from calling class 'io.netty.util.internal.PlatformDependent0$1'.
+      Diffblue Cover's default sandboxing policy disallows this in order to prevent
+      your code from damaging your system environment.
+      See https://diff.blue/R011 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.<init>:()V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.addQueueTask:(Ljava/lang/String;)V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.cleanCache:()V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.getImgCache:()Ljava/util/Map;
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.getImgCache:(Ljava/lang/String;)Ljava/util/List;
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.getMediaConvertCache:()Ljava/util/Map;
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.getMediaConvertCache:(Ljava/lang/String;)Ljava/lang/String;
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.getPDFCache:()Ljava/util/Map;
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.getPDFCache:(Ljava/lang/String;)Ljava/lang/String;
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.getPdfImageCache:(Ljava/lang/String;)Ljava/lang/Integer;
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.initIMGCachePool:(Ljava/lang/Integer;)V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.initMediaConvertCachePool:(Ljava/lang/Integer;)V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.initPDFCachePool:(Ljava/lang/Integer;)V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.initPdfImagesCachePool:(Ljava/lang/Integer;)V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.putImgCache:(Ljava/lang/String;Ljava/util/List;)V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.putMediaConvertCache:(Ljava/lang/String;Ljava/lang/String;)V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.putPDFCache:(Ljava/lang/String;Ljava/lang/String;)V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.putPdfImageCache:(Ljava/lang/String;I)V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.takeQueueTask:()Ljava/lang/String;
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.<init>:()V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.addQueueTask:(Ljava/lang/String;)V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.cleanCache:()V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.getImgCache:()Ljava/util/Map;
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.getImgCache:(Ljava/lang/String;)Ljava/util/List;
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.getMediaConvertCache:()Ljava/util/Map;
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.getMediaConvertCache:(Ljava/lang/String;)Ljava/lang/String;
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.getPDFCache:()Ljava/util/Map;
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.getPDFCache:(Ljava/lang/String;)Ljava/lang/String;
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.getPdfImageCache:(Ljava/lang/String;)Ljava/lang/Integer;
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.initIMGCachePool:(Ljava/lang/Integer;)V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.initMediaConvertCachePool:(Ljava/lang/Integer;)V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.initPDFCachePool:(Ljava/lang/Integer;)V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.initPdfImagesCachePool:(Ljava/lang/Integer;)V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.putImgCache:(Ljava/lang/String;Ljava/util/List;)V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.putMediaConvertCache:(Ljava/lang/String;Ljava/lang/String;)V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.putPDFCache:(Ljava/lang/String;Ljava/lang/String;)V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.putPdfImageCache:(Ljava/lang/String;I)V
+      cn.keking.service.cache.impl.CacheServiceRocksDBImpl.takeQueueTask:()Ljava/lang/String;
+      
+      Diffblue Cover ran code in your project that tried
+      to access 'sun.misc' from calling class 'io.netty.util.internal.PlatformDependent0$1'.
+      Diffblue Cover's default sandboxing policy disallows this in order to prevent
+      your code from damaging your system environment.
+      See https://diff.blue/R011 to resolve this issue.
+      
+INFO  
+INFO  R031: Method may be time-sensitive
+      Diffblue Cover was only able to write tests that are time-sensitive.
+      The assertions don't pass when run at an alternate date, time, and
+      timezone. Try refactoring the method to take a 'java.time.Clock' instance so
+      that the time can be parameterized during testing.
+      See Working with code R031 (https://diff.blue/R031) for details.
+      
+INFO  Affected methods:
+      cn.keking.utils.DateUtils.calculateCurrentTimeDifference:(J)J
+      cn.keking.utils.DateUtils.getCurrentSecond:()J
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.utils.DateUtils.calculateCurrentTimeDifference:(J)J
+      cn.keking.utils.DateUtils.getCurrentSecond:()J
+      
+      Diffblue Cover was only able to write tests that are time-sensitive.
+      The assertions don't pass when run at an alternate date, time, and
+      timezone. Try refactoring the method to take a 'java.time.Clock' instance so
+      that the time can be parameterized during testing.
+      See Working with code R031 (https://diff.blue/R031) for details.
+      
+INFO  
+INFO  R011: Sandboxing policy violation
+      Diffblue Cover ran code in your project that tried
+      to access files (file '..', permission 'delete') from calling class 'cn.keking.utils.KkFileUtils'.
+      Diffblue Cover's default sandboxing policy disallows this in order to prevent
+      your code from damaging your system environment.
+      See https://diff.blue/R011 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.utils.KkFileUtils.deleteFileByPath:(Ljava/lang/String;)V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.utils.KkFileUtils.deleteFileByPath:(Ljava/lang/String;)V
+      
+      Diffblue Cover ran code in your project that tried
+      to access files (file '..', permission 'delete') from calling class 'cn.keking.utils.KkFileUtils'.
+      Diffblue Cover's default sandboxing policy disallows this in order to prevent
+      your code from damaging your system environment.
+      See https://diff.blue/R011 to resolve this issue.
+      
+INFO  
+INFO  R011: Sandboxing policy violation
+      Diffblue Cover ran code in your project that tried
+      to access the network.
+      Diffblue Cover's default sandboxing policy disallows this in order to prevent
+      your code from damaging your system environment.
+      See https://diff.blue/R011 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.utils.WebUtils.normalizedURL:(Ljava/lang/String;)Ljava/net/URL;
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.utils.WebUtils.normalizedURL:(Ljava/lang/String;)Ljava/net/URL;
+      
+      Diffblue Cover ran code in your project that tried
+      to access the network.
+      Diffblue Cover's default sandboxing policy disallows this in order to prevent
+      your code from damaging your system environment.
+      See https://diff.blue/R011 to resolve this issue.
+      
+INFO  
+INFO  50 issues were found and displayed
+INFO  Rerun with --prompts --limit 10 --skip 10 to focus on a subset of the issues
+INFO  Rerun without --prompts to summarise all the issues
+INFO  
+INFO  Log file: /home/ubuntu/kkFileView/.diffblue/log/user-20260116T152302.log
+INFO  Finished in 5s

@@ -62,6 +62,31 @@ class ConvertPicUtilDiffblueTest {
    * Test {@link ConvertPicUtil#convertJpg2Pdf(String, String)}.
    *
    * <ul>
+   *   <li>When createValidFtpHost.
+   *   <li>Then throw {@link Exception}.
+   * </ul>
+   *
+   * <p>Method under test: {@link ConvertPicUtil#convertJpg2Pdf(String, String)}
+   */
+  @Test
+  @DisplayName("Test convertJpg2Pdf(String, String); when createValidFtpHost; then throw Exception")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String ConvertPicUtil.convertJpg2Pdf(String, String)"})
+  void testConvertJpg2Pdf_whenCreateValidFtpHost_thenThrowException() throws Exception {
+    // Arrange
+    String strJpgFile = FtpUtilsFactory.createValidFtpHost();
+
+    // Act and Assert
+    assertThrows(
+        Exception.class,
+        () -> ConvertPicUtil.convertJpg2Pdf(strJpgFile, FtpUtilsFactory.createValidFtpUrl()));
+  }
+
+  /**
+   * Test {@link ConvertPicUtil#convertJpg2Pdf(String, String)}.
+   *
+   * <ul>
    *   <li>When createValidFtpUrl.
    *   <li>Then throw {@link Exception}.
    * </ul>
@@ -81,27 +106,5 @@ class ConvertPicUtilDiffblueTest {
     assertThrows(
         Exception.class,
         () -> ConvertPicUtil.convertJpg2Pdf(strJpgFile, FtpUtilsFactory.createValidFtpUrl()));
-  }
-
-  /**
-   * Test {@link ConvertPicUtil#convertJpg2Pdf(String, String)}.
-   *
-   * <ul>
-   *   <li>When {@code r}.
-   *   <li>Then throw {@link Exception}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConvertPicUtil#convertJpg2Pdf(String, String)}
-   */
-  @Test
-  @DisplayName("Test convertJpg2Pdf(String, String); when 'r'; then throw Exception")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String ConvertPicUtil.convertJpg2Pdf(String, String)"})
-  void testConvertJpg2Pdf_whenR_thenThrowException() throws Exception {
-    // Arrange, Act and Assert
-    assertThrows(
-        Exception.class,
-        () -> ConvertPicUtil.convertJpg2Pdf("r", FtpUtilsFactory.createValidFtpUrl()));
   }
 }

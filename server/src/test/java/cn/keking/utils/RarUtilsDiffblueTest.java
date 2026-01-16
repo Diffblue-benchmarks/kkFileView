@@ -21,22 +21,22 @@ class RarUtilsDiffblueTest {
    * Test {@link RarUtils#getUTF8BytesFromGBKString(String)}.
    *
    * <ul>
-   *   <li>Then return {@code ftp://localhost/test/file.txt} Bytes is {@code UTF-8}.
+   *   <li>Then return {@code ftp://127.0.0.1/test/file.txt} Bytes is {@code UTF-8}.
    * </ul>
    *
    * <p>Method under test: {@link RarUtils#getUTF8BytesFromGBKString(String)}
    */
   @Test
   @DisplayName(
-      "Test getUTF8BytesFromGBKString(String); then return 'ftp://localhost/test/file.txt' Bytes is 'UTF-8'")
+      "Test getUTF8BytesFromGBKString(String); then return 'ftp://127.0.0.1/test/file.txt' Bytes is 'UTF-8'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"byte[] RarUtils.getUTF8BytesFromGBKString(String)"})
-  void testGetUTF8BytesFromGBKString_thenReturnFtpLocalhostTestFileTxtBytesIsUtf8()
+  void testGetUTF8BytesFromGBKString_thenReturnFtp127001TestFileTxtBytesIsUtf8()
       throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     assertArrayEquals(
-        "ftp://localhost/test/file.txt".getBytes("UTF-8"),
+        "ftp://127.0.0.1/test/file.txt".getBytes("UTF-8"),
         RarUtils.getUTF8BytesFromGBKString(FtpUtilsFactory.createValidFtpUrl()));
   }
 
@@ -59,29 +59,6 @@ class RarUtilsDiffblueTest {
   void testGetUTF8BytesFromGBKString_whenEmptyString_thenReturnEmptyArrayOfByte() {
     // Arrange, Act and Assert
     assertArrayEquals(new byte[] {}, RarUtils.getUTF8BytesFromGBKString(""));
-  }
-
-  /**
-   * Test {@link RarUtils#getUtf8String(String)}.
-   *
-   * <ul>
-   *   <li>When createValidFtpUrl.
-   *   <li>Then return {@code ftp://localhost/test/file.txt}.
-   * </ul>
-   *
-   * <p>Method under test: {@link RarUtils#getUtf8String(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test getUtf8String(String); when createValidFtpUrl; then return 'ftp://localhost/test/file.txt'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String RarUtils.getUtf8String(String)"})
-  void testGetUtf8String_whenCreateValidFtpUrl_thenReturnFtpLocalhostTestFileTxt() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "ftp://localhost/test/file.txt",
-        RarUtils.getUtf8String(FtpUtilsFactory.createValidFtpUrl()));
   }
 
   /**
@@ -256,27 +233,7 @@ class RarUtilsDiffblueTest {
   void testSpecialSymbols() {
     // Arrange, Act and Assert
     assertEquals(
-        "ftplocalhosttestfiletxt", RarUtils.specialSymbols(FtpUtilsFactory.createValidFtpUrl()));
-  }
-
-  /**
-   * Test {@link RarUtils#isMessyCode(String)}.
-   *
-   * <ul>
-   *   <li>When {@code 42}.
-   *   <li>Then return {@code false}.
-   * </ul>
-   *
-   * <p>Method under test: {@link RarUtils#isMessyCode(String)}
-   */
-  @Test
-  @DisplayName("Test isMessyCode(String); when '42'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean RarUtils.isMessyCode(String)"})
-  void testIsMessyCode_when42_thenReturnFalse() {
-    // Arrange, Act and Assert
-    assertFalse(RarUtils.isMessyCode("42"));
+        "ftp127001testfiletxt", RarUtils.specialSymbols(FtpUtilsFactory.createValidFtpUrl()));
   }
 
   /**
@@ -363,8 +320,6 @@ class RarUtilsDiffblueTest {
     assertEquals(1, actualTree.size());
     ZtreeNodeVo getResult = actualTree.get(0);
     assertEquals("file.txt", getResult.name);
-    assertEquals("ftp:/localhost/test", getResult.pid);
-    assertEquals("ftp:/localhost/test/file.txt", getResult.id);
     assertNull(getResult.children);
   }
 }

@@ -3,13 +3,11 @@ package cn.keking.service.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.ArgumentMatchers.isA;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import cn.keking.model.FileAttribute;
 import cn.keking.service.FileHandlerService;
 import cn.keking.service.cache.impl.CacheServiceJDKImpl;
+import cn.keking.utils.DownloadUtilsFactory;
 import cn.keking.utils.FtpUtilsFactory;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
@@ -59,7 +57,7 @@ class BpmnFilePreviewImplDiffblueTest {
     BpmnFilePreviewImpl bpmnFilePreviewImpl = new BpmnFilePreviewImpl(commonPreview);
     ConcurrentModel model = new ConcurrentModel();
 
-    FileAttribute fileAttribute = SimTextFilePreviewImplFactory.createFileAttribute();
+    FileAttribute fileAttribute = DownloadUtilsFactory.createValidFileAttribute();
     fileAttribute.setCompressFile(false);
 
     // Act and Assert
@@ -68,7 +66,7 @@ class BpmnFilePreviewImplDiffblueTest {
         bpmnFilePreviewImpl.filePreviewHandle("https://example.org/example", model, fileAttribute));
     assertEquals(2, model.size());
     assertEquals("https://example.org/example", model.get("currentUrl"));
-    assertEquals("test.txt", model.get("fileName"));
+    assertEquals("test-file.txt", model.get("fileName"));
   }
 
   /**
@@ -95,7 +93,7 @@ class BpmnFilePreviewImplDiffblueTest {
     BpmnFilePreviewImpl bpmnFilePreviewImpl = new BpmnFilePreviewImpl(commonPreview);
     ConcurrentModel model = new ConcurrentModel();
 
-    FileAttribute fileAttribute = SimTextFilePreviewImplFactory.createFileAttribute();
+    FileAttribute fileAttribute = DownloadUtilsFactory.createValidFileAttribute();
     fileAttribute.setCompressFile(false);
 
     // Act
@@ -134,21 +132,21 @@ class BpmnFilePreviewImplDiffblueTest {
     BpmnFilePreviewImpl bpmnFilePreviewImpl = new BpmnFilePreviewImpl(commonPreview);
     ConcurrentModel model = new ConcurrentModel();
 
-    FileAttribute fileAttribute = SimTextFilePreviewImplFactory.createFileAttribute();
+    FileAttribute fileAttribute = DownloadUtilsFactory.createValidFileAttribute();
     fileAttribute.setCompressFile(false);
 
     // Act and Assert
     assertEquals("bpmn", bpmnFilePreviewImpl.filePreviewHandle(null, model, fileAttribute));
     assertEquals(1, model.size());
-    assertEquals("test.txt", model.get("fileName"));
+    assertEquals("test-file.txt", model.get("fileName"));
   }
 
   /**
    * Test {@link BpmnFilePreviewImpl#filePreviewHandle(String, Model, FileAttribute)}.
    *
    * <ul>
-   *   <li>When createFileAttribute.
-   *   <li>Then calls {@link CommonPreviewImpl#filePreviewHandle(String, Model, FileAttribute)}.
+   *   <li>When createValidFileAttribute.
+   *   <li>Then {@link ConcurrentModel#ConcurrentModel()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link BpmnFilePreviewImpl#filePreviewHandle(String, Model,
@@ -156,11 +154,11 @@ class BpmnFilePreviewImplDiffblueTest {
    */
   @Test
   @DisplayName(
-      "Test filePreviewHandle(String, Model, FileAttribute); when createFileAttribute; then calls filePreviewHandle(String, Model, FileAttribute)")
+      "Test filePreviewHandle(String, Model, FileAttribute); when createValidFileAttribute; then ConcurrentModel() size is one")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String BpmnFilePreviewImpl.filePreviewHandle(String, Model, FileAttribute)"})
-  void testFilePreviewHandle_whenCreateFileAttribute_thenCallsFilePreviewHandle() {
+  void testFilePreviewHandle_whenCreateValidFileAttribute_thenConcurrentModelSizeIsOne() {
     // Arrange
     when(commonPreviewImpl.filePreviewHandle(
             Mockito.<String>any(), Mockito.<Model>any(), Mockito.<FileAttribute>any()))
@@ -168,17 +166,12 @@ class BpmnFilePreviewImplDiffblueTest {
     String url = FtpUtilsFactory.createValidFtpUrl();
     ConcurrentModel model = new ConcurrentModel();
 
-    // Act
-    String actualFilePreviewHandleResult =
+    // Act and Assert
+    assertEquals(
+        "bpmn",
         bpmnFilePreviewImpl.filePreviewHandle(
-            url, model, SimTextFilePreviewImplFactory.createFileAttribute());
-
-    // Assert
-    verify(commonPreviewImpl)
-        .filePreviewHandle(
-            eq("ftp://localhost/test/file.txt"), isA(Model.class), isA(FileAttribute.class));
-    assertEquals("bpmn", actualFilePreviewHandleResult);
+            url, model, DownloadUtilsFactory.createValidFileAttribute()));
     assertEquals(1, model.size());
-    assertEquals("test.txt", model.get("fileName"));
+    assertEquals("test-file.txt", model.get("fileName"));
   }
 }

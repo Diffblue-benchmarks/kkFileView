@@ -26,6 +26,10 @@ public class BaseUrlFilter implements Filter {
         return baseUrl;
     }
 
+    public static String getBASE_URL() {
+        return BASE_URL;
+    }
+
 
     @Override
     public void init(FilterConfig filterConfig) {

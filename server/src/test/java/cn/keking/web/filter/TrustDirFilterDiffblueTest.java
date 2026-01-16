@@ -3,6 +3,7 @@ package cn.keking.web.filter;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.isA;
@@ -10,11 +11,13 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import ch.qos.logback.classic.Logger;
 import cn.keking.web.controller.FileControllerFactory;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.IOException;
 import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -38,6 +41,71 @@ import org.springframework.mock.web.MockFilterConfig;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 class TrustDirFilterDiffblueTest {
+  /**
+   * Test {@link TrustDirFilter#init(FilterConfig)}.
+   *
+   * <p>Method under test: {@link TrustDirFilter#init(FilterConfig)}
+   */
+  @Test
+  @DisplayName("Test init(FilterConfig)")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"void TrustDirFilter.init(FilterConfig)"})
+  void testInit() {
+    // Arrange
+    TrustDirFilter trustDirFilter = new TrustDirFilter();
+
+    // Act
+    trustDirFilter.init(new MockFilterConfig());
+
+    // Assert
+    assertEquals(
+        "<!DOCTYPE html>\n"
+            + "<html lang=\"en\">\n"
+            + "<head>\n"
+            + "    <meta charset=\"utf-8\" />\n"
+            + "    <style type=\"text/css\">\n"
+            + "        body {\n"
+            + "            margin: 0 auto;\n"
+            + "            width: 900px;\n"
+            + "            background-color: #CCB;\n"
+            + "        }\n"
+            + "\n"
+            + "        .container {\n"
+            + "            width: 700px;\n"
+            + "            height: 700px;\n"
+            + "            margin: 0 auto;\n"
+            + "        }\n"
+            + "\n"
+            + "        img {\n"
+            + "            width: auto;\n"
+            + "            height: auto;\n"
+            + "            max-width: 100%;\n"
+            + "            max-height: 100%;\n"
+            + "            padding-bottom: 36px;\n"
+            + "        }\n"
+            + "\n"
+            + "        p {\n"
+            + "            display: block;\n"
+            + "            font-size: 20px;\n"
+            + "            color: blue;\n"
+            + "        }\n"
+            + "    </style>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<div class=\"container\">\n"
+            + "    <img src=\"images/sorry.jpg\" />\n"
+            + "    <p>\n"
+            + "        预览源文件来自未授信的目录，请停止访问！<br>\n"
+            + "        有任何疑问，请加入kk开源社区知识星球咨询：<a href=\"https://t.zsxq.com/09ZHSXbsQ\">https://t.zsxq.com/09ZHSXbsQ</a><br>"
+            + "\n"
+            + "    </p>\n"
+            + "</div>\n"
+            + "</body>\n"
+            + "</html>\n",
+        trustDirFilter.getNotTrustDirView());
+  }
+
   /**
    * Test {@link TrustDirFilter#doFilter(ServletRequest, ServletResponse, FilterChain)}.
    *
@@ -239,5 +307,38 @@ class TrustDirFilterDiffblueTest {
     assertEquals("", ((MockHttpServletResponse) response).getContentAsString());
     assertFalse(response.isCommitted());
     assertArrayEquals(new byte[] {}, ((MockHttpServletResponse) response).getContentAsByteArray());
+  }
+
+  /**
+   * Test getters and setters.
+   *
+   * <p>Methods under test:
+   *
+   * <ul>
+   *   <li>{@link TrustDirFilter#destroy()}
+   *   <li>{@link TrustDirFilter#getLogger()}
+   *   <li>{@link TrustDirFilter#getNotTrustDirView()}
+   * </ul>
+   */
+  @Test
+  @DisplayName("Test getters and setters")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({
+    "void TrustDirFilter.destroy()",
+    "org.slf4j.Logger TrustDirFilter.getLogger()",
+    "java.lang.String TrustDirFilter.getNotTrustDirView()"
+  })
+  void testGettersAndSetters() {
+    // Arrange
+    TrustDirFilter trustDirFilter = new TrustDirFilter();
+
+    // Act
+    trustDirFilter.destroy();
+    org.slf4j.Logger actualLogger = trustDirFilter.getLogger();
+
+    // Assert
+    assertTrue(actualLogger instanceof Logger);
+    assertNull(trustDirFilter.getNotTrustDirView());
   }
 }

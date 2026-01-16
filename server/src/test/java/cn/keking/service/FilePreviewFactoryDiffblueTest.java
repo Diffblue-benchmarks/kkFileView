@@ -6,7 +6,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import cn.keking.model.FileAttribute;
-import cn.keking.service.impl.SimTextFilePreviewImplFactory;
+import cn.keking.utils.DownloadUtilsFactory;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.jupiter.api.DisplayName;
@@ -43,7 +43,7 @@ class FilePreviewFactoryDiffblueTest {
     FilePreviewFactory filePreviewFactory = new FilePreviewFactory(context);
 
     // Act
-    filePreviewFactory.get(SimTextFilePreviewImplFactory.createFileAttribute());
+    filePreviewFactory.get(DownloadUtilsFactory.createValidFileAttribute());
 
     // Assert
     verify(context).getBean(eq("simTextFilePreviewImpl"), isA(Class.class));

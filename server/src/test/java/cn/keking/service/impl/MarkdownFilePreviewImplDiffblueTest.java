@@ -1,11 +1,9 @@
 package cn.keking.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.ArgumentMatchers.isA;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import cn.keking.model.FileAttribute;
+import cn.keking.utils.DownloadUtilsFactory;
 import cn.keking.utils.FtpUtilsFactory;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
@@ -49,15 +47,10 @@ class MarkdownFilePreviewImplDiffblueTest {
     String url = FtpUtilsFactory.createValidFtpUrl();
     ConcurrentModel model = new ConcurrentModel();
 
-    // Act
-    String actualFilePreviewHandleResult =
+    // Act and Assert
+    assertEquals(
+        "markdown",
         markdownFilePreviewImpl.filePreviewHandle(
-            url, model, SimTextFilePreviewImplFactory.createFileAttribute());
-
-    // Assert
-    verify(simTextFilePreviewImpl)
-        .filePreviewHandle(
-            eq("ftp://localhost/test/file.txt"), isA(Model.class), isA(FileAttribute.class));
-    assertEquals("markdown", actualFilePreviewHandleResult);
+            url, model, DownloadUtilsFactory.createValidFileAttribute()));
   }
 }

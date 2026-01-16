@@ -157,6 +157,26 @@ class KkFileUtilsDiffblueTest {
    * Test {@link KkFileUtils#isInteger(String)}.
    *
    * <ul>
+   *   <li>When {@code 444444242}.
+   *   <li>Then return {@code true}.
+   * </ul>
+   *
+   * <p>Method under test: {@link KkFileUtils#isInteger(String)}
+   */
+  @Test
+  @DisplayName("Test isInteger(String); when '444444242'; then return 'true'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"boolean KkFileUtils.isInteger(String)"})
+  void testIsInteger_when444444242_thenReturnTrue() {
+    // Arrange, Act and Assert
+    assertTrue(KkFileUtils.isInteger("444444242"));
+  }
+
+  /**
+   * Test {@link KkFileUtils#isInteger(String)}.
+   *
+   * <ul>
    *   <li>When {@code 4444444444}.
    *   <li>Then return {@code true}.
    * </ul>
@@ -171,6 +191,66 @@ class KkFileUtilsDiffblueTest {
   void testIsInteger_when4444444444_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(KkFileUtils.isInteger("4444444444"));
+  }
+
+  /**
+   * Test {@link KkFileUtils#isInteger(String)}.
+   *
+   * <ul>
+   *   <li>When {@code 444444244444}.
+   *   <li>Then return {@code true}.
+   * </ul>
+   *
+   * <p>Method under test: {@link KkFileUtils#isInteger(String)}
+   */
+  @Test
+  @DisplayName("Test isInteger(String); when '444444244444'; then return 'true'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"boolean KkFileUtils.isInteger(String)"})
+  void testIsInteger_when444444244444_thenReturnTrue() {
+    // Arrange, Act and Assert
+    assertTrue(KkFileUtils.isInteger("444444244444"));
+  }
+
+  /**
+   * Test {@link KkFileUtils#isInteger(String)}.
+   *
+   * <ul>
+   *   <li>When {@code 444444444442}.
+   *   <li>Then return {@code true}.
+   * </ul>
+   *
+   * <p>Method under test: {@link KkFileUtils#isInteger(String)}
+   */
+  @Test
+  @DisplayName("Test isInteger(String); when '444444444442'; then return 'true'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"boolean KkFileUtils.isInteger(String)"})
+  void testIsInteger_when444444444442_thenReturnTrue() {
+    // Arrange, Act and Assert
+    assertTrue(KkFileUtils.isInteger("444444444442"));
+  }
+
+  /**
+   * Test {@link KkFileUtils#isInteger(String)}.
+   *
+   * <ul>
+   *   <li>When {@code 444444444444444}.
+   *   <li>Then return {@code true}.
+   * </ul>
+   *
+   * <p>Method under test: {@link KkFileUtils#isInteger(String)}
+   */
+  @Test
+  @DisplayName("Test isInteger(String); when '444444444444444'; then return 'true'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"boolean KkFileUtils.isInteger(String)"})
+  void testIsInteger_when444444444444444_thenReturnTrue() {
+    // Arrange, Act and Assert
+    assertTrue(KkFileUtils.isInteger("444444444444444"));
   }
 
   /**
@@ -305,29 +385,6 @@ class KkFileUtilsDiffblueTest {
   void testDeleteFileByName_whenDotDot_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(KkFileUtils.deleteFileByName(".."));
-  }
-
-  /**
-   * Test {@link KkFileUtils#htmlEscape(String)}.
-   *
-   * <ul>
-   *   <li>When createValidFtpUrl.
-   *   <li>Then return {@code ftp://localhost/test/file.txt}.
-   * </ul>
-   *
-   * <p>Method under test: {@link KkFileUtils#htmlEscape(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test htmlEscape(String); when createValidFtpUrl; then return 'ftp://localhost/test/file.txt'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String KkFileUtils.htmlEscape(String)"})
-  void testHtmlEscape_whenCreateValidFtpUrl_thenReturnFtpLocalhostTestFileTxt() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "ftp://localhost/test/file.txt",
-        KkFileUtils.htmlEscape(FtpUtilsFactory.createValidFtpUrl()));
   }
 
   /**

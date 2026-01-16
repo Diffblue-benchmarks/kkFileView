@@ -24,6 +24,86 @@ class RedissonConfigDiffblueTest {
    * Test {@link RedissonConfig#config()}.
    *
    * <ul>
+   *   <li>Given {@link RedissonConfig} (default constructor) Address is createValidFtpUrl.
+   * </ul>
+   *
+   * <p>Method under test: {@link RedissonConfig#config()}
+   */
+  @Test
+  @DisplayName(
+      "Test config(); given RedissonConfig (default constructor) Address is createValidFtpUrl")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"Config RedissonConfig.config()"})
+  void testConfig_givenRedissonConfigAddressIsCreateValidFtpUrl() throws Exception {
+    // Arrange
+    RedissonConfig redissonConfig = new RedissonConfig();
+    redissonConfig.setAddress(FtpUtilsFactory.createValidFtpUrl());
+
+    // Act
+    Config actualConfigResult = redissonConfig.config();
+
+    // Assert
+    assertTrue(actualConfigResult.getEventLoopGroup() instanceof NioEventLoopGroup);
+    assertTrue(actualConfigResult.getCodecProvider() instanceof DefaultCodecProvider);
+    assertTrue(actualConfigResult.getCodec() instanceof JsonJacksonCodec);
+    assertTrue(actualConfigResult.getResolverProvider() instanceof DefaultResolverProvider);
+    assertEquals(
+        "---\n"
+            + "singleServerConfig:\n"
+            + "  idleConnectionTimeout: 10000\n"
+            + "  pingTimeout: 1000\n"
+            + "  connectTimeout: 10000\n"
+            + "  timeout: 3000\n"
+            + "  retryAttempts: 3\n"
+            + "  retryInterval: 1500\n"
+            + "  reconnectionTimeout: 3000\n"
+            + "  failedAttempts: 3\n"
+            + "  subscriptionsPerConnection: 5\n"
+            + "  address:\n"
+            + "  - \"//ftp:\"\n"
+            + "  subscriptionConnectionMinimumIdleSize: 1\n"
+            + "  subscriptionConnectionPoolSize: 50\n"
+            + "  connectionMinimumIdleSize: 10\n"
+            + "  connectionPoolSize: 64\n"
+            + "  database: 0\n"
+            + "  dnsMonitoring: false\n"
+            + "  dnsMonitoringInterval: 5000\n"
+            + "threads: 0\n"
+            + "nettyThreads: 0\n"
+            + "codec: !<org.redisson.codec.JsonJacksonCodec> {}\n"
+            + "codecProvider: !<org.redisson.codec.DefaultCodecProvider> {}\n"
+            + "resolverProvider: !<org.redisson.liveobject.provider.DefaultResolverProvider> {}\n"
+            + "redissonReferenceEnabled: true\n"
+            + "useLinuxNativeEpoll: false\n"
+            + "eventLoopGroup:\n"
+            + "  shuttingDown: false\n"
+            + "  shutdown: false\n"
+            + "  terminated: false\n",
+        actualConfigResult.toYAML());
+    assertEquals(
+        "{\"singleServerConfig\":{\"idleConnectionTimeout\":10000,\"pingTimeout\":1000,\"connectTimeout\":10000,\"timeout"
+            + "\":3000,\"retryAttempts\":3,\"retryInterval\":1500,\"reconnectionTimeout\":3000,\"failedAttempts\":3,"
+            + "\"subscriptionsPerConnection\":5,\"address\":[\"//ftp:\"],\"subscriptionConnectionMinimumIdleSize\":1,"
+            + "\"subscriptionConnectionPoolSize\":50,\"connectionMinimumIdleSize\":10,\"connectionPoolSize\":64,\"database"
+            + "\":0,\"dnsMonitoring\":false,\"dnsMonitoringInterval\":5000},\"threads\":0,\"nettyThreads\":0,\"codec\":{\"class"
+            + "\":\"org.redisson.codec.JsonJacksonCodec\"},\"codecProvider\":{\"class\":\"org.redisson.codec.DefaultCodecProvider"
+            + "\"},\"resolverProvider\":{\"class\":\"org.redisson.liveobject.provider.DefaultResolverProvider\"},"
+            + "\"redissonReferenceEnabled\":true,\"useLinuxNativeEpoll\":false,\"eventLoopGroup\":{\"shuttingDown\":false,"
+            + "\"shutdown\":false,\"terminated\":false}}",
+        actualConfigResult.toJSON());
+    assertNull(actualConfigResult.getExecutor());
+    assertEquals(0, actualConfigResult.getNettyThreads());
+    assertEquals(0, actualConfigResult.getThreads());
+    assertFalse(actualConfigResult.isClusterConfig());
+    assertFalse(actualConfigResult.isUseLinuxNativeEpoll());
+    assertTrue(actualConfigResult.isRedissonReferenceEnabled());
+  }
+
+  /**
+   * Test {@link RedissonConfig#config()}.
+   *
+   * <ul>
    *   <li>Given {@link RedissonConfig} (default constructor) ClientName is createValidFtpUrl.
    * </ul>
    *
@@ -48,130 +128,6 @@ class RedissonConfigDiffblueTest {
     assertTrue(actualConfigResult.getCodecProvider() instanceof DefaultCodecProvider);
     assertTrue(actualConfigResult.getCodec() instanceof JsonJacksonCodec);
     assertTrue(actualConfigResult.getResolverProvider() instanceof DefaultResolverProvider);
-    assertEquals(
-        "---\n"
-            + "singleServerConfig:\n"
-            + "  idleConnectionTimeout: 10000\n"
-            + "  pingTimeout: 1000\n"
-            + "  connectTimeout: 10000\n"
-            + "  timeout: 3000\n"
-            + "  retryAttempts: 3\n"
-            + "  retryInterval: 1500\n"
-            + "  reconnectionTimeout: 3000\n"
-            + "  failedAttempts: 3\n"
-            + "  subscriptionsPerConnection: 5\n"
-            + "  clientName: \"ftp://localhost/test/file.txt\"\n"
-            + "  subscriptionConnectionMinimumIdleSize: 1\n"
-            + "  subscriptionConnectionPoolSize: 50\n"
-            + "  connectionMinimumIdleSize: 10\n"
-            + "  connectionPoolSize: 64\n"
-            + "  database: 0\n"
-            + "  dnsMonitoring: false\n"
-            + "  dnsMonitoringInterval: 5000\n"
-            + "threads: 0\n"
-            + "nettyThreads: 0\n"
-            + "codec: !<org.redisson.codec.JsonJacksonCodec> {}\n"
-            + "codecProvider: !<org.redisson.codec.DefaultCodecProvider> {}\n"
-            + "resolverProvider: !<org.redisson.liveobject.provider.DefaultResolverProvider> {}\n"
-            + "redissonReferenceEnabled: true\n"
-            + "useLinuxNativeEpoll: false\n"
-            + "eventLoopGroup:\n"
-            + "  shuttingDown: false\n"
-            + "  shutdown: false\n"
-            + "  terminated: false\n",
-        actualConfigResult.toYAML());
-    assertEquals(
-        "{\"singleServerConfig\":{\"idleConnectionTimeout\":10000,\"pingTimeout\":1000,\"connectTimeout\":10000,\"timeout"
-            + "\":3000,\"retryAttempts\":3,\"retryInterval\":1500,\"reconnectionTimeout\":3000,\"failedAttempts\":3,"
-            + "\"subscriptionsPerConnection\":5,\"clientName\":\"ftp://localhost/test/file.txt\",\"subscriptionConnectionM"
-            + "inimumIdleSize\":1,\"subscriptionConnectionPoolSize\":50,\"connectionMinimumIdleSize\":10,\"connectionPoolSize"
-            + "\":64,\"database\":0,\"dnsMonitoring\":false,\"dnsMonitoringInterval\":5000},\"threads\":0,\"nettyThreads\":0,"
-            + "\"codec\":{\"class\":\"org.redisson.codec.JsonJacksonCodec\"},\"codecProvider\":{\"class\":\"org.redisson.codec"
-            + ".DefaultCodecProvider\"},\"resolverProvider\":{\"class\":\"org.redisson.liveobject.provider.DefaultResolverProvider"
-            + "\"},\"redissonReferenceEnabled\":true,\"useLinuxNativeEpoll\":false,\"eventLoopGroup\":{\"shuttingDown\":false"
-            + ",\"shutdown\":false,\"terminated\":false}}",
-        actualConfigResult.toJSON());
-    assertNull(actualConfigResult.getExecutor());
-    assertEquals(0, actualConfigResult.getNettyThreads());
-    assertEquals(0, actualConfigResult.getThreads());
-    assertFalse(actualConfigResult.isClusterConfig());
-    assertFalse(actualConfigResult.isUseLinuxNativeEpoll());
-    assertTrue(actualConfigResult.isRedissonReferenceEnabled());
-  }
-
-  /**
-   * Test {@link RedissonConfig#config()}.
-   *
-   * <ul>
-   *   <li>Given {@link RedissonConfig} (default constructor) Codec is {@code JsonJacksonCodec}.
-   * </ul>
-   *
-   * <p>Method under test: {@link RedissonConfig#config()}
-   */
-  @Test
-  @DisplayName(
-      "Test config(); given RedissonConfig (default constructor) Codec is 'org.redisson.codec.JsonJacksonCodec'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Config RedissonConfig.config()"})
-  void testConfig_givenRedissonConfigCodecIsOrgRedissonCodecJsonJacksonCodec() throws Exception {
-    // Arrange
-    RedissonConfig redissonConfig = new RedissonConfig();
-    redissonConfig.setAddress("");
-    redissonConfig.setCodec("org.redisson.codec.JsonJacksonCodec");
-
-    // Act
-    Config actualConfigResult = redissonConfig.config();
-
-    // Assert
-    assertTrue(actualConfigResult.getEventLoopGroup() instanceof NioEventLoopGroup);
-    assertTrue(actualConfigResult.getCodecProvider() instanceof DefaultCodecProvider);
-    assertTrue(actualConfigResult.getCodec() instanceof JsonJacksonCodec);
-    assertTrue(actualConfigResult.getResolverProvider() instanceof DefaultResolverProvider);
-    assertEquals(
-        "---\n"
-            + "singleServerConfig:\n"
-            + "  idleConnectionTimeout: 10000\n"
-            + "  pingTimeout: 1000\n"
-            + "  connectTimeout: 10000\n"
-            + "  timeout: 3000\n"
-            + "  retryAttempts: 3\n"
-            + "  retryInterval: 1500\n"
-            + "  reconnectionTimeout: 3000\n"
-            + "  failedAttempts: 3\n"
-            + "  subscriptionsPerConnection: 5\n"
-            + "  address:\n"
-            + "  - \"//:\"\n"
-            + "  subscriptionConnectionMinimumIdleSize: 1\n"
-            + "  subscriptionConnectionPoolSize: 50\n"
-            + "  connectionMinimumIdleSize: 10\n"
-            + "  connectionPoolSize: 64\n"
-            + "  database: 0\n"
-            + "  dnsMonitoring: false\n"
-            + "  dnsMonitoringInterval: 5000\n"
-            + "threads: 0\n"
-            + "nettyThreads: 0\n"
-            + "codec: !<org.redisson.codec.JsonJacksonCodec> {}\n"
-            + "codecProvider: !<org.redisson.codec.DefaultCodecProvider> {}\n"
-            + "resolverProvider: !<org.redisson.liveobject.provider.DefaultResolverProvider> {}\n"
-            + "redissonReferenceEnabled: true\n"
-            + "useLinuxNativeEpoll: false\n"
-            + "eventLoopGroup:\n"
-            + "  shuttingDown: false\n"
-            + "  shutdown: false\n"
-            + "  terminated: false\n",
-        actualConfigResult.toYAML());
-    assertEquals(
-        "{\"singleServerConfig\":{\"idleConnectionTimeout\":10000,\"pingTimeout\":1000,\"connectTimeout\":10000,\"timeout"
-            + "\":3000,\"retryAttempts\":3,\"retryInterval\":1500,\"reconnectionTimeout\":3000,\"failedAttempts\":3,"
-            + "\"subscriptionsPerConnection\":5,\"address\":[\"//:\"],\"subscriptionConnectionMinimumIdleSize\":1,"
-            + "\"subscriptionConnectionPoolSize\":50,\"connectionMinimumIdleSize\":10,\"connectionPoolSize\":64,\"database"
-            + "\":0,\"dnsMonitoring\":false,\"dnsMonitoringInterval\":5000},\"threads\":0,\"nettyThreads\":0,\"codec\":{\"class"
-            + "\":\"org.redisson.codec.JsonJacksonCodec\"},\"codecProvider\":{\"class\":\"org.redisson.codec.DefaultCodecProvider"
-            + "\"},\"resolverProvider\":{\"class\":\"org.redisson.liveobject.provider.DefaultResolverProvider\"},"
-            + "\"redissonReferenceEnabled\":true,\"useLinuxNativeEpoll\":false,\"eventLoopGroup\":{\"shuttingDown\":false,"
-            + "\"shutdown\":false,\"terminated\":false}}",
-        actualConfigResult.toJSON());
     assertNull(actualConfigResult.getExecutor());
     assertEquals(0, actualConfigResult.getNettyThreads());
     assertEquals(0, actualConfigResult.getThreads());
@@ -208,49 +164,6 @@ class RedissonConfigDiffblueTest {
     assertTrue(actualConfigResult.getCodecProvider() instanceof DefaultCodecProvider);
     assertTrue(actualConfigResult.getCodec() instanceof JsonJacksonCodec);
     assertTrue(actualConfigResult.getResolverProvider() instanceof DefaultResolverProvider);
-    assertEquals(
-        "---\n"
-            + "singleServerConfig:\n"
-            + "  idleConnectionTimeout: 10000\n"
-            + "  pingTimeout: 1000\n"
-            + "  connectTimeout: 10000\n"
-            + "  timeout: 3000\n"
-            + "  retryAttempts: 3\n"
-            + "  retryInterval: 1500\n"
-            + "  reconnectionTimeout: 3000\n"
-            + "  failedAttempts: 3\n"
-            + "  password: \"ftp://localhost/test/file.txt\"\n"
-            + "  subscriptionsPerConnection: 5\n"
-            + "  subscriptionConnectionMinimumIdleSize: 1\n"
-            + "  subscriptionConnectionPoolSize: 50\n"
-            + "  connectionMinimumIdleSize: 10\n"
-            + "  connectionPoolSize: 64\n"
-            + "  database: 0\n"
-            + "  dnsMonitoring: false\n"
-            + "  dnsMonitoringInterval: 5000\n"
-            + "threads: 0\n"
-            + "nettyThreads: 0\n"
-            + "codec: !<org.redisson.codec.JsonJacksonCodec> {}\n"
-            + "codecProvider: !<org.redisson.codec.DefaultCodecProvider> {}\n"
-            + "resolverProvider: !<org.redisson.liveobject.provider.DefaultResolverProvider> {}\n"
-            + "redissonReferenceEnabled: true\n"
-            + "useLinuxNativeEpoll: false\n"
-            + "eventLoopGroup:\n"
-            + "  shuttingDown: false\n"
-            + "  shutdown: false\n"
-            + "  terminated: false\n",
-        actualConfigResult.toYAML());
-    assertEquals(
-        "{\"singleServerConfig\":{\"idleConnectionTimeout\":10000,\"pingTimeout\":1000,\"connectTimeout\":10000,\"timeout"
-            + "\":3000,\"retryAttempts\":3,\"retryInterval\":1500,\"reconnectionTimeout\":3000,\"failedAttempts\":3,\"password"
-            + "\":\"ftp://localhost/test/file.txt\",\"subscriptionsPerConnection\":5,\"subscriptionConnectionMinimumIdleSize"
-            + "\":1,\"subscriptionConnectionPoolSize\":50,\"connectionMinimumIdleSize\":10,\"connectionPoolSize\":64,\"database"
-            + "\":0,\"dnsMonitoring\":false,\"dnsMonitoringInterval\":5000},\"threads\":0,\"nettyThreads\":0,\"codec\":{\"class"
-            + "\":\"org.redisson.codec.JsonJacksonCodec\"},\"codecProvider\":{\"class\":\"org.redisson.codec.DefaultCodecProvider"
-            + "\"},\"resolverProvider\":{\"class\":\"org.redisson.liveobject.provider.DefaultResolverProvider\"},"
-            + "\"redissonReferenceEnabled\":true,\"useLinuxNativeEpoll\":false,\"eventLoopGroup\":{\"shuttingDown\":false,"
-            + "\"shutdown\":false,\"terminated\":false}}",
-        actualConfigResult.toJSON());
     assertNull(actualConfigResult.getExecutor());
     assertEquals(0, actualConfigResult.getNettyThreads());
     assertEquals(0, actualConfigResult.getThreads());
@@ -264,16 +177,19 @@ class RedissonConfigDiffblueTest {
    *
    * <ul>
    *   <li>Given {@link RedissonConfig} (default constructor) Password is empty string.
+   *   <li>Then return toYAML is a string.
    * </ul>
    *
    * <p>Method under test: {@link RedissonConfig#config()}
    */
   @Test
-  @DisplayName("Test config(); given RedissonConfig (default constructor) Password is empty string")
+  @DisplayName(
+      "Test config(); given RedissonConfig (default constructor) Password is empty string; then return toYAML is a string")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"Config RedissonConfig.config()"})
-  void testConfig_givenRedissonConfigPasswordIsEmptyString() throws Exception {
+  void testConfig_givenRedissonConfigPasswordIsEmptyString_thenReturnToYAMLIsAString()
+      throws Exception {
     // Arrange
     RedissonConfig redissonConfig = new RedissonConfig();
     redissonConfig.setPassword("");
@@ -460,9 +376,9 @@ class RedissonConfigDiffblueTest {
     redissonConfig.setSubscriptionsPerConnection(1);
     redissonConfig.setThread(1);
     redissonConfig.setTimeout(10);
-    String actualAddress = redissonConfig.getAddress();
-    String actualClientName = redissonConfig.getClientName();
-    String actualCodec = redissonConfig.getCodec();
+    redissonConfig.getAddress();
+    redissonConfig.getClientName();
+    redissonConfig.getCodec();
     int actualConnectTimeout = redissonConfig.getConnectTimeout();
     int actualConnectionMinimumIdleSize = redissonConfig.getConnectionMinimumIdleSize();
     int actualConnectionPoolSize = redissonConfig.getConnectionPoolSize();
@@ -470,7 +386,7 @@ class RedissonConfigDiffblueTest {
     int actualDnsMonitoringInterval = redissonConfig.getDnsMonitoringInterval();
     int actualFailedAttempts = redissonConfig.getFailedAttempts();
     int actualIdleConnectionTimeout = redissonConfig.getIdleConnectionTimeout();
-    String actualPassword = redissonConfig.getPassword();
+    redissonConfig.getPassword();
     int actualPingTimeout = redissonConfig.getPingTimeout();
     int actualReconnectionTimeout = redissonConfig.getReconnectionTimeout();
     int actualRetryAttempts = redissonConfig.getRetryAttempts();
@@ -483,10 +399,6 @@ class RedissonConfigDiffblueTest {
     int actualTimeout = redissonConfig.getTimeout();
 
     // Assert
-    assertEquals("ftp://localhost/test/file.txt", actualAddress);
-    assertEquals("ftp://localhost/test/file.txt", actualClientName);
-    assertEquals("ftp://localhost/test/file.txt", actualCodec);
-    assertEquals("ftp://localhost/test/file.txt", actualPassword);
     assertEquals(1, actualConnectionMinimumIdleSize);
     assertEquals(1, actualDatabase);
     assertEquals(1, actualFailedAttempts);

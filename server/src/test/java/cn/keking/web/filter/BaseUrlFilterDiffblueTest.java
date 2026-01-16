@@ -1,5 +1,6 @@
 package cn.keking.web.filter;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.doNothing;
@@ -11,6 +12,7 @@ import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.IOException;
 import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -19,6 +21,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.mock.web.MockFilterConfig;
 
 class BaseUrlFilterDiffblueTest {
   /**
@@ -88,5 +91,37 @@ class BaseUrlFilterDiffblueTest {
 
     // Assert
     verify(filterChain).doFilter(isA(ServletRequest.class), isA(ServletResponse.class));
+  }
+
+  /**
+   * Test getters and setters.
+   *
+   * <p>Methods under test:
+   *
+   * <ul>
+   *   <li>default or parameterless constructor of {@link BaseUrlFilter}
+   *   <li>{@link BaseUrlFilter#destroy()}
+   *   <li>{@link BaseUrlFilter#init(FilterConfig)}
+   *   <li>{@link BaseUrlFilter#getBASE_URL()}
+   * </ul>
+   */
+  @Test
+  @DisplayName("Test getters and setters")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({
+    "void BaseUrlFilter.<init>()",
+    "void BaseUrlFilter.destroy()",
+    "java.lang.String BaseUrlFilter.getBASE_URL()",
+    "void BaseUrlFilter.init(FilterConfig)"
+  })
+  void testGettersAndSetters() {
+    // Arrange and Act
+    BaseUrlFilter actualBaseUrlFilter = new BaseUrlFilter();
+    actualBaseUrlFilter.destroy();
+    actualBaseUrlFilter.init(new MockFilterConfig());
+
+    // Assert
+    assertNull(actualBaseUrlFilter.getBASE_URL());
   }
 }

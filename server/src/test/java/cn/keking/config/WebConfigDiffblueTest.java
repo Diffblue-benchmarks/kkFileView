@@ -2,7 +2,9 @@ package cn.keking.config;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import ch.qos.logback.classic.Logger;
 import cn.keking.web.filter.AttributeSetFilter;
 import cn.keking.web.filter.BaseUrlFilter;
 import cn.keking.web.filter.ChinesePathFilter;
@@ -83,6 +85,7 @@ class WebConfigDiffblueTest {
     Collection<String> urlPatterns = actualTrustHostFilter.getUrlPatterns();
     assertEquals(3, urlPatterns.size());
     assertTrue(urlPatterns instanceof Set);
+    assertNull(actualTrustHostFilter.getFilter().getNotTrustHostHtmlView());
     assertFalse(actualTrustHostFilter.isMatchAfter());
     assertTrue(urlPatterns.contains("/getCorsFile"));
     assertTrue(urlPatterns.contains("/onlinePreview"));
@@ -115,6 +118,8 @@ class WebConfigDiffblueTest {
         new WebConfig().getTrustDirFilter();
 
     // Assert
+    TrustDirFilter filter = actualTrustDirFilter.getFilter();
+    assertTrue(filter.getLogger() instanceof Logger);
     Collection<String> servletNames = actualTrustDirFilter.getServletNames();
     assertTrue(servletNames instanceof Set);
     Collection<ServletRegistrationBean<?>> servletRegistrationBeans =
@@ -123,6 +128,7 @@ class WebConfigDiffblueTest {
     Collection<String> urlPatterns = actualTrustDirFilter.getUrlPatterns();
     assertEquals(3, urlPatterns.size());
     assertTrue(urlPatterns instanceof Set);
+    assertNull(filter.getNotTrustDirView());
     assertFalse(actualTrustDirFilter.isMatchAfter());
     assertTrue(urlPatterns.contains("/getCorsFile"));
     assertTrue(urlPatterns.contains("/onlinePreview"));
