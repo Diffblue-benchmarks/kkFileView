@@ -1,0 +1,17 @@
+name: com.diffblue.cover.refactoring.Recipe
+recipeList:
+- com.diffblue.cover.refactoring.recipes.AddGetter: {className: org.apache.pdfbox.pdmodel.DefaultResourceCache,
+    fieldName: colorSpaces}
+- com.diffblue.cover.refactoring.recipes.AddGetter: {className: org.apache.pdfbox.pdmodel.DefaultResourceCache,
+    fieldName: extGStates}
+- com.diffblue.cover.refactoring.recipes.AddGetter: {className: org.apache.pdfbox.pdmodel.DefaultResourceCache,
+    fieldName: fonts}
+- com.diffblue.cover.refactoring.recipes.AddGetter: {className: org.apache.pdfbox.pdmodel.DefaultResourceCache,
+    fieldName: patterns}
+- com.diffblue.cover.refactoring.recipes.AddGetter: {className: org.apache.pdfbox.pdmodel.DefaultResourceCache,
+    fieldName: properties}
+- com.diffblue.cover.refactoring.recipes.AddGetter: {className: org.apache.pdfbox.pdmodel.DefaultResourceCache,
+    fieldName: shadings}
+- com.diffblue.cover.refactoring.recipes.AddGetter: {className: org.apache.pdfbox.pdmodel.DefaultResourceCache,
+    fieldName: xobjects}
+type: specs.openrewrite.org/v1beta/recipe

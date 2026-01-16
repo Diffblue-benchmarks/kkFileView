@@ -1,0 +1,228 @@
+INFO  Diffblue Cover 2025.12.02-74144f0-licensed
+INFO  
+INFO  Command: create
+INFO  Create tests for the specified package/class/method.
+INFO  
+INFO  Discovered modules:
+INFO  - cn.keking:kkFileView
+INFO  
+INFO  
+INFO  [1/1] Creating tests for module: cn.keking:kkFileView
+INFO  =====================================================
+INFO  
+INFO  Detecting environment:
+INFO  ----------------------
+INFO  Detected Java version 1.8.0_472
+INFO  Selected build system: Maven
+INFO  Selected classpath from build system maven
+INFO  Selected test framework: JUnit Jupiter API
+INFO  Selected Java language compliance level: 1.8
+INFO  Selected test validation: enabled
+INFO  Prefixes for filtering classes/methods:
+INFO  - cn.keking
+INFO  - cn.keking.config
+INFO  - cn.keking.model
+INFO  - cn.keking.service
+INFO  - cn.keking.service.cache
+INFO  - cn.keking.service.cache.impl
+INFO  - cn.keking.service.impl
+INFO  - cn.keking.utils
+INFO  - cn.keking.web.controller
+INFO  - cn.keking.web.filter
+INFO  Gathering methods to test...
+INFO  Found 593 callable methods in 73 classes
+INFO  
+INFO  Creating tests:
+INFO  ---------------
+INFO   [1/73] cn.keking.ServerMain
+INFO   [1/73]   Tests created: 0
+INFO   [2/73] cn.keking.config.ConfigConstants
+INFO   [2/73]   Tests created: 1
+INFO   [3/73] cn.keking.config.ConfigRefreshComponent
+INFO   [3/73]   Tests created: 0
+INFO   [4/73] cn.keking.config.ConfigRefreshComponent$ConfigRefreshThread
+INFO   [4/73]   Tests created: 0
+INFO   [5/73] cn.keking.config.RedissonConfig
+INFO   [5/73]   Tests created: 5
+INFO   [6/73] cn.keking.config.SchedulerCleanConfig
+INFO   [6/73]   Tests created: 1
+INFO   [7/73] cn.keking.config.WatermarkConfigConstants
+INFO   [7/73]   Tests created: 0
+INFO   [8/73] cn.keking.config.WebConfig
+INFO   [8/73]   Tests created: 6
+INFO   [9/73] cn.keking.model.FileAttribute
+INFO   [9/73]   Tests created: 0
+INFO  [10/73] cn.keking.model.FileType
+INFO  [10/73]   Tests created: 0
+INFO  [11/73] cn.keking.model.ReturnResponse
+INFO  [11/73]   Tests created: 0
+INFO  [12/73] cn.keking.service.CompressFileReader
+INFO  [12/73]   Tests created: 0
+INFO  [13/73] cn.keking.service.FileConvertQueueTask
+INFO  [13/73]   Tests created: 0
+INFO  [14/73] cn.keking.service.FileConvertQueueTask$ConvertTask
+INFO  [14/73]   Tests created: 0
+INFO  [15/73] cn.keking.service.FileHandlerService
+INFO  [15/73]   Tests created: 27
+INFO  [16/73] cn.keking.service.FilePreviewFactory
+INFO  [16/73]   Tests created: 1
+INFO  [17/73] cn.keking.service.OfficePluginManager
+INFO  [17/73]   Tests created: 1
+INFO  [18/73] cn.keking.service.ZtreeNodeVo
+INFO  [18/73]   Tests created: 1
+INFO  [19/73] cn.keking.service.cache.NotResourceCache
+INFO  [19/73]   Tests created: 0
+INFO  [20/73] cn.keking.service.cache.impl.CacheServiceJDKImpl
+INFO  [20/73]   Tests created: 2
+INFO  [21/73] cn.keking.service.cache.impl.CacheServiceRedisImpl
+INFO  [21/73]   Tests created: 0
+INFO  [22/73] cn.keking.service.cache.impl.CacheServiceRocksDBImpl
+INFO  [22/73]   Tests created: 0
+INFO  [23/73] cn.keking.service.impl.BpmnFilePreviewImpl
+INFO  [23/73]   Tests created: 4
+INFO  [24/73] cn.keking.service.impl.CadFilePreviewImpl
+INFO  [24/73]   Tests created: 1
+INFO  [25/73] cn.keking.service.impl.CodeFilePreviewImpl
+INFO  [25/73]   Tests created: 1
+INFO  [26/73] cn.keking.service.impl.CommonPreviewImpl
+INFO  [26/73]   Tests created: 4
+INFO  [27/73] cn.keking.service.impl.CompressFilePreviewImpl
+INFO  [27/73]   Tests created: 3
+INFO  [28/73] cn.keking.service.impl.DcmFilePreviewImpl
+INFO  [28/73]   Tests created: 4
+INFO  [29/73] cn.keking.service.impl.DrawioFilePreviewImpl
+INFO  [29/73]   Tests created: 4
+INFO  [30/73] cn.keking.service.impl.EmlFilePreviewImpl
+INFO  [30/73]   Tests created: 4
+INFO  [31/73] cn.keking.service.impl.EpubFilePreviewImpl
+INFO  [31/73]   Tests created: 4
+INFO  [32/73] cn.keking.service.impl.MarkdownFilePreviewImpl
+INFO  [32/73]   Tests created: 1
+INFO  [33/73] cn.keking.service.impl.MediaFilePreviewImpl
+INFO  [33/73]   Tests created: 5
+INFO  [34/73] cn.keking.service.impl.OfdFilePreviewImpl
+INFO  [34/73]   Tests created: 4
+INFO  [35/73] cn.keking.service.impl.OfficeFilePreviewImpl
+INFO  [35/73]   Tests created: 1
+INFO  [36/73] cn.keking.service.impl.Online3DFilePreviewImpl
+INFO  [36/73]   Tests created: 4
+INFO  [37/73] cn.keking.service.impl.OtherFilePreviewImpl
+INFO  [37/73]   Tests created: 6
+INFO  [38/73] cn.keking.service.impl.PdfFilePreviewImpl
+INFO  [38/73]   Tests created: 2
+INFO  [39/73] cn.keking.service.impl.PictureFilePreviewImpl
+INFO  [39/73]   Tests created: 5
+INFO  [40/73] cn.keking.service.impl.SimTextFilePreviewImpl
+INFO  [40/73]   Tests created: 0
+INFO  [41/73] cn.keking.service.impl.SvgFilePreviewImpl
+INFO  [41/73]   Tests created: 4
+INFO  [42/73] cn.keking.service.impl.TiffFilePreviewImpl
+INFO  [42/73]   Tests created: 4
+INFO  [43/73] cn.keking.service.impl.XmindFilePreviewImpl
+INFO  [43/73]   Tests created: 4
+INFO  [44/73] cn.keking.service.impl.XmlFilePreviewImpl
+INFO  [44/73]   Tests created: 1
+INFO  [45/73] cn.keking.utils.BytesEncodingDetect
+INFO  [45/73]   Tests created: 0
+INFO  [46/73] cn.keking.utils.CaptchaUtil
+INFO  [46/73]   Tests created: 0
+INFO  [47/73] cn.keking.utils.ConfigUtils
+INFO  [47/73]   Tests created: 0
+INFO  [48/73] cn.keking.utils.ConvertPicUtil
+INFO  [48/73]   Tests created: 0
+INFO  [49/73] cn.keking.utils.DateUtils
+INFO  [49/73]   Tests created: 0
+INFO  [50/73] cn.keking.utils.DownloadUtils
+INFO  [50/73]   Tests created: 0
+INFO  [51/73] cn.keking.utils.Encoding
+INFO  [51/73]   Tests created: 0
+INFO  [52/73] cn.keking.utils.EncodingDetects
+INFO  [52/73]   Tests created: 0
+INFO  [53/73] cn.keking.utils.FileHeaderRar
+INFO  [53/73]   Tests created: 1
+INFO  [54/73] cn.keking.utils.FtpUtils
+INFO  [54/73]   Tests created: 0
+INFO  [55/73] cn.keking.utils.KkFileUtils
+INFO  [55/73]   Tests created: 0
+INFO  [56/73] cn.keking.utils.LocalOfficeUtils
+INFO  [56/73]   Tests created: 0
+INFO  [57/73] cn.keking.utils.OfficeUtils
+INFO  [57/73]   Tests created: 0
+INFO  [58/73] cn.keking.utils.RarUtils
+INFO  [58/73]   Tests created: 0
+INFO  [59/73] cn.keking.utils.SimpleEncodingDetects
+INFO  [59/73]   Tests created: 0
+INFO  [60/73] cn.keking.utils.SslUtils
+INFO  [60/73]   Tests created: 0
+INFO  [61/73] cn.keking.utils.SslUtils$miTM
+INFO  [61/73]   Tests created: 1
+INFO  [62/73] cn.keking.utils.UrlEncoderUtils
+INFO  [62/73]   Tests created: 0
+INFO  [63/73] cn.keking.utils.WebUtils
+INFO  [63/73]   Tests created: 0
+INFO  [64/73] cn.keking.web.controller.FileController
+INFO  [64/73]   Tests created: 2
+INFO  [65/73] cn.keking.web.controller.IndexController
+INFO  [65/73]   Tests created: 5
+INFO  [66/73] cn.keking.web.controller.OnlinePreviewController
+INFO  [66/73]   Tests created: 11
+INFO  [67/73] cn.keking.web.filter.AttributeSetFilter
+INFO  [67/73]   Tests created: 0
+INFO  [68/73] cn.keking.web.filter.BaseUrlFilter
+INFO  [68/73]   Tests created: 0
+INFO  [69/73] cn.keking.web.filter.ChinesePathFilter
+INFO  [69/73]   Tests created: 0
+INFO  [70/73] cn.keking.web.filter.SecurityFilterProxy
+INFO  [70/73]   Tests created: 2
+INFO  [71/73] cn.keking.web.filter.TrustDirFilter
+INFO  [71/73]   Tests created: 0
+INFO  [72/73] cn.keking.web.filter.TrustHostFilter
+INFO  [72/73]   Tests created: 0
+INFO  [73/73] cn.keking.web.filter.UrlCheckFilter
+INFO  [73/73]   Tests created: 0
+INFO  
+INFO  Test creation summary for module: cn.keking:kkFileView
+INFO  ------------------------------------------------------
+INFO  Total:                                             593 methods
+INFO  137 tests created for:                             120 methods
+INFO  
+INFO  Tested indirectly via other methods:                39 methods
+INFO     39 T005: Trivial constructor
+INFO  Not unit-testable:                                   2 methods
+INFO      1 T006: Main method
+INFO      1 T007: Framework configuration callback
+INFO  No tests created for:                              430 methods
+INFO    210 R005: Unable to load class
+INFO     29 R027: Missing beans when creating Spring context
+INFO     19 R011: Sandboxing policy violation
+INFO      7 R002: Missing observers
+INFO      7 R013: No inputs found that don't throw a trivial exception
+INFO      4 R081: Exception in arrange section
+INFO      1 R026: Failed to create Spring context
+INFO  Could not find the following classes - please check your classpath
+INFO  org.springframework.session.config.annotation.web.http.SpringHttpSessionConfiguration
+INFO  
+INFO  Running validation command.
+INFO  This can take a couple of minutes.
+INFO  Test execution failed, analyzing...
+INFO  6 individual tests did not pass and were removed.
+INFO    
+INFO  Number of tests discarded during validation since they didn't compile, run or pass
+INFO    1 for cn.keking.config.ConfigConstants.maxSize
+INFO    3 for cn.keking.service.impl.CompressFilePreviewImpl.filePreviewHandle
+INFO    1 for cn.keking.service.impl.TiffFilePreviewImpl.filePreviewHandle
+INFO    1 for cn.keking.web.controller.FileController.directory
+INFO  To skip discarding these tests please re-run DCover with --skip-test-validation
+INFO  Test validation was able to validate 131 out of 137 complete tests, the remainder were discarded.
+INFO  Refactorings have been generated - run `dcover refactor` to apply them
+INFO  Calculating coverage from Diffblue tests.
+INFO  JaCoCo report file created in /home/ubuntu/kkFileView/server/.diffblue/reports/diffblue-tests-jacoco-report.xml
+INFO  Calculating coverage from manual tests.
+INFO  JaCoCo report file created in /home/ubuntu/kkFileView/server/.diffblue/reports/manual-tests-jacoco-report.xml
+INFO  
+INFO  Diffblue tests cover 819 of 6972 lines to cover (11.7%)
+INFO  Manual tests cover 8 of 6972 lines to cover (0.1%)
+INFO  Writing JSON report to /home/ubuntu/kkFileView/server/.diffblue/reports/report.json
+INFO  
+INFO  Log file: /home/ubuntu/kkFileView/.diffblue/log/user-20260116T111524.log
+INFO  Finished in 18m 23s
