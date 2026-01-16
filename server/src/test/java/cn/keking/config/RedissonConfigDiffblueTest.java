@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import cn.keking.utils.FtpUtilsFactory;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -23,21 +24,21 @@ class RedissonConfigDiffblueTest {
    * Test {@link RedissonConfig#config()}.
    *
    * <ul>
-   *   <li>Given {@link RedissonConfig} (default constructor) ClientName is {@code Dr Jane Doe}.
+   *   <li>Given {@link RedissonConfig} (default constructor) ClientName is createValidFtpUrl.
    * </ul>
    *
    * <p>Method under test: {@link RedissonConfig#config()}
    */
   @Test
   @DisplayName(
-      "Test config(); given RedissonConfig (default constructor) ClientName is 'Dr Jane Doe'")
+      "Test config(); given RedissonConfig (default constructor) ClientName is createValidFtpUrl")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"Config RedissonConfig.config()"})
-  void testConfig_givenRedissonConfigClientNameIsDrJaneDoe() throws Exception {
+  void testConfig_givenRedissonConfigClientNameIsCreateValidFtpUrl() throws Exception {
     // Arrange
     RedissonConfig redissonConfig = new RedissonConfig();
-    redissonConfig.setClientName("Dr Jane Doe");
+    redissonConfig.setClientName(FtpUtilsFactory.createValidFtpUrl());
 
     // Act
     Config actualConfigResult = redissonConfig.config();
@@ -59,7 +60,7 @@ class RedissonConfigDiffblueTest {
             + "  reconnectionTimeout: 3000\n"
             + "  failedAttempts: 3\n"
             + "  subscriptionsPerConnection: 5\n"
-            + "  clientName: \"Dr Jane Doe\"\n"
+            + "  clientName: \"ftp://localhost/test/file.txt\"\n"
             + "  subscriptionConnectionMinimumIdleSize: 1\n"
             + "  subscriptionConnectionPoolSize: 50\n"
             + "  connectionMinimumIdleSize: 10\n"
@@ -82,13 +83,13 @@ class RedissonConfigDiffblueTest {
     assertEquals(
         "{\"singleServerConfig\":{\"idleConnectionTimeout\":10000,\"pingTimeout\":1000,\"connectTimeout\":10000,\"timeout"
             + "\":3000,\"retryAttempts\":3,\"retryInterval\":1500,\"reconnectionTimeout\":3000,\"failedAttempts\":3,"
-            + "\"subscriptionsPerConnection\":5,\"clientName\":\"Dr Jane Doe\",\"subscriptionConnectionMinimumIdleSize\":1,"
-            + "\"subscriptionConnectionPoolSize\":50,\"connectionMinimumIdleSize\":10,\"connectionPoolSize\":64,\"database"
-            + "\":0,\"dnsMonitoring\":false,\"dnsMonitoringInterval\":5000},\"threads\":0,\"nettyThreads\":0,\"codec\":{\"class"
-            + "\":\"org.redisson.codec.JsonJacksonCodec\"},\"codecProvider\":{\"class\":\"org.redisson.codec.DefaultCodecProvider"
-            + "\"},\"resolverProvider\":{\"class\":\"org.redisson.liveobject.provider.DefaultResolverProvider\"},"
-            + "\"redissonReferenceEnabled\":true,\"useLinuxNativeEpoll\":false,\"eventLoopGroup\":{\"shuttingDown\":false,"
-            + "\"shutdown\":false,\"terminated\":false}}",
+            + "\"subscriptionsPerConnection\":5,\"clientName\":\"ftp://localhost/test/file.txt\",\"subscriptionConnectionM"
+            + "inimumIdleSize\":1,\"subscriptionConnectionPoolSize\":50,\"connectionMinimumIdleSize\":10,\"connectionPoolSize"
+            + "\":64,\"database\":0,\"dnsMonitoring\":false,\"dnsMonitoringInterval\":5000},\"threads\":0,\"nettyThreads\":0,"
+            + "\"codec\":{\"class\":\"org.redisson.codec.JsonJacksonCodec\"},\"codecProvider\":{\"class\":\"org.redisson.codec"
+            + ".DefaultCodecProvider\"},\"resolverProvider\":{\"class\":\"org.redisson.liveobject.provider.DefaultResolverProvider"
+            + "\"},\"redissonReferenceEnabled\":true,\"useLinuxNativeEpoll\":false,\"eventLoopGroup\":{\"shuttingDown\":false"
+            + ",\"shutdown\":false,\"terminated\":false}}",
         actualConfigResult.toJSON());
     assertNull(actualConfigResult.getExecutor());
     assertEquals(0, actualConfigResult.getNettyThreads());
@@ -183,6 +184,85 @@ class RedissonConfigDiffblueTest {
    * Test {@link RedissonConfig#config()}.
    *
    * <ul>
+   *   <li>Given {@link RedissonConfig} (default constructor) Password is createValidFtpUrl.
+   * </ul>
+   *
+   * <p>Method under test: {@link RedissonConfig#config()}
+   */
+  @Test
+  @DisplayName(
+      "Test config(); given RedissonConfig (default constructor) Password is createValidFtpUrl")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"Config RedissonConfig.config()"})
+  void testConfig_givenRedissonConfigPasswordIsCreateValidFtpUrl() throws Exception {
+    // Arrange
+    RedissonConfig redissonConfig = new RedissonConfig();
+    redissonConfig.setPassword(FtpUtilsFactory.createValidFtpUrl());
+
+    // Act
+    Config actualConfigResult = redissonConfig.config();
+
+    // Assert
+    assertTrue(actualConfigResult.getEventLoopGroup() instanceof NioEventLoopGroup);
+    assertTrue(actualConfigResult.getCodecProvider() instanceof DefaultCodecProvider);
+    assertTrue(actualConfigResult.getCodec() instanceof JsonJacksonCodec);
+    assertTrue(actualConfigResult.getResolverProvider() instanceof DefaultResolverProvider);
+    assertEquals(
+        "---\n"
+            + "singleServerConfig:\n"
+            + "  idleConnectionTimeout: 10000\n"
+            + "  pingTimeout: 1000\n"
+            + "  connectTimeout: 10000\n"
+            + "  timeout: 3000\n"
+            + "  retryAttempts: 3\n"
+            + "  retryInterval: 1500\n"
+            + "  reconnectionTimeout: 3000\n"
+            + "  failedAttempts: 3\n"
+            + "  password: \"ftp://localhost/test/file.txt\"\n"
+            + "  subscriptionsPerConnection: 5\n"
+            + "  subscriptionConnectionMinimumIdleSize: 1\n"
+            + "  subscriptionConnectionPoolSize: 50\n"
+            + "  connectionMinimumIdleSize: 10\n"
+            + "  connectionPoolSize: 64\n"
+            + "  database: 0\n"
+            + "  dnsMonitoring: false\n"
+            + "  dnsMonitoringInterval: 5000\n"
+            + "threads: 0\n"
+            + "nettyThreads: 0\n"
+            + "codec: !<org.redisson.codec.JsonJacksonCodec> {}\n"
+            + "codecProvider: !<org.redisson.codec.DefaultCodecProvider> {}\n"
+            + "resolverProvider: !<org.redisson.liveobject.provider.DefaultResolverProvider> {}\n"
+            + "redissonReferenceEnabled: true\n"
+            + "useLinuxNativeEpoll: false\n"
+            + "eventLoopGroup:\n"
+            + "  shuttingDown: false\n"
+            + "  shutdown: false\n"
+            + "  terminated: false\n",
+        actualConfigResult.toYAML());
+    assertEquals(
+        "{\"singleServerConfig\":{\"idleConnectionTimeout\":10000,\"pingTimeout\":1000,\"connectTimeout\":10000,\"timeout"
+            + "\":3000,\"retryAttempts\":3,\"retryInterval\":1500,\"reconnectionTimeout\":3000,\"failedAttempts\":3,\"password"
+            + "\":\"ftp://localhost/test/file.txt\",\"subscriptionsPerConnection\":5,\"subscriptionConnectionMinimumIdleSize"
+            + "\":1,\"subscriptionConnectionPoolSize\":50,\"connectionMinimumIdleSize\":10,\"connectionPoolSize\":64,\"database"
+            + "\":0,\"dnsMonitoring\":false,\"dnsMonitoringInterval\":5000},\"threads\":0,\"nettyThreads\":0,\"codec\":{\"class"
+            + "\":\"org.redisson.codec.JsonJacksonCodec\"},\"codecProvider\":{\"class\":\"org.redisson.codec.DefaultCodecProvider"
+            + "\"},\"resolverProvider\":{\"class\":\"org.redisson.liveobject.provider.DefaultResolverProvider\"},"
+            + "\"redissonReferenceEnabled\":true,\"useLinuxNativeEpoll\":false,\"eventLoopGroup\":{\"shuttingDown\":false,"
+            + "\"shutdown\":false,\"terminated\":false}}",
+        actualConfigResult.toJSON());
+    assertNull(actualConfigResult.getExecutor());
+    assertEquals(0, actualConfigResult.getNettyThreads());
+    assertEquals(0, actualConfigResult.getThreads());
+    assertFalse(actualConfigResult.isClusterConfig());
+    assertFalse(actualConfigResult.isUseLinuxNativeEpoll());
+    assertTrue(actualConfigResult.isRedissonReferenceEnabled());
+  }
+
+  /**
+   * Test {@link RedissonConfig#config()}.
+   *
+   * <ul>
    *   <li>Given {@link RedissonConfig} (default constructor) Password is empty string.
    * </ul>
    *
@@ -247,84 +327,6 @@ class RedissonConfigDiffblueTest {
             + "\":{\"class\":\"org.redisson.liveobject.provider.DefaultResolverProvider\"},\"redissonReferenceEnabled\""
             + ":true,\"useLinuxNativeEpoll\":false,\"eventLoopGroup\":{\"shuttingDown\":false,\"shutdown\":false,\"terminated"
             + "\":false}}",
-        actualConfigResult.toJSON());
-    assertNull(actualConfigResult.getExecutor());
-    assertEquals(0, actualConfigResult.getNettyThreads());
-    assertEquals(0, actualConfigResult.getThreads());
-    assertFalse(actualConfigResult.isClusterConfig());
-    assertFalse(actualConfigResult.isUseLinuxNativeEpoll());
-    assertTrue(actualConfigResult.isRedissonReferenceEnabled());
-  }
-
-  /**
-   * Test {@link RedissonConfig#config()}.
-   *
-   * <ul>
-   *   <li>Given {@link RedissonConfig} (default constructor) Password is {@code iloveyou}.
-   * </ul>
-   *
-   * <p>Method under test: {@link RedissonConfig#config()}
-   */
-  @Test
-  @DisplayName("Test config(); given RedissonConfig (default constructor) Password is 'iloveyou'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Config RedissonConfig.config()"})
-  void testConfig_givenRedissonConfigPasswordIsIloveyou() throws Exception {
-    // Arrange
-    RedissonConfig redissonConfig = new RedissonConfig();
-    redissonConfig.setPassword("iloveyou");
-
-    // Act
-    Config actualConfigResult = redissonConfig.config();
-
-    // Assert
-    assertTrue(actualConfigResult.getEventLoopGroup() instanceof NioEventLoopGroup);
-    assertTrue(actualConfigResult.getCodecProvider() instanceof DefaultCodecProvider);
-    assertTrue(actualConfigResult.getCodec() instanceof JsonJacksonCodec);
-    assertTrue(actualConfigResult.getResolverProvider() instanceof DefaultResolverProvider);
-    assertEquals(
-        "---\n"
-            + "singleServerConfig:\n"
-            + "  idleConnectionTimeout: 10000\n"
-            + "  pingTimeout: 1000\n"
-            + "  connectTimeout: 10000\n"
-            + "  timeout: 3000\n"
-            + "  retryAttempts: 3\n"
-            + "  retryInterval: 1500\n"
-            + "  reconnectionTimeout: 3000\n"
-            + "  failedAttempts: 3\n"
-            + "  password: \"iloveyou\"\n"
-            + "  subscriptionsPerConnection: 5\n"
-            + "  subscriptionConnectionMinimumIdleSize: 1\n"
-            + "  subscriptionConnectionPoolSize: 50\n"
-            + "  connectionMinimumIdleSize: 10\n"
-            + "  connectionPoolSize: 64\n"
-            + "  database: 0\n"
-            + "  dnsMonitoring: false\n"
-            + "  dnsMonitoringInterval: 5000\n"
-            + "threads: 0\n"
-            + "nettyThreads: 0\n"
-            + "codec: !<org.redisson.codec.JsonJacksonCodec> {}\n"
-            + "codecProvider: !<org.redisson.codec.DefaultCodecProvider> {}\n"
-            + "resolverProvider: !<org.redisson.liveobject.provider.DefaultResolverProvider> {}\n"
-            + "redissonReferenceEnabled: true\n"
-            + "useLinuxNativeEpoll: false\n"
-            + "eventLoopGroup:\n"
-            + "  shuttingDown: false\n"
-            + "  shutdown: false\n"
-            + "  terminated: false\n",
-        actualConfigResult.toYAML());
-    assertEquals(
-        "{\"singleServerConfig\":{\"idleConnectionTimeout\":10000,\"pingTimeout\":1000,\"connectTimeout\":10000,\"timeout"
-            + "\":3000,\"retryAttempts\":3,\"retryInterval\":1500,\"reconnectionTimeout\":3000,\"failedAttempts\":3,\"password"
-            + "\":\"iloveyou\",\"subscriptionsPerConnection\":5,\"subscriptionConnectionMinimumIdleSize\":1,\"subscriptionC"
-            + "onnectionPoolSize\":50,\"connectionMinimumIdleSize\":10,\"connectionPoolSize\":64,\"database\":0,\"dnsMonitoring"
-            + "\":false,\"dnsMonitoringInterval\":5000},\"threads\":0,\"nettyThreads\":0,\"codec\":{\"class\":\"org.redisson.codec"
-            + ".JsonJacksonCodec\"},\"codecProvider\":{\"class\":\"org.redisson.codec.DefaultCodecProvider\"},\"resolverProvider"
-            + "\":{\"class\":\"org.redisson.liveobject.provider.DefaultResolverProvider\"},\"redissonReferenceEnabled\":true"
-            + ",\"useLinuxNativeEpoll\":false,\"eventLoopGroup\":{\"shuttingDown\":false,\"shutdown\":false,\"terminated\":false"
-            + "}}",
         actualConfigResult.toJSON());
     assertNull(actualConfigResult.getExecutor());
     assertEquals(0, actualConfigResult.getNettyThreads());
@@ -437,9 +439,9 @@ class RedissonConfigDiffblueTest {
     RedissonConfig redissonConfig = new RedissonConfig();
 
     // Act
-    redissonConfig.setAddress("42 Main St");
-    redissonConfig.setClientName("Dr Jane Doe");
-    redissonConfig.setCodec("Codec");
+    redissonConfig.setAddress(FtpUtilsFactory.createValidFtpUrl());
+    redissonConfig.setClientName(FtpUtilsFactory.createValidFtpUrl());
+    redissonConfig.setCodec(FtpUtilsFactory.createValidFtpUrl());
     redissonConfig.setConnectTimeout(10);
     redissonConfig.setConnectionMinimumIdleSize(1);
     redissonConfig.setConnectionPoolSize(3);
@@ -448,7 +450,7 @@ class RedissonConfigDiffblueTest {
     redissonConfig.setDnsMonitoringInterval(42);
     redissonConfig.setFailedAttempts(1);
     redissonConfig.setIdleConnectionTimeout(1);
-    redissonConfig.setPassword("iloveyou");
+    redissonConfig.setPassword(FtpUtilsFactory.createValidFtpUrl());
     redissonConfig.setPingTimeout(10);
     redissonConfig.setReconnectionTimeout(10);
     redissonConfig.setRetryAttempts(1);
@@ -481,10 +483,10 @@ class RedissonConfigDiffblueTest {
     int actualTimeout = redissonConfig.getTimeout();
 
     // Assert
-    assertEquals("42 Main St", actualAddress);
-    assertEquals("Codec", actualCodec);
-    assertEquals("Dr Jane Doe", actualClientName);
-    assertEquals("iloveyou", actualPassword);
+    assertEquals("ftp://localhost/test/file.txt", actualAddress);
+    assertEquals("ftp://localhost/test/file.txt", actualClientName);
+    assertEquals("ftp://localhost/test/file.txt", actualCodec);
+    assertEquals("ftp://localhost/test/file.txt", actualPassword);
     assertEquals(1, actualConnectionMinimumIdleSize);
     assertEquals(1, actualDatabase);
     assertEquals(1, actualFailedAttempts);

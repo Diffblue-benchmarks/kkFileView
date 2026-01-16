@@ -1,0 +1,11 @@
+{
+  "base-class": "cn.keking.DiffblueTestBase",
+  "phases": {
+    "baseline": {
+      "base-class": "cn.keking.DiffblueTestBase"
+    },
+    "write": {
+      "base-class": "cn.keking.DiffblueTestBase"
+    }
+  }
+}

@@ -9,6 +9,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import cn.keking.web.controller.FileControllerFactory;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.IOException;
@@ -18,21 +19,11 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import org.eclipse.jetty.http.HttpCompliance;
-import org.eclipse.jetty.io.ByteArrayEndPoint;
-import org.eclipse.jetty.server.HttpChannel;
-import org.eclipse.jetty.server.HttpChannelState;
-import org.eclipse.jetty.server.HttpConfiguration;
-import org.eclipse.jetty.server.HttpConnection;
-import org.eclipse.jetty.server.HttpInput;
-import org.eclipse.jetty.server.LocalConnector;
-import org.eclipse.jetty.server.Request;
-import org.eclipse.jetty.server.Server;
+import javax.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 class UrlCheckFilterDiffblueTest {
@@ -56,8 +47,8 @@ class UrlCheckFilterDiffblueTest {
   void testDoFilter_givenIOException_thenThrowIOException() throws IOException, ServletException {
     // Arrange
     UrlCheckFilter urlCheckFilter = new UrlCheckFilter();
-    MockHttpServletRequest request = new MockHttpServletRequest();
-    MockHttpServletResponse response = new MockHttpServletResponse();
+    ServletRequest request = TrustHostFilterFactory.createServletRequestWithValidUrl();
+    HttpServletResponse response = FileControllerFactory.createHttpServletResponse();
 
     FilterChain chain = mock(FilterChain.class);
     doThrow(new IOException())
@@ -73,7 +64,7 @@ class UrlCheckFilterDiffblueTest {
    * Test {@link UrlCheckFilter#doFilter(ServletRequest, ServletResponse, FilterChain)}.
    *
    * <ul>
-   *   <li>Then {@link MockHttpServletResponse} (default constructor) Status is two hundred.
+   *   <li>Then createHttpServletResponse Status is two hundred.
    * </ul>
    *
    * <p>Method under test: {@link UrlCheckFilter#doFilter(ServletRequest, ServletResponse,
@@ -81,16 +72,16 @@ class UrlCheckFilterDiffblueTest {
    */
   @Test
   @DisplayName(
-      "Test doFilter(ServletRequest, ServletResponse, FilterChain); then MockHttpServletResponse (default constructor) Status is two hundred")
+      "Test doFilter(ServletRequest, ServletResponse, FilterChain); then createHttpServletResponse Status is two hundred")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"void UrlCheckFilter.doFilter(ServletRequest, ServletResponse, FilterChain)"})
-  void testDoFilter_thenMockHttpServletResponseStatusIsTwoHundred()
+  void testDoFilter_thenCreateHttpServletResponseStatusIsTwoHundred()
       throws IOException, ServletException {
     // Arrange
     UrlCheckFilter urlCheckFilter = new UrlCheckFilter();
-    MockHttpServletRequest request = new MockHttpServletRequest();
-    MockHttpServletResponse response = new MockHttpServletResponse();
+    ServletRequest request = TrustHostFilterFactory.createServletRequestWithValidUrl();
+    HttpServletResponse response = FileControllerFactory.createHttpServletResponse();
 
     FilterChain chain = mock(FilterChain.class);
     doNothing().when(chain).doFilter(Mockito.<ServletRequest>any(), Mockito.<ServletResponse>any());
@@ -102,6 +93,7 @@ class UrlCheckFilterDiffblueTest {
     verify(chain).doFilter(isA(ServletRequest.class), isA(ServletResponse.class));
     Collection<String> headerNames = response.getHeaderNames();
     assertTrue(headerNames instanceof Set);
+    assertTrue(response instanceof MockHttpServletResponse);
     assertEquals(200, response.getStatus());
     assertFalse(response.isCommitted());
     assertTrue(headerNames.isEmpty());

@@ -6,6 +6,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import cn.keking.web.controller.FileControllerFactory;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.IOException;
@@ -21,8 +22,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -56,8 +55,8 @@ class SecurityFilterProxyDiffblueTest {
   void testDoFilterInternal_givenServletException_thenThrowServletException()
       throws IOException, ServletException {
     // Arrange
-    MockHttpServletRequest request = new MockHttpServletRequest();
-    MockHttpServletResponse response = new MockHttpServletResponse();
+    HttpServletRequest request = FileControllerFactory.createHttpServletRequestWithSession();
+    HttpServletResponse response = FileControllerFactory.createHttpServletResponse();
 
     FilterChain filterChain = mock(FilterChain.class);
     doThrow(new ServletException())
@@ -76,7 +75,7 @@ class SecurityFilterProxyDiffblueTest {
    * FilterChain)}.
    *
    * <ul>
-   *   <li>When {@link MockHttpServletRequest#MockHttpServletRequest()}.
+   *   <li>When createHttpServletRequestWithSession.
    *   <li>Then calls {@link FilterChain#doFilter(ServletRequest, ServletResponse)}.
    * </ul>
    *
@@ -85,17 +84,17 @@ class SecurityFilterProxyDiffblueTest {
    */
   @Test
   @DisplayName(
-      "Test doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain); when MockHttpServletRequest(); then calls doFilter(ServletRequest, ServletResponse)")
+      "Test doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain); when createHttpServletRequestWithSession; then calls doFilter(ServletRequest, ServletResponse)")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({
     "void SecurityFilterProxy.doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain)"
   })
-  void testDoFilterInternal_whenMockHttpServletRequest_thenCallsDoFilter()
+  void testDoFilterInternal_whenCreateHttpServletRequestWithSession_thenCallsDoFilter()
       throws IOException, ServletException {
     // Arrange
-    MockHttpServletRequest request = new MockHttpServletRequest();
-    MockHttpServletResponse response = new MockHttpServletResponse();
+    HttpServletRequest request = FileControllerFactory.createHttpServletRequestWithSession();
+    HttpServletResponse response = FileControllerFactory.createHttpServletResponse();
 
     FilterChain filterChain = mock(FilterChain.class);
     doNothing()

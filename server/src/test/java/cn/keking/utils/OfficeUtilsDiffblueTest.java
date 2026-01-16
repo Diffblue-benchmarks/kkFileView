@@ -13,6 +13,26 @@ class OfficeUtilsDiffblueTest {
    * Test {@link OfficeUtils#isPwdProtected(String)}.
    *
    * <ul>
+   *   <li>When createValidFtpUrl.
+   *   <li>Then return {@code false}.
+   * </ul>
+   *
+   * <p>Method under test: {@link OfficeUtils#isPwdProtected(String)}
+   */
+  @Test
+  @DisplayName("Test isPwdProtected(String); when createValidFtpUrl; then return 'false'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"boolean OfficeUtils.isPwdProtected(String)"})
+  void testIsPwdProtected_whenCreateValidFtpUrl_thenReturnFalse() {
+    // Arrange, Act and Assert
+    assertFalse(OfficeUtils.isPwdProtected(FtpUtilsFactory.createValidFtpUrl()));
+  }
+
+  /**
+   * Test {@link OfficeUtils#isPwdProtected(String)}.
+   *
+   * <ul>
    *   <li>When empty string.
    *   <li>Then return {@code false}.
    * </ul>
@@ -70,23 +90,25 @@ class OfficeUtilsDiffblueTest {
   }
 
   /**
-   * Test {@link OfficeUtils#isPwdProtected(String)}.
+   * Test {@link OfficeUtils#isCompatible(String, String)}.
    *
    * <ul>
-   *   <li>When {@code Path}.
-   *   <li>Then return {@code false}.
+   *   <li>When createValidFtpUrl.
    * </ul>
    *
-   * <p>Method under test: {@link OfficeUtils#isPwdProtected(String)}
+   * <p>Method under test: {@link OfficeUtils#isCompatible(String, String)}
    */
   @Test
-  @DisplayName("Test isPwdProtected(String); when 'Path'; then return 'false'")
+  @DisplayName("Test isCompatible(String, String); when createValidFtpUrl")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
-  @MethodsUnderTest({"boolean OfficeUtils.isPwdProtected(String)"})
-  void testIsPwdProtected_whenPath_thenReturnFalse() {
-    // Arrange, Act and Assert
-    assertFalse(OfficeUtils.isPwdProtected("Path"));
+  @MethodsUnderTest({"boolean OfficeUtils.isCompatible(String, String)"})
+  void testIsCompatible_whenCreateValidFtpUrl() {
+    // Arrange
+    String path = FtpUtilsFactory.createValidFtpUrl();
+
+    // Act and Assert
+    assertFalse(OfficeUtils.isCompatible(path, FtpUtilsFactory.createValidFtpUrl()));
   }
 
   /**
@@ -105,7 +127,7 @@ class OfficeUtilsDiffblueTest {
   @MethodsUnderTest({"boolean OfficeUtils.isCompatible(String, String)"})
   void testIsCompatible_whenEmptyString() {
     // Arrange, Act and Assert
-    assertFalse(OfficeUtils.isCompatible("", "iloveyou"));
+    assertFalse(OfficeUtils.isCompatible("", FtpUtilsFactory.createValidFtpUrl()));
   }
 
   /**
@@ -124,44 +146,6 @@ class OfficeUtilsDiffblueTest {
   @MethodsUnderTest({"boolean OfficeUtils.isCompatible(String, String)"})
   void testIsCompatible_whenNull() {
     // Arrange, Act and Assert
-    assertFalse(OfficeUtils.isCompatible(null, "iloveyou"));
-  }
-
-  /**
-   * Test {@link OfficeUtils#isCompatible(String, String)}.
-   *
-   * <ul>
-   *   <li>When {@code Password}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeUtils#isCompatible(String, String)}
-   */
-  @Test
-  @DisplayName("Test isCompatible(String, String); when 'Password'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean OfficeUtils.isCompatible(String, String)"})
-  void testIsCompatible_whenPassword() {
-    // Arrange, Act and Assert
-    assertFalse(OfficeUtils.isCompatible("", "Password"));
-  }
-
-  /**
-   * Test {@link OfficeUtils#isCompatible(String, String)}.
-   *
-   * <ul>
-   *   <li>When {@code Path}.
-   * </ul>
-   *
-   * <p>Method under test: {@link OfficeUtils#isCompatible(String, String)}
-   */
-  @Test
-  @DisplayName("Test isCompatible(String, String); when 'Path'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean OfficeUtils.isCompatible(String, String)"})
-  void testIsCompatible_whenPath() {
-    // Arrange, Act and Assert
-    assertFalse(OfficeUtils.isCompatible("Path", "iloveyou"));
+    assertFalse(OfficeUtils.isCompatible(null, FtpUtilsFactory.createValidFtpUrl()));
   }
 }

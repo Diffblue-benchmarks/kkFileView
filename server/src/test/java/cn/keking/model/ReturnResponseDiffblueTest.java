@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import cn.keking.utils.FtpUtilsFactory;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.jupiter.api.DisplayName;
@@ -41,16 +42,17 @@ class ReturnResponseDiffblueTest {
   })
   void testGettersAndSetters() {
     // Arrange and Act
-    ReturnResponse<Object> actualReturnResponse = new ReturnResponse<>(1, "Msg", "Content");
+    ReturnResponse<Object> actualReturnResponse =
+        new ReturnResponse<>(1, FtpUtilsFactory.createValidFtpUrl(), "Content");
     actualReturnResponse.setCode(1);
     actualReturnResponse.setContent("Content");
-    actualReturnResponse.setMsg("Msg");
+    actualReturnResponse.setMsg(FtpUtilsFactory.createValidFtpUrl());
     int actualCode = actualReturnResponse.getCode();
     Object actualContent = actualReturnResponse.getContent();
 
     // Assert
     assertEquals("Content", actualContent);
-    assertEquals("Msg", actualReturnResponse.getMsg());
+    assertEquals("ftp://localhost/test/file.txt", actualReturnResponse.getMsg());
     assertEquals(1, actualCode);
   }
 
@@ -88,10 +90,11 @@ class ReturnResponseDiffblueTest {
   @MethodsUnderTest({"ReturnResponse ReturnResponse.failure(String)"})
   void testFailureWithString() {
     // Arrange and Act
-    ReturnResponse<Object> actualFailureResult = ReturnResponse.failure("Err Msg");
+    ReturnResponse<Object> actualFailureResult =
+        ReturnResponse.failure(FtpUtilsFactory.createValidFtpUrl());
 
     // Assert
-    assertEquals("Err Msg", actualFailureResult.getMsg());
+    assertEquals("ftp://localhost/test/file.txt", actualFailureResult.getMsg());
     assertNull(actualFailureResult.getContent());
     assertEquals(1, actualFailureResult.getCode());
     assertFalse(actualFailureResult.isSuccess());
@@ -146,20 +149,21 @@ class ReturnResponseDiffblueTest {
    * Test {@link ReturnResponse#isSuccess()}.
    *
    * <ul>
-   *   <li>Given failure {@code Err Msg}.
+   *   <li>Given failure createValidFtpUrl.
    *   <li>Then return {@code false}.
    * </ul>
    *
    * <p>Method under test: {@link ReturnResponse#isSuccess()}
    */
   @Test
-  @DisplayName("Test isSuccess(); given failure 'Err Msg'; then return 'false'")
+  @DisplayName("Test isSuccess(); given failure createValidFtpUrl; then return 'false'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"boolean ReturnResponse.isSuccess()"})
-  void testIsSuccess_givenFailureErrMsg_thenReturnFalse() {
+  void testIsSuccess_givenFailureCreateValidFtpUrl_thenReturnFalse() {
     // Arrange
-    ReturnResponse<Object> failureResult = ReturnResponse.failure("Err Msg");
+    ReturnResponse<Object> failureResult =
+        ReturnResponse.failure(FtpUtilsFactory.createValidFtpUrl());
 
     // Act and Assert
     assertFalse(failureResult.isSuccess());
@@ -169,22 +173,20 @@ class ReturnResponseDiffblueTest {
    * Test {@link ReturnResponse#isSuccess()}.
    *
    * <ul>
-   *   <li>Given {@link ReturnResponse#ReturnResponse(int, String, Object)} with code is zero and
-   *       {@code Msg} and {@code Content}.
    *   <li>Then return {@code true}.
    * </ul>
    *
    * <p>Method under test: {@link ReturnResponse#isSuccess()}
    */
   @Test
-  @DisplayName(
-      "Test isSuccess(); given ReturnResponse(int, String, Object) with code is zero and 'Msg' and 'Content'; then return 'true'")
+  @DisplayName("Test isSuccess(); then return 'true'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"boolean ReturnResponse.isSuccess()"})
-  void testIsSuccess_givenReturnResponseWithCodeIsZeroAndMsgAndContent_thenReturnTrue() {
+  void testIsSuccess_thenReturnTrue() {
     // Arrange
-    ReturnResponse<Object> returnResponse = new ReturnResponse<>(0, "Msg", "Content");
+    ReturnResponse<Object> returnResponse =
+        new ReturnResponse<>(0, FtpUtilsFactory.createValidFtpUrl(), "Content");
 
     // Act and Assert
     assertTrue(returnResponse.isSuccess());
@@ -194,20 +196,21 @@ class ReturnResponseDiffblueTest {
    * Test {@link ReturnResponse#isFailure()}.
    *
    * <ul>
-   *   <li>Given failure {@code Err Msg}.
+   *   <li>Given failure createValidFtpUrl.
    *   <li>Then return {@code true}.
    * </ul>
    *
    * <p>Method under test: {@link ReturnResponse#isFailure()}
    */
   @Test
-  @DisplayName("Test isFailure(); given failure 'Err Msg'; then return 'true'")
+  @DisplayName("Test isFailure(); given failure createValidFtpUrl; then return 'true'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"boolean ReturnResponse.isFailure()"})
-  void testIsFailure_givenFailureErrMsg_thenReturnTrue() {
+  void testIsFailure_givenFailureCreateValidFtpUrl_thenReturnTrue() {
     // Arrange
-    ReturnResponse<Object> failureResult = ReturnResponse.failure("Err Msg");
+    ReturnResponse<Object> failureResult =
+        ReturnResponse.failure(FtpUtilsFactory.createValidFtpUrl());
 
     // Act and Assert
     assertTrue(failureResult.isFailure());
@@ -217,22 +220,20 @@ class ReturnResponseDiffblueTest {
    * Test {@link ReturnResponse#isFailure()}.
    *
    * <ul>
-   *   <li>Given {@link ReturnResponse#ReturnResponse(int, String, Object)} with code is zero and
-   *       {@code Msg} and {@code Content}.
    *   <li>Then return {@code false}.
    * </ul>
    *
    * <p>Method under test: {@link ReturnResponse#isFailure()}
    */
   @Test
-  @DisplayName(
-      "Test isFailure(); given ReturnResponse(int, String, Object) with code is zero and 'Msg' and 'Content'; then return 'false'")
+  @DisplayName("Test isFailure(); then return 'false'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"boolean ReturnResponse.isFailure()"})
-  void testIsFailure_givenReturnResponseWithCodeIsZeroAndMsgAndContent_thenReturnFalse() {
+  void testIsFailure_thenReturnFalse() {
     // Arrange
-    ReturnResponse<Object> returnResponse = new ReturnResponse<>(0, "Msg", "Content");
+    ReturnResponse<Object> returnResponse =
+        new ReturnResponse<>(0, FtpUtilsFactory.createValidFtpUrl(), "Content");
 
     // Act and Assert
     assertFalse(returnResponse.isFailure());

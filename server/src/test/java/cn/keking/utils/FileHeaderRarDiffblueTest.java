@@ -35,13 +35,14 @@ class FileHeaderRarDiffblueTest {
   })
   void testGettersAndSetters() {
     // Arrange and Act
-    FileHeaderRar actualFileHeaderRar = new FileHeaderRar("foo.txt", true);
+    FileHeaderRar actualFileHeaderRar =
+        new FileHeaderRar(FtpUtilsFactory.createValidFtpUrl(), true);
     actualFileHeaderRar.setDirectory(true);
-    actualFileHeaderRar.setFileNameW("foo.txt");
+    actualFileHeaderRar.setFileNameW(FtpUtilsFactory.createValidFtpUrl());
     Boolean actualDirectory = actualFileHeaderRar.getDirectory();
 
     // Assert
-    assertEquals("foo.txt", actualFileHeaderRar.getFileNameW());
+    assertEquals("ftp://localhost/test/file.txt", actualFileHeaderRar.getFileNameW());
     assertTrue(actualDirectory);
   }
 }

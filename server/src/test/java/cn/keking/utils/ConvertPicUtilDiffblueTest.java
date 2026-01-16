@@ -21,9 +21,12 @@ class ConvertPicUtilDiffblueTest {
   @ManagedByDiffblue
   @MethodsUnderTest({"List ConvertPicUtil.convertTif2Jpg(String, String, boolean)"})
   void testConvertTif2Jpg() throws Exception {
-    // Arrange and Act
+    // Arrange
+    String strInputFile = FtpUtilsFactory.createValidFtpUrl();
+
+    // Act
     List<String> actualConvertTif2JpgResult =
-        ConvertPicUtil.convertTif2Jpg("Str Input File", "Str Output File", true);
+        ConvertPicUtil.convertTif2Jpg(strInputFile, FtpUtilsFactory.createValidFtpUrl(), true);
 
     // Assert
     assertNull(actualConvertTif2JpgResult);
@@ -52,7 +55,32 @@ class ConvertPicUtilDiffblueTest {
         Exception.class,
         () ->
             ConvertPicUtil.convertJpg2Pdf(
-                "Bad endianness tag (not 0x4949 or 0x4d4d)", "Str Pdf File"));
+                "Bad endianness tag (not 0x4949 or 0x4d4d)", FtpUtilsFactory.createValidFtpUrl()));
+  }
+
+  /**
+   * Test {@link ConvertPicUtil#convertJpg2Pdf(String, String)}.
+   *
+   * <ul>
+   *   <li>When createValidFtpUrl.
+   *   <li>Then throw {@link Exception}.
+   * </ul>
+   *
+   * <p>Method under test: {@link ConvertPicUtil#convertJpg2Pdf(String, String)}
+   */
+  @Test
+  @DisplayName("Test convertJpg2Pdf(String, String); when createValidFtpUrl; then throw Exception")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String ConvertPicUtil.convertJpg2Pdf(String, String)"})
+  void testConvertJpg2Pdf_whenCreateValidFtpUrl_thenThrowException() throws Exception {
+    // Arrange
+    String strJpgFile = FtpUtilsFactory.createValidFtpUrl();
+
+    // Act and Assert
+    assertThrows(
+        Exception.class,
+        () -> ConvertPicUtil.convertJpg2Pdf(strJpgFile, FtpUtilsFactory.createValidFtpUrl()));
   }
 
   /**
@@ -72,27 +100,8 @@ class ConvertPicUtilDiffblueTest {
   @MethodsUnderTest({"String ConvertPicUtil.convertJpg2Pdf(String, String)"})
   void testConvertJpg2Pdf_whenR_thenThrowException() throws Exception {
     // Arrange, Act and Assert
-    assertThrows(Exception.class, () -> ConvertPicUtil.convertJpg2Pdf("r", "Str Pdf File"));
-  }
-
-  /**
-   * Test {@link ConvertPicUtil#convertJpg2Pdf(String, String)}.
-   *
-   * <ul>
-   *   <li>When {@code Str Jpg File}.
-   *   <li>Then throw {@link Exception}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConvertPicUtil#convertJpg2Pdf(String, String)}
-   */
-  @Test
-  @DisplayName("Test convertJpg2Pdf(String, String); when 'Str Jpg File'; then throw Exception")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String ConvertPicUtil.convertJpg2Pdf(String, String)"})
-  void testConvertJpg2Pdf_whenStrJpgFile_thenThrowException() throws Exception {
-    // Arrange, Act and Assert
     assertThrows(
-        Exception.class, () -> ConvertPicUtil.convertJpg2Pdf("Str Jpg File", "Str Pdf File"));
+        Exception.class,
+        () -> ConvertPicUtil.convertJpg2Pdf("r", FtpUtilsFactory.createValidFtpUrl()));
   }
 }

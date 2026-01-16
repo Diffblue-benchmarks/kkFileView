@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import cn.keking.utils.FtpUtilsFactory;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.jupiter.api.DisplayName;
@@ -23,20 +24,20 @@ class FileAttributeDiffblueTest {
   @ManagedByDiffblue
   @MethodsUnderTest({"void FileAttribute.<init>(FileType, String, String, String, String)"})
   void testNewFileAttribute() {
-    // Arrange and Act
+    // Arrange
+    String suffix = FtpUtilsFactory.createValidFtpUrl();
+    String name = FtpUtilsFactory.createValidFtpUrl();
+    String url = FtpUtilsFactory.createValidFtpUrl();
+
+    // Act
     FileAttribute actualFileAttribute =
-        new FileAttribute(
-            FileType.PICTURE,
-            "Suffix",
-            "Name",
-            "https://example.org/example",
-            "Office Preview Type");
+        new FileAttribute(FileType.PICTURE, suffix, name, url, FtpUtilsFactory.createValidFtpUrl());
 
     // Assert
-    assertEquals("Name", actualFileAttribute.getName());
-    assertEquals("Office Preview Type", actualFileAttribute.getOfficePreviewType());
-    assertEquals("Suffix", actualFileAttribute.getSuffix());
-    assertEquals("https://example.org/example", actualFileAttribute.getUrl());
+    assertEquals("ftp://localhost/test/file.txt", actualFileAttribute.getName());
+    assertEquals("ftp://localhost/test/file.txt", actualFileAttribute.getOfficePreviewType());
+    assertEquals("ftp://localhost/test/file.txt", actualFileAttribute.getSuffix());
+    assertEquals("ftp://localhost/test/file.txt", actualFileAttribute.getUrl());
     assertNull(actualFileAttribute.getCacheListName());
     assertNull(actualFileAttribute.getCacheName());
     assertNull(actualFileAttribute.getCompressFileKey());
@@ -144,23 +145,23 @@ class FileAttributeDiffblueTest {
     FileAttribute fileAttribute = new FileAttribute();
 
     // Act
-    fileAttribute.setCacheListName("Cache List Name");
-    fileAttribute.setCacheName("Cache Name");
+    fileAttribute.setCacheListName(FtpUtilsFactory.createValidFtpUrl());
+    fileAttribute.setCacheName(FtpUtilsFactory.createValidFtpUrl());
     fileAttribute.setCompressFile(true);
-    fileAttribute.setCompressFileKey("Compress File Key");
-    fileAttribute.setFilePassword("iloveyou");
+    fileAttribute.setCompressFileKey(FtpUtilsFactory.createValidFtpUrl());
+    fileAttribute.setFilePassword(FtpUtilsFactory.createValidFtpUrl());
     fileAttribute.setForceUpdatedCache(true);
     fileAttribute.setHtmlView(true);
-    fileAttribute.setKkProxyAuthorization("JaneDoe");
-    fileAttribute.setName("Name");
-    fileAttribute.setOfficePreviewType("Office Preview Type");
-    fileAttribute.setOriginFilePath("/directory/foo.txt");
-    fileAttribute.setOutFilePath("/directory/foo.txt");
+    fileAttribute.setKkProxyAuthorization(FtpUtilsFactory.createValidFtpUrl());
+    fileAttribute.setName(FtpUtilsFactory.createValidFtpUrl());
+    fileAttribute.setOfficePreviewType(FtpUtilsFactory.createValidFtpUrl());
+    fileAttribute.setOriginFilePath(FtpUtilsFactory.createValidFtpUrl());
+    fileAttribute.setOutFilePath(FtpUtilsFactory.createValidFtpUrl());
     fileAttribute.setSkipDownLoad(true);
-    fileAttribute.setSuffix("Suffix");
-    fileAttribute.setTifPreviewType("Preview Type");
+    fileAttribute.setSuffix(FtpUtilsFactory.createValidFtpUrl());
+    fileAttribute.setTifPreviewType(FtpUtilsFactory.createValidFtpUrl());
     fileAttribute.setType(FileType.PICTURE);
-    fileAttribute.setUrl("https://example.org/example");
+    fileAttribute.setUrl(FtpUtilsFactory.createValidFtpUrl());
     fileAttribute.setUsePasswordCache(true);
     Boolean actualForceUpdatedCacheResult = fileAttribute.forceUpdatedCache();
     String actualCacheListName = fileAttribute.getCacheListName();
@@ -181,18 +182,18 @@ class FileAttributeDiffblueTest {
     boolean actualIsCompressFileResult = fileAttribute.isCompressFile();
 
     // Assert
-    assertEquals("/directory/foo.txt", actualOriginFilePath);
-    assertEquals("/directory/foo.txt", actualOutFilePath);
-    assertEquals("Cache List Name", actualCacheListName);
-    assertEquals("Cache Name", actualCacheName);
-    assertEquals("Compress File Key", actualCompressFileKey);
-    assertEquals("JaneDoe", actualKkProxyAuthorization);
-    assertEquals("Name", actualName);
-    assertEquals("Office Preview Type", actualOfficePreviewType);
-    assertEquals("Preview Type", actualTifPreviewType);
-    assertEquals("Suffix", actualSuffix);
-    assertEquals("https://example.org/example", actualUrl);
-    assertEquals("iloveyou", actualFilePassword);
+    assertEquals("ftp://localhost/test/file.txt", actualCacheListName);
+    assertEquals("ftp://localhost/test/file.txt", actualCacheName);
+    assertEquals("ftp://localhost/test/file.txt", actualCompressFileKey);
+    assertEquals("ftp://localhost/test/file.txt", actualFilePassword);
+    assertEquals("ftp://localhost/test/file.txt", actualKkProxyAuthorization);
+    assertEquals("ftp://localhost/test/file.txt", actualName);
+    assertEquals("ftp://localhost/test/file.txt", actualOfficePreviewType);
+    assertEquals("ftp://localhost/test/file.txt", actualOriginFilePath);
+    assertEquals("ftp://localhost/test/file.txt", actualOutFilePath);
+    assertEquals("ftp://localhost/test/file.txt", actualSuffix);
+    assertEquals("ftp://localhost/test/file.txt", actualTifPreviewType);
+    assertEquals("ftp://localhost/test/file.txt", actualUrl);
     assertEquals(FileType.PICTURE, actualType);
     assertTrue(actualForceUpdatedCacheResult);
     assertTrue(actualSkipDownLoad);

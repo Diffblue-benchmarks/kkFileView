@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import cn.keking.web.controller.FileControllerFactory;
+import cn.keking.web.filter.TrustHostFilterFactory;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.ByteArrayInputStream;
@@ -11,10 +13,10 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import org.eclipse.jetty.server.ServletRequestHttpWrapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,7 +33,9 @@ class WebUtilsDiffblueTest {
   @MethodsUnderTest({"String WebUtils.encodeFileName(String)"})
   void testEncodeFileName() {
     // Arrange, Act and Assert
-    assertEquals("Name", WebUtils.encodeFileName("Name"));
+    assertEquals(
+        "ftp%3A%2F%2Flocalhost%2Ftest%2Ffile.txt",
+        WebUtils.encodeFileName(FtpUtilsFactory.createValidFtpUrl()));
   }
 
   /**
@@ -47,8 +51,8 @@ class WebUtilsDiffblueTest {
   void testClearFullfilenameParam() {
     // Arrange, Act and Assert
     assertEquals(
-        "https://example.org/example",
-        WebUtils.clearFullfilenameParam("https://example.org/example"));
+        "ftp://localhost/test/file.txt",
+        WebUtils.clearFullfilenameParam(FtpUtilsFactory.createValidFtpUrl()));
   }
 
   /**
@@ -2273,6 +2277,29 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#urlEncoderencode(String)}.
    *
    * <ul>
+   *   <li>When createValidFtpUrl.
+   *   <li>Then return {@code ftp://localhost/test/file.txt}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test urlEncoderencode(String); when createValidFtpUrl; then return 'ftp://localhost/test/file.txt'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
+  void testUrlEncoderencode_whenCreateValidFtpUrl_thenReturnFtpLocalhostTestFileTxt() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "ftp://localhost/test/file.txt",
+        WebUtils.urlEncoderencode(FtpUtilsFactory.createValidFtpUrl()));
+  }
+
+  /**
+   * Test {@link WebUtils#urlEncoderencode(String)}.
+   *
+   * <ul>
    *   <li>When {@code file:file:}.
    *   <li>Then return {@code file:file:}.
    * </ul>
@@ -2533,28 +2560,6 @@ class WebUtilsDiffblueTest {
   void testUrlEncoderencode_whenFullfilenamefile_thenReturnFullfilenamefile() {
     // Arrange, Act and Assert
     assertEquals("fullfilenamefile:", WebUtils.urlEncoderencode("fullfilenamefile:"));
-  }
-
-  /**
-   * Test {@link WebUtils#urlEncoderencode(String)}.
-   *
-   * <ul>
-   *   <li>When {@code https://example.org/example}.
-   *   <li>Then return {@code https://example.org/example}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#urlEncoderencode(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test urlEncoderencode(String); when 'https://example.org/example'; then return 'https://example.org/example'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.urlEncoderencode(String)"})
-  void testUrlEncoderencode_whenHttpsExampleOrgExample_thenReturnHttpsExampleOrgExample() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "https://example.org/example", WebUtils.urlEncoderencode("https://example.org/example"));
   }
 
   /**
@@ -3005,6 +3010,30 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#getUrlParameterReg(String, String)}.
    *
    * <ul>
+   *   <li>When createValidFtpUrl.
+   *   <li>Then return empty string.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#getUrlParameterReg(String, String)}
+   */
+  @Test
+  @DisplayName(
+      "Test getUrlParameterReg(String, String); when createValidFtpUrl; then return empty string")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.getUrlParameterReg(String, String)"})
+  void testGetUrlParameterReg_whenCreateValidFtpUrl_thenReturnEmptyString() {
+    // Arrange
+    String url = FtpUtilsFactory.createValidFtpUrl();
+
+    // Act and Assert
+    assertEquals("", WebUtils.getUrlParameterReg(url, FtpUtilsFactory.createValidFtpUrl()));
+  }
+
+  /**
+   * Test {@link WebUtils#getUrlParameterReg(String, String)}.
+   *
+   * <ul>
    *   <li>When empty string.
    *   <li>Then return empty string.
    * </ul>
@@ -3019,7 +3048,7 @@ class WebUtilsDiffblueTest {
   @MethodsUnderTest({"String WebUtils.getUrlParameterReg(String, String)"})
   void testGetUrlParameterReg_whenEmptyString_thenReturnEmptyString() {
     // Arrange, Act and Assert
-    assertEquals("", WebUtils.getUrlParameterReg("", "https://example.org/example"));
+    assertEquals("", WebUtils.getUrlParameterReg("", FtpUtilsFactory.createValidFtpUrl()));
   }
 
   /**
@@ -3039,30 +3068,27 @@ class WebUtilsDiffblueTest {
   @MethodsUnderTest({"String WebUtils.getUrlParameterReg(String, String)"})
   void testGetUrlParameterReg_whenFooBar_thenReturnNull() {
     // Arrange, Act and Assert
-    assertNull(WebUtils.getUrlParameterReg("foo[?]bar", "https://example.org/example"));
+    assertNull(WebUtils.getUrlParameterReg("foo[?]bar", FtpUtilsFactory.createValidFtpUrl()));
   }
 
   /**
-   * Test {@link WebUtils#getUrlParameterReg(String, String)}.
+   * Test {@link WebUtils#getFileNameFromURL(String)}.
    *
    * <ul>
-   *   <li>When {@code https://example.org/example}.
-   *   <li>Then return empty string.
+   *   <li>When createValidFtpUrl.
+   *   <li>Then return {@code file.txt}.
    * </ul>
    *
-   * <p>Method under test: {@link WebUtils#getUrlParameterReg(String, String)}
+   * <p>Method under test: {@link WebUtils#getFileNameFromURL(String)}
    */
   @Test
-  @DisplayName(
-      "Test getUrlParameterReg(String, String); when 'https://example.org/example'; then return empty string")
+  @DisplayName("Test getFileNameFromURL(String); when createValidFtpUrl; then return 'file.txt'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.getUrlParameterReg(String, String)"})
-  void testGetUrlParameterReg_whenHttpsExampleOrgExample_thenReturnEmptyString() {
+  @MethodsUnderTest({"String WebUtils.getFileNameFromURL(String)"})
+  void testGetFileNameFromURL_whenCreateValidFtpUrl_thenReturnFileTxt() {
     // Arrange, Act and Assert
-    assertEquals(
-        "",
-        WebUtils.getUrlParameterReg("https://example.org/example", "https://example.org/example"));
+    assertEquals("file.txt", WebUtils.getFileNameFromURL(FtpUtilsFactory.createValidFtpUrl()));
   }
 
   /**
@@ -3090,27 +3116,6 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#getFileNameFromURL(String)}.
    *
    * <ul>
-   *   <li>When {@code https://example.org/example}.
-   *   <li>Then return {@code example}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#getFileNameFromURL(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test getFileNameFromURL(String); when 'https://example.org/example'; then return 'example'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.getFileNameFromURL(String)"})
-  void testGetFileNameFromURL_whenHttpsExampleOrgExample_thenReturnExample() {
-    // Arrange, Act and Assert
-    assertEquals("example", WebUtils.getFileNameFromURL("https://example.org/example"));
-  }
-
-  /**
-   * Test {@link WebUtils#getFileNameFromURL(String)}.
-   *
-   * <ul>
    *   <li>When {@code ?}.
    *   <li>Then return empty string.
    * </ul>
@@ -3131,44 +3136,72 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#getFileNameFromMultipartFile(MultipartFile)}.
    *
    * <ul>
-   *   <li>Then return empty string.
+   *   <li>Then return {@code file.txt}.
    * </ul>
    *
    * <p>Method under test: {@link WebUtils#getFileNameFromMultipartFile(MultipartFile)}
    */
   @Test
-  @DisplayName("Test getFileNameFromMultipartFile(MultipartFile); then return empty string")
+  @DisplayName("Test getFileNameFromMultipartFile(MultipartFile); then return 'file.txt'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.getFileNameFromMultipartFile(MultipartFile)"})
-  void testGetFileNameFromMultipartFile_thenReturnEmptyString() throws IOException {
+  void testGetFileNameFromMultipartFile_thenReturnFileTxt() throws IOException {
     // Arrange
+    String name = FtpUtilsFactory.createValidFtpUrl();
+    String originalFilename = FtpUtilsFactory.createValidFtpUrl();
+    String contentType = FtpUtilsFactory.createValidFtpUrl();
+
     MockMultipartFile file =
-        new MockMultipartFile("Name", new ByteArrayInputStream("AXAXAXAX".getBytes("UTF-8")));
+        new MockMultipartFile(
+            name,
+            originalFilename,
+            contentType,
+            new ByteArrayInputStream("A/A/A/A/".getBytes("UTF-8")));
 
     // Act and Assert
-    assertEquals("", WebUtils.getFileNameFromMultipartFile(file));
+    assertEquals("file.txt", WebUtils.getFileNameFromMultipartFile(file));
+  }
+
+  /**
+   * Test {@link WebUtils#getFileNameFromMultipartFile(MultipartFile)}.
+   *
+   * <ul>
+   *   <li>Then return {@code test-document.txt}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#getFileNameFromMultipartFile(MultipartFile)}
+   */
+  @Test
+  @DisplayName("Test getFileNameFromMultipartFile(MultipartFile); then return 'test-document.txt'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.getFileNameFromMultipartFile(MultipartFile)"})
+  void testGetFileNameFromMultipartFile_thenReturnTestDocumentTxt() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "test-document.txt",
+        WebUtils.getFileNameFromMultipartFile(FileControllerFactory.createMultipartFile()));
   }
 
   /**
    * Test {@link WebUtils#suffixFromUrl(String)}.
    *
    * <ul>
-   *   <li>When {@code https://example.org/example}.
-   *   <li>Then return {@code example}.
+   *   <li>When createValidFtpUrl.
+   *   <li>Then return {@code txt}.
    * </ul>
    *
    * <p>Method under test: {@link WebUtils#suffixFromUrl(String)}
    */
   @Test
-  @DisplayName(
-      "Test suffixFromUrl(String); when 'https://example.org/example'; then return 'example'")
+  @DisplayName("Test suffixFromUrl(String); when createValidFtpUrl; then return 'txt'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.suffixFromUrl(String)"})
-  void testSuffixFromUrl_whenHttpsExampleOrgExample_thenReturnExample() {
+  void testSuffixFromUrl_whenCreateValidFtpUrl_thenReturnTxt() {
     // Arrange, Act and Assert
-    assertEquals("example", WebUtils.suffixFromUrl("https://example.org/example"));
+    assertEquals("txt", WebUtils.suffixFromUrl(FtpUtilsFactory.createValidFtpUrl()));
   }
 
   /**
@@ -3195,42 +3228,23 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#encodeUrlFileName(String)}.
    *
    * <ul>
-   *   <li>Then return {@code https://example.org/example}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#encodeUrlFileName(String)}
-   */
-  @Test
-  @DisplayName("Test encodeUrlFileName(String); then return 'https://example.org/example'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.encodeUrlFileName(String)"})
-  void testEncodeUrlFileName_thenReturnHttpsExampleOrgExample() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "https://example.org/example", WebUtils.encodeUrlFileName("https://example.org/example"));
-  }
-
-  /**
-   * Test {@link WebUtils#encodeUrlFileName(String)}.
-   *
-   * <ul>
-   *   <li>When {@code WebUtils}.
-   *   <li>Then return {@code WebUtils}.
+   *   <li>When createValidFtpUrl.
+   *   <li>Then return {@code ftp://localhost/test/file.txt}.
    * </ul>
    *
    * <p>Method under test: {@link WebUtils#encodeUrlFileName(String)}
    */
   @Test
   @DisplayName(
-      "Test encodeUrlFileName(String); when 'cn.keking.utils.WebUtils'; then return 'cn.keking.utils.WebUtils'")
+      "Test encodeUrlFileName(String); when createValidFtpUrl; then return 'ftp://localhost/test/file.txt'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.encodeUrlFileName(String)"})
-  void testEncodeUrlFileName_whenCnKekingUtilsWebUtils_thenReturnCnKekingUtilsWebUtils() {
+  void testEncodeUrlFileName_whenCreateValidFtpUrl_thenReturnFtpLocalhostTestFileTxt() {
     // Arrange, Act and Assert
     assertEquals(
-        "cn.keking.utils.WebUtils", WebUtils.encodeUrlFileName("cn.keking.utils.WebUtils"));
+        "ftp://localhost/test/file.txt",
+        WebUtils.encodeUrlFileName(FtpUtilsFactory.createValidFtpUrl()));
   }
 
   /**
@@ -3257,182 +3271,28 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#getSourceUrl(ServletRequest)}.
    *
    * <ul>
-   *   <li>Given {@code currentUrl}.
+   *   <li>Then return {@code http://localhost/test}.
    * </ul>
    *
    * <p>Method under test: {@link WebUtils#getSourceUrl(ServletRequest)}
    */
   @Test
-  @DisplayName("Test getSourceUrl(ServletRequest); given 'currentUrl'")
+  @DisplayName("Test getSourceUrl(ServletRequest); then return 'http://localhost/test'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.getSourceUrl(ServletRequest)"})
-  void testGetSourceUrl_givenCurrentUrl() {
-    // Arrange
-    MockHttpServletRequest request = new MockHttpServletRequest();
-    request.addParameter("currentUrl", "42");
-
-    // Act and Assert
-    assertEquals("�", WebUtils.getSourceUrl(request));
+  void testGetSourceUrl_thenReturnHttpLocalhostTest() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "http://localhost/test",
+        WebUtils.getSourceUrl(TrustHostFilterFactory.createServletRequestWithValidUrl()));
   }
 
   /**
    * Test {@link WebUtils#getSourceUrl(ServletRequest)}.
    *
    * <ul>
-   *   <li>Given {@code +}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#getSourceUrl(ServletRequest)}
-   */
-  @Test
-  @DisplayName("Test getSourceUrl(ServletRequest); given '+'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.getSourceUrl(ServletRequest)"})
-  void testGetSourceUrl_givenPlusSign() {
-    // Arrange
-    MockHttpServletRequest request = new MockHttpServletRequest();
-    request.addParameter("url", "+");
-
-    // Act and Assert
-    assertNull(WebUtils.getSourceUrl(request));
-  }
-
-  /**
-   * Test {@link WebUtils#getSourceUrl(ServletRequest)}.
-   *
-   * <ul>
-   *   <li>Given space.
-   *   <li>When {@link MockHttpServletRequest#MockHttpServletRequest()} addParameter {@code url} and
-   *       space.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#getSourceUrl(ServletRequest)}
-   */
-  @Test
-  @DisplayName(
-      "Test getSourceUrl(ServletRequest); given space; when MockHttpServletRequest() addParameter 'url' and space")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.getSourceUrl(ServletRequest)"})
-  void testGetSourceUrl_givenSpace_whenMockHttpServletRequestAddParameterUrlAndSpace() {
-    // Arrange
-    MockHttpServletRequest request = new MockHttpServletRequest();
-    request.addParameter("url", " ");
-
-    // Act and Assert
-    assertNull(WebUtils.getSourceUrl(request));
-  }
-
-  /**
-   * Test {@link WebUtils#getSourceUrl(ServletRequest)}.
-   *
-   * <ul>
-   *   <li>Given {@code urlPath}.
-   *   <li>When {@link MockHttpServletRequest#MockHttpServletRequest()} addParameter {@code urlPath}
-   *       and {@code 42}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#getSourceUrl(ServletRequest)}
-   */
-  @Test
-  @DisplayName(
-      "Test getSourceUrl(ServletRequest); given 'urlPath'; when MockHttpServletRequest() addParameter 'urlPath' and '42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.getSourceUrl(ServletRequest)"})
-  void testGetSourceUrl_givenUrlPath_whenMockHttpServletRequestAddParameterUrlPathAnd42() {
-    // Arrange
-    MockHttpServletRequest request = new MockHttpServletRequest();
-    request.addParameter("urlPath", "42");
-
-    // Act and Assert
-    assertEquals("�", WebUtils.getSourceUrl(request));
-  }
-
-  /**
-   * Test {@link WebUtils#getSourceUrl(ServletRequest)}.
-   *
-   * <ul>
-   *   <li>Given {@code urls}.
-   *   <li>When {@link MockHttpServletRequest#MockHttpServletRequest()} addParameter {@code urls}
-   *       and {@code 42}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#getSourceUrl(ServletRequest)}
-   */
-  @Test
-  @DisplayName(
-      "Test getSourceUrl(ServletRequest); given 'urls'; when MockHttpServletRequest() addParameter 'urls' and '42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.getSourceUrl(ServletRequest)"})
-  void testGetSourceUrl_givenUrls_whenMockHttpServletRequestAddParameterUrlsAnd42() {
-    // Arrange
-    MockHttpServletRequest request = new MockHttpServletRequest();
-    request.addParameter("urls", "42");
-
-    // Act and Assert
-    assertEquals("�", WebUtils.getSourceUrl(request));
-  }
-
-  /**
-   * Test {@link WebUtils#getSourceUrl(ServletRequest)}.
-   *
-   * <ul>
-   *   <li>Given {@code Value}.
-   *   <li>When {@link MockHttpServletRequest#MockHttpServletRequest()} addParameter {@code url} and
-   *       {@code Value}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#getSourceUrl(ServletRequest)}
-   */
-  @Test
-  @DisplayName(
-      "Test getSourceUrl(ServletRequest); given 'Value'; when MockHttpServletRequest() addParameter 'url' and 'Value'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.getSourceUrl(ServletRequest)"})
-  void testGetSourceUrl_givenValue_whenMockHttpServletRequestAddParameterUrlAndValue() {
-    // Arrange
-    MockHttpServletRequest request = new MockHttpServletRequest();
-    request.addParameter("url", "Value");
-
-    // Act and Assert
-    assertNull(WebUtils.getSourceUrl(request));
-  }
-
-  /**
-   * Test {@link WebUtils#getSourceUrl(ServletRequest)}.
-   *
-   * <ul>
-   *   <li>When {@link MockHttpServletRequest#MockHttpServletRequest()} addParameter {@code url} and
-   *       {@code 42}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#getSourceUrl(ServletRequest)}
-   */
-  @Test
-  @DisplayName(
-      "Test getSourceUrl(ServletRequest); when MockHttpServletRequest() addParameter 'url' and '42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.getSourceUrl(ServletRequest)"})
-  void testGetSourceUrl_whenMockHttpServletRequestAddParameterUrlAnd42() {
-    // Arrange
-    MockHttpServletRequest request = new MockHttpServletRequest();
-    request.addParameter("url", "42");
-
-    // Act and Assert
-    assertEquals("�", WebUtils.getSourceUrl(request));
-  }
-
-  /**
-   * Test {@link WebUtils#getSourceUrl(ServletRequest)}.
-   *
-   * <ul>
-   *   <li>When {@link MockHttpServletRequest#MockHttpServletRequest()}.
+   *   <li>When createHttpServletRequestWithSession.
    *   <li>Then return {@code null}.
    * </ul>
    *
@@ -3440,33 +3300,33 @@ class WebUtilsDiffblueTest {
    */
   @Test
   @DisplayName(
-      "Test getSourceUrl(ServletRequest); when MockHttpServletRequest(); then return 'null'")
+      "Test getSourceUrl(ServletRequest); when createHttpServletRequestWithSession; then return 'null'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.getSourceUrl(ServletRequest)"})
-  void testGetSourceUrl_whenMockHttpServletRequest_thenReturnNull() {
+  void testGetSourceUrl_whenCreateHttpServletRequestWithSession_thenReturnNull() {
     // Arrange, Act and Assert
-    assertNull(WebUtils.getSourceUrl(new MockHttpServletRequest()));
+    assertNull(WebUtils.getSourceUrl(FileControllerFactory.createHttpServletRequestWithSession()));
   }
 
   /**
    * Test {@link WebUtils#isValidUrl(String)}.
    *
    * <ul>
-   *   <li>When {@code https://example.org/example}.
+   *   <li>When createValidFtpUrl.
    *   <li>Then return {@code true}.
    * </ul>
    *
    * <p>Method under test: {@link WebUtils#isValidUrl(String)}
    */
   @Test
-  @DisplayName("Test isValidUrl(String); when 'https://example.org/example'; then return 'true'")
+  @DisplayName("Test isValidUrl(String); when createValidFtpUrl; then return 'true'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"boolean WebUtils.isValidUrl(String)"})
-  void testIsValidUrl_whenHttpsExampleOrgExample_thenReturnTrue() {
+  void testIsValidUrl_whenCreateValidFtpUrl_thenReturnTrue() {
     // Arrange, Act and Assert
-    assertTrue(WebUtils.isValidUrl("https://example.org/example"));
+    assertTrue(WebUtils.isValidUrl(FtpUtilsFactory.createValidFtpUrl()));
   }
 
   /**
@@ -3532,7 +3392,7 @@ class WebUtilsDiffblueTest {
   @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
   void testDecodeUrl3() {
     // Arrange, Act and Assert
-    assertEquals("���=�a", WebUtils.decodeUrl(" urlPath"));
+    assertEquals("~�e~)^���", WebUtils.decodeUrl("\nfullfilename"));
   }
 
   /**
@@ -3547,7 +3407,7 @@ class WebUtilsDiffblueTest {
   @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
   void testDecodeUrl4() {
     // Arrange, Act and Assert
-    assertEquals("~�e~)^���", WebUtils.decodeUrl("\nfullfilename"));
+    assertEquals("J��q�", WebUtils.decodeUrl("Source "));
   }
 
   /**
@@ -3562,67 +3422,7 @@ class WebUtilsDiffblueTest {
   @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
   void testDecodeUrl5() {
     // Arrange, Act and Assert
-    assertEquals("��Oj�", WebUtils.decodeUrl("\nurlPath"));
-  }
-
-  /**
-   * Test {@link WebUtils#decodeUrl(String)}.
-   *
-   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
-   */
-  @Test
-  @DisplayName("Test decodeUrl(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl6() {
-    // Arrange, Act and Assert
-    assertEquals("J��q�", WebUtils.decodeUrl("Source "));
-  }
-
-  /**
-   * Test {@link WebUtils#decodeUrl(String)}.
-   *
-   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
-   */
-  @Test
-  @DisplayName("Test decodeUrl(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl7() {
-    // Arrange, Act and Assert
     assertEquals("~�e~)^���", WebUtils.decodeUrl("fullfilename\n"));
-  }
-
-  /**
-   * Test {@link WebUtils#decodeUrl(String)}.
-   *
-   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
-   */
-  @Test
-  @DisplayName("Test decodeUrl(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl8() {
-    // Arrange, Act and Assert
-    assertEquals("��Oj�~", WebUtils.decodeUrl("urlPath "));
-  }
-
-  /**
-   * Test {@link WebUtils#decodeUrl(String)}.
-   *
-   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
-   */
-  @Test
-  @DisplayName("Test decodeUrl(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl9() {
-    // Arrange, Act and Assert
-    assertEquals("��Oj�", WebUtils.decodeUrl("urlPath\n"));
   }
 
   /**
@@ -3874,6 +3674,26 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#decodeUrl(String)}.
    *
    * <ul>
+   *   <li>When createValidFtpUrl.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName("Test decodeUrl(String); when createValidFtpUrl; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenCreateValidFtpUrl_thenReturnNull() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl(FtpUtilsFactory.createValidFtpUrl()));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
    *   <li>When {@code file:}.
    *   <li>Then return {@code null}.
    * </ul>
@@ -4028,6 +3848,46 @@ class WebUtilsDiffblueTest {
   void testDecodeUrl_whenHttpsExampleOrgExample42_thenReturnNull2() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("https://example.org/example\n42"));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/example42}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName("Test decodeUrl(String); when 'https://example.org/example42'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExample42_thenReturnNull3() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl("https://example.org/example42 "));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/example42}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName("Test decodeUrl(String); when 'https://example.org/example42'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExample42_thenReturnNull4() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl("https://example.org/example42\n"));
   }
 
   /**
@@ -4286,6 +4146,48 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#decodeUrl(String)}.
    *
    * <ul>
+   *   <li>When {@code https://example.org/exampleSource}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test decodeUrl(String); when 'https://example.org/exampleSource'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExampleSource_thenReturnNull3() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl("https://example.org/exampleSource "));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/exampleSource}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test decodeUrl(String); when 'https://example.org/exampleSource'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExampleSource_thenReturnNull4() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl("https://example.org/exampleSource\n"));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
    *   <li>When {@code https://example.org/example url解码异常，接入方法错误未使用BASE64}.
    *   <li>Then return {@code null}.
    * </ul>
@@ -4328,48 +4230,6 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#decodeUrl(String)}.
    *
    * <ul>
-   *   <li>When {@code https://example.org/example urlPath}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test decodeUrl(String); when 'https://example.org/example urlPath'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExampleUrlPath_thenReturnNull() {
-    // Arrange, Act and Assert
-    assertNull(WebUtils.decodeUrl("https://example.org/example urlPath"));
-  }
-
-  /**
-   * Test {@link WebUtils#decodeUrl(String)}.
-   *
-   * <ul>
-   *   <li>When {@code https://example.org/example urlPath}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
-   */
-  @Test
-  @DisplayName(
-      "Test decodeUrl(String); when 'https://example.org/example urlPath'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExampleUrlPath_thenReturnNull2() {
-    // Arrange, Act and Assert
-    assertNull(WebUtils.decodeUrl("https://example.org/example\nurlPath"));
-  }
-
-  /**
-   * Test {@link WebUtils#decodeUrl(String)}.
-   *
-   * <ul>
    *   <li>When {@code https://example.org/example}.
    *   <li>Then return {@code null}.
    * </ul>
@@ -4382,26 +4242,6 @@ class WebUtilsDiffblueTest {
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
   void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull() {
-    // Arrange, Act and Assert
-    assertNull(WebUtils.decodeUrl("https://example.org/example"));
-  }
-
-  /**
-   * Test {@link WebUtils#decodeUrl(String)}.
-   *
-   * <ul>
-   *   <li>When {@code https://example.org/example}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
-   */
-  @Test
-  @DisplayName("Test decodeUrl(String); when 'https://example.org/example'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull2() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("https://example.org/example "));
   }
@@ -4421,7 +4261,7 @@ class WebUtilsDiffblueTest {
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull3() {
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull2() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("https://example.org/example\n"));
   }
@@ -4441,7 +4281,7 @@ class WebUtilsDiffblueTest {
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull4() {
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull3() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl(" https://example.org/example"));
   }
@@ -4461,7 +4301,7 @@ class WebUtilsDiffblueTest {
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull5() {
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull4() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("\nhttps://example.org/example"));
   }
@@ -4481,7 +4321,7 @@ class WebUtilsDiffblueTest {
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull6() {
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull5() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("https://example.org/example  "));
   }
@@ -4501,7 +4341,7 @@ class WebUtilsDiffblueTest {
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull7() {
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull6() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("https://example.org/example \n"));
   }
@@ -4521,7 +4361,7 @@ class WebUtilsDiffblueTest {
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull8() {
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull7() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("https://example.org/example +"));
   }
@@ -4541,7 +4381,7 @@ class WebUtilsDiffblueTest {
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull9() {
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull8() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("https://example.org/example ?"));
   }
@@ -4561,7 +4401,7 @@ class WebUtilsDiffblueTest {
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull10() {
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull9() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("https://example.org/example [=]"));
   }
@@ -4581,7 +4421,7 @@ class WebUtilsDiffblueTest {
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull11() {
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull10() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("https://example.org/example [?]"));
   }
@@ -4601,7 +4441,7 @@ class WebUtilsDiffblueTest {
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull12() {
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull11() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("https://example.org/example\n "));
   }
@@ -4621,7 +4461,7 @@ class WebUtilsDiffblueTest {
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull13() {
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull12() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("https://example.org/example\n\n"));
   }
@@ -4641,7 +4481,7 @@ class WebUtilsDiffblueTest {
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull14() {
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull13() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("https://example.org/example\n?"));
   }
@@ -4661,7 +4501,7 @@ class WebUtilsDiffblueTest {
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull15() {
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull14() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("https://example.org/example\n[=]"));
   }
@@ -4681,7 +4521,7 @@ class WebUtilsDiffblueTest {
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull16() {
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull15() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("https://example.org/example\n[?]"));
   }
@@ -4701,7 +4541,7 @@ class WebUtilsDiffblueTest {
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
-  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull17() {
+  void testDecodeUrl_whenHttpsExampleOrgExample_thenReturnNull16() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("https://example.org/example+ "));
   }
@@ -4788,6 +4628,48 @@ class WebUtilsDiffblueTest {
   void testDecodeUrl_whenHttpsExampleOrgExamplehttpsExampleOrgExample_thenReturnNull2() {
     // Arrange, Act and Assert
     assertNull(WebUtils.decodeUrl("https://example.org/examplehttps://example.org/example\n"));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/exampleurl解码异常，接入方法错误未使用BASE64}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test decodeUrl(String); when 'https://example.org/exampleurl解码异常，接入方法错误未使用BASE64'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExampleurlBase64_thenReturnNull() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl("https://example.org/exampleurl解码异常，接入方法错误未使用BASE64 "));
+  }
+
+  /**
+   * Test {@link WebUtils#decodeUrl(String)}.
+   *
+   * <ul>
+   *   <li>When {@code https://example.org/exampleurl解码异常，接入方法错误未使用BASE64}.
+   *   <li>Then return {@code null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WebUtils#decodeUrl(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test decodeUrl(String); when 'https://example.org/exampleurl解码异常，接入方法错误未使用BASE64'; then return 'null'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.decodeUrl(String)"})
+  void testDecodeUrl_whenHttpsExampleOrgExampleurlBase64_thenReturnNull2() {
+    // Arrange, Act and Assert
+    assertNull(WebUtils.decodeUrl("https://example.org/exampleurl解码异常，接入方法错误未使用BASE64\n"));
   }
 
   /**
@@ -5316,22 +5198,25 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#decodeBase64String(String, Charset)}.
    *
    * <ul>
-   *   <li>Then return J replacement character replacement character q.
+   *   <li>When createValidFtpUrl.
+   *   <li>Then return {@code null}.
    * </ul>
    *
    * <p>Method under test: {@link WebUtils#decodeBase64String(String, Charset)}
    */
   @Test
   @DisplayName(
-      "Test decodeBase64String(String, Charset); then return J replacement character replacement character q")
+      "Test decodeBase64String(String, Charset); when createValidFtpUrl; then return 'null'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.decodeBase64String(String, Charset)"})
-  void testDecodeBase64String_thenReturnJReplacementCharacterReplacementCharacterQ() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "J��q",
-        WebUtils.decodeBase64String("Source", Charset.forName(KkFileUtils.DEFAULT_FILE_ENCODING)));
+  void testDecodeBase64String_whenCreateValidFtpUrl_thenReturnNull() {
+    // Arrange
+    String source = FtpUtilsFactory.createValidFtpUrl();
+
+    // Act and Assert
+    assertNull(
+        WebUtils.decodeBase64String(source, Charset.forName(KkFileUtils.DEFAULT_FILE_ENCODING)));
   }
 
   /**
@@ -5372,7 +5257,7 @@ class WebUtilsDiffblueTest {
   @MethodsUnderTest({"String WebUtils.decodeBase64String(String, Charset)"})
   void testDecodeBase64String_whenNull_thenReturnNull() {
     // Arrange, Act and Assert
-    assertNull(WebUtils.decodeBase64String("Source", null));
+    assertNull(WebUtils.decodeBase64String("\n", null));
   }
 
   /**
@@ -5400,21 +5285,20 @@ class WebUtilsDiffblueTest {
    * Test {@link WebUtils#getHost(String)}.
    *
    * <ul>
-   *   <li>When {@code https://example.org/example}.
-   *   <li>Then return {@code example.org}.
+   *   <li>When createValidFtpUrl.
+   *   <li>Then return {@code localhost}.
    * </ul>
    *
    * <p>Method under test: {@link WebUtils#getHost(String)}
    */
   @Test
-  @DisplayName(
-      "Test getHost(String); when 'https://example.org/example'; then return 'example.org'")
+  @DisplayName("Test getHost(String); when createValidFtpUrl; then return 'localhost'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.getHost(String)"})
-  void testGetHost_whenHttpsExampleOrgExample_thenReturnExampleOrg() {
+  void testGetHost_whenCreateValidFtpUrl_thenReturnLocalhost() {
     // Arrange, Act and Assert
-    assertEquals("example.org", WebUtils.getHost("https://example.org/example"));
+    assertEquals("localhost", WebUtils.getHost(FtpUtilsFactory.createValidFtpUrl()));
   }
 
   /**
@@ -5440,40 +5324,86 @@ class WebUtilsDiffblueTest {
   /**
    * Test {@link WebUtils#getSessionAttr(HttpServletRequest, String)}.
    *
+   * <p>Method under test: {@link WebUtils#getSessionAttr(HttpServletRequest, String)}
+   */
+  @Test
+  @DisplayName("Test getSessionAttr(HttpServletRequest, String)")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String WebUtils.getSessionAttr(HttpServletRequest, String)"})
+  void testGetSessionAttr() {
+    // Arrange
+    ServletRequestHttpWrapper request =
+        new ServletRequestHttpWrapper(TrustHostFilterFactory.createServletRequestWithValidUrl());
+
+    // Act and Assert
+    assertNull(WebUtils.getSessionAttr(request, FtpUtilsFactory.createValidFtpUrl()));
+  }
+
+  /**
+   * Test {@link WebUtils#getSessionAttr(HttpServletRequest, String)}.
+   *
    * <ul>
-   *   <li>When {@code Key}.
+   *   <li>When createHttpServletRequestWithSession.
    *   <li>Then return {@code null}.
    * </ul>
    *
    * <p>Method under test: {@link WebUtils#getSessionAttr(HttpServletRequest, String)}
    */
   @Test
-  @DisplayName("Test getSessionAttr(HttpServletRequest, String); when 'Key'; then return 'null'")
+  @DisplayName(
+      "Test getSessionAttr(HttpServletRequest, String); when createHttpServletRequestWithSession; then return 'null'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"String WebUtils.getSessionAttr(HttpServletRequest, String)"})
-  void testGetSessionAttr_whenKey_thenReturnNull() {
-    // Arrange, Act and Assert
-    assertNull(WebUtils.getSessionAttr(new MockHttpServletRequest(), "Key"));
+  void testGetSessionAttr_whenCreateHttpServletRequestWithSession_thenReturnNull() {
+    // Arrange
+    HttpServletRequest request = FileControllerFactory.createHttpServletRequestWithSession();
+
+    // Act and Assert
+    assertNull(WebUtils.getSessionAttr(request, FtpUtilsFactory.createValidFtpUrl()));
+  }
+
+  /**
+   * Test {@link WebUtils#getLongSessionAttr(HttpServletRequest, String)}.
+   *
+   * <p>Method under test: {@link WebUtils#getLongSessionAttr(HttpServletRequest, String)}
+   */
+  @Test
+  @DisplayName("Test getLongSessionAttr(HttpServletRequest, String)")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"long WebUtils.getLongSessionAttr(HttpServletRequest, String)"})
+  void testGetLongSessionAttr() {
+    // Arrange
+    ServletRequestHttpWrapper request =
+        new ServletRequestHttpWrapper(TrustHostFilterFactory.createServletRequestWithValidUrl());
+
+    // Act and Assert
+    assertEquals(0L, WebUtils.getLongSessionAttr(request, FtpUtilsFactory.createValidFtpUrl()));
   }
 
   /**
    * Test {@link WebUtils#getLongSessionAttr(HttpServletRequest, String)}.
    *
    * <ul>
-   *   <li>When {@code Key}.
+   *   <li>When createHttpServletRequestWithSession.
    *   <li>Then return zero.
    * </ul>
    *
    * <p>Method under test: {@link WebUtils#getLongSessionAttr(HttpServletRequest, String)}
    */
   @Test
-  @DisplayName("Test getLongSessionAttr(HttpServletRequest, String); when 'Key'; then return zero")
+  @DisplayName(
+      "Test getLongSessionAttr(HttpServletRequest, String); when createHttpServletRequestWithSession; then return zero")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"long WebUtils.getLongSessionAttr(HttpServletRequest, String)"})
-  void testGetLongSessionAttr_whenKey_thenReturnZero() {
-    // Arrange, Act and Assert
-    assertEquals(0L, WebUtils.getLongSessionAttr(new MockHttpServletRequest(), "Key"));
+  void testGetLongSessionAttr_whenCreateHttpServletRequestWithSession_thenReturnZero() {
+    // Arrange
+    HttpServletRequest request = FileControllerFactory.createHttpServletRequestWithSession();
+
+    // Act and Assert
+    assertEquals(0L, WebUtils.getLongSessionAttr(request, FtpUtilsFactory.createValidFtpUrl()));
   }
 }

@@ -6,6 +6,7 @@ import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import cn.keking.model.FileAttribute;
+import cn.keking.utils.FtpUtilsFactory;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.jupiter.api.DisplayName;
@@ -44,18 +45,19 @@ class MarkdownFilePreviewImplDiffblueTest {
     // Arrange
     when(simTextFilePreviewImpl.filePreviewHandle(
             Mockito.<String>any(), Mockito.<Model>any(), Mockito.<FileAttribute>any()))
-        .thenReturn("File Preview Handle");
+        .thenReturn(FtpUtilsFactory.createValidFtpUrl());
+    String url = FtpUtilsFactory.createValidFtpUrl();
     ConcurrentModel model = new ConcurrentModel();
 
     // Act
     String actualFilePreviewHandleResult =
         markdownFilePreviewImpl.filePreviewHandle(
-            "https://example.org/example", model, new FileAttribute());
+            url, model, SimTextFilePreviewImplFactory.createFileAttribute());
 
     // Assert
     verify(simTextFilePreviewImpl)
         .filePreviewHandle(
-            eq("https://example.org/example"), isA(Model.class), isA(FileAttribute.class));
+            eq("ftp://localhost/test/file.txt"), isA(Model.class), isA(FileAttribute.class));
     assertEquals("markdown", actualFilePreviewHandleResult);
   }
 }

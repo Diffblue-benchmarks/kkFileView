@@ -1,0 +1,72 @@
+INFO  Diffblue Cover 2026.01.01-SNAPSHOT-363c8f3-dev
+INFO  
+INFO  Command: issues
+INFO  Output a prioritized list of issues.
+INFO  
+INFO  Discovered modules:
+INFO  - cn.keking:kkFileView
+INFO  
+INFO  
+INFO  [1/1] Diagnosing issues for module: cn.keking:kkFileView
+INFO  ========================================================
+INFO  
+INFO  Detected Java version 1.8.0_472
+INFO  Selected build system: Maven
+INFO  Reading report file '/home/ubuntu/kkFileView/server/.diffblue/reports/report.json'
+INFO  Copied report file to '/home/ubuntu/kkFileView/server/.diffblue/reports/report-20260116T140902.json'
+INFO  
+INFO  R031: Method may be time-sensitive
+      Diffblue Cover was only able to write tests that are time-sensitive.
+      The assertions don't pass when run at an alternate date, time, and
+      timezone. Try refactoring the method to take a 'java.time.Clock' instance so
+      that the time can be parameterized during testing.
+      See Working with code R031 (https://diff.blue/R031) for details.
+      
+INFO  Affected methods:
+      cn.keking.utils.DateUtils.calculateCurrentTimeDifference:(J)J
+      cn.keking.utils.DateUtils.getCurrentSecond:()J
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.utils.DateUtils.calculateCurrentTimeDifference:(J)J
+      cn.keking.utils.DateUtils.getCurrentSecond:()J
+      
+      Diffblue Cover was only able to write tests that are time-sensitive.
+      The assertions don't pass when run at an alternate date, time, and
+      timezone. Try refactoring the method to take a 'java.time.Clock' instance so
+      that the time can be parameterized during testing.
+      See Working with code R031 (https://diff.blue/R031) for details.
+      
+INFO  
+INFO  1 issues were found and displayed
+INFO  Rerun without --prompts to summarise all the issues
+INFO  Actioning all 1 listed issues via agent
+INFO  Executing prompt with Claude Code agent...
+INFO  [Claude Code] ## Summary
+INFO  [Claude Code] 
+INFO  [Claude Code] The issues reported by Diffblue Cover have already been resolved. The refactoring has been successfully completed:
+INFO  [Claude Code] 
+INFO  [Claude Code] ### Changes Made (already in place):
+INFO  [Claude Code] 
+INFO  [Claude Code] 1. **`DateUtils.getCurrentSecond()`** - Refactored to support Clock injection:
+INFO  [Claude Code]    - Original no-arg method now delegates to `getCurrentSecond(Clock.systemDefaultZone())`
+INFO  [Claude Code]    - New overloaded method `getCurrentSecond(Clock clock)` accepts a Clock parameter for testing
+INFO  [Claude Code]    - Located at `server/src/main/java/cn/keking/utils/DateUtils.java:24-26`
+INFO  [Claude Code] 
+INFO  [Claude Code] 2. **`DateUtils.calculateCurrentTimeDifference(long datetime)`** - Refactored to support Clock injection:
+INFO  [Claude Code]    - Original method now delegates to `calculateCurrentTimeDifference(datetime, Clock.systemDefaultZone())`
+INFO  [Claude Code]    - New overloaded method `calculateCurrentTimeDifference(long datetime, Clock clock)` accepts a Clock parameter
+INFO  [Claude Code]    - Located at `server/src/main/java/cn/keking/utils/DateUtils.java:43-44`
+INFO  [Claude Code] 
+INFO  [Claude Code] ### Verification:
+INFO  [Claude Code] 
+INFO  [Claude Code] - All existing callers in `FileController.java:110,117` continue to work with the no-arg methods (backward compatible)
+INFO  [Claude Code] - Test file `DateUtilsDiffblueTest.java` uses `Clock.fixed()` to create deterministic, non-time-sensitive tests
+INFO  [Claude Code] - Build completed successfully with `mvn install -DskipTests`
+INFO  [Claude Code] 
+INFO  [Claude Code] The refactoring follows the recommendation from Diffblue Cover R031 documentation, allowing Diffblue Cover to create time-independent tests by injecting fixed Clock instances during testing while maintaining backward compatibility for production code.
+INFO  Claude Code agent completed successfully.
+INFO  
+INFO  Log file: /home/ubuntu/kkFileView/.diffblue/log/user-20260116T141037.log
+INFO  Finished in 1m 39s

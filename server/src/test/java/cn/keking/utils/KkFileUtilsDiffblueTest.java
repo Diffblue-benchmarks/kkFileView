@@ -17,6 +17,26 @@ class KkFileUtilsDiffblueTest {
    * Test {@link KkFileUtils#isIllegalFileName(String)}.
    *
    * <ul>
+   *   <li>When createValidFtpUrl.
+   *   <li>Then return {@code false}.
+   * </ul>
+   *
+   * <p>Method under test: {@link KkFileUtils#isIllegalFileName(String)}
+   */
+  @Test
+  @DisplayName("Test isIllegalFileName(String); when createValidFtpUrl; then return 'false'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"boolean KkFileUtils.isIllegalFileName(String)"})
+  void testIsIllegalFileName_whenCreateValidFtpUrl_thenReturnFalse() {
+    // Arrange, Act and Assert
+    assertFalse(KkFileUtils.isIllegalFileName(FtpUtilsFactory.createValidFtpUrl()));
+  }
+
+  /**
+   * Test {@link KkFileUtils#isIllegalFileName(String)}.
+   *
+   * <ul>
    *   <li>When {@code ..}.
    *   <li>Then return {@code true}.
    * </ul>
@@ -31,26 +51,6 @@ class KkFileUtilsDiffblueTest {
   void testIsIllegalFileName_whenDotDot_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(KkFileUtils.isIllegalFileName(".."));
-  }
-
-  /**
-   * Test {@link KkFileUtils#isIllegalFileName(String)}.
-   *
-   * <ul>
-   *   <li>When {@code foo.txt}.
-   *   <li>Then return {@code false}.
-   * </ul>
-   *
-   * <p>Method under test: {@link KkFileUtils#isIllegalFileName(String)}
-   */
-  @Test
-  @DisplayName("Test isIllegalFileName(String); when 'foo.txt'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean KkFileUtils.isIllegalFileName(String)"})
-  void testIsIllegalFileName_whenFooTxt_thenReturnFalse() {
-    // Arrange, Act and Assert
-    assertFalse(KkFileUtils.isIllegalFileName("foo.txt"));
   }
 
   /**
@@ -177,6 +177,26 @@ class KkFileUtilsDiffblueTest {
    * Test {@link KkFileUtils#isInteger(String)}.
    *
    * <ul>
+   *   <li>When createValidFtpUrl.
+   *   <li>Then return {@code false}.
+   * </ul>
+   *
+   * <p>Method under test: {@link KkFileUtils#isInteger(String)}
+   */
+  @Test
+  @DisplayName("Test isInteger(String); when createValidFtpUrl; then return 'false'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"boolean KkFileUtils.isInteger(String)"})
+  void testIsInteger_whenCreateValidFtpUrl_thenReturnFalse() {
+    // Arrange, Act and Assert
+    assertFalse(KkFileUtils.isInteger(FtpUtilsFactory.createValidFtpUrl()));
+  }
+
+  /**
+   * Test {@link KkFileUtils#isInteger(String)}.
+   *
+   * <ul>
    *   <li>When empty string.
    *   <li>Then return {@code false}.
    * </ul>
@@ -191,26 +211,6 @@ class KkFileUtilsDiffblueTest {
   void testIsInteger_whenEmptyString_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(KkFileUtils.isInteger(""));
-  }
-
-  /**
-   * Test {@link KkFileUtils#isInteger(String)}.
-   *
-   * <ul>
-   *   <li>When {@code Str}.
-   *   <li>Then return {@code false}.
-   * </ul>
-   *
-   * <p>Method under test: {@link KkFileUtils#isInteger(String)}
-   */
-  @Test
-  @DisplayName("Test isInteger(String); when 'Str'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean KkFileUtils.isInteger(String)"})
-  void testIsInteger_whenStr_thenReturnFalse() {
-    // Arrange, Act and Assert
-    assertFalse(KkFileUtils.isInteger("Str"));
   }
 
   /**
@@ -251,38 +251,83 @@ class KkFileUtilsDiffblueTest {
    * Test {@link KkFileUtils#deleteFileByName(String)}.
    *
    * <ul>
-   *   <li>When {@code ..}.
+   *   <li>When createValidFilePath.
+   *   <li>Then return {@code true}.
    * </ul>
    *
    * <p>Method under test: {@link KkFileUtils#deleteFileByName(String)}
    */
   @Test
-  @DisplayName("Test deleteFileByName(String); when '..'")
+  @DisplayName("Test deleteFileByName(String); when createValidFilePath; then return 'true'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"boolean KkFileUtils.deleteFileByName(String)"})
-  void testDeleteFileByName_whenDotDot() {
+  void testDeleteFileByName_whenCreateValidFilePath_thenReturnTrue() {
     // Arrange, Act and Assert
-    assertFalse(KkFileUtils.deleteFileByName(".."));
+    assertTrue(KkFileUtils.deleteFileByName(EncodingDetectsFactory.createValidFilePath()));
   }
 
   /**
    * Test {@link KkFileUtils#deleteFileByName(String)}.
    *
    * <ul>
-   *   <li>When {@code foo.txt}.
+   *   <li>When createValidFtpUrl.
+   *   <li>Then return {@code false}.
    * </ul>
    *
    * <p>Method under test: {@link KkFileUtils#deleteFileByName(String)}
    */
   @Test
-  @DisplayName("Test deleteFileByName(String); when 'foo.txt'")
+  @DisplayName("Test deleteFileByName(String); when createValidFtpUrl; then return 'false'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"boolean KkFileUtils.deleteFileByName(String)"})
-  void testDeleteFileByName_whenFooTxt() {
+  void testDeleteFileByName_whenCreateValidFtpUrl_thenReturnFalse() {
     // Arrange, Act and Assert
-    assertFalse(KkFileUtils.deleteFileByName("foo.txt"));
+    assertFalse(KkFileUtils.deleteFileByName(FtpUtilsFactory.createValidFtpUrl()));
+  }
+
+  /**
+   * Test {@link KkFileUtils#deleteFileByName(String)}.
+   *
+   * <ul>
+   *   <li>When {@code ..}.
+   *   <li>Then return {@code false}.
+   * </ul>
+   *
+   * <p>Method under test: {@link KkFileUtils#deleteFileByName(String)}
+   */
+  @Test
+  @DisplayName("Test deleteFileByName(String); when '..'; then return 'false'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"boolean KkFileUtils.deleteFileByName(String)"})
+  void testDeleteFileByName_whenDotDot_thenReturnFalse() {
+    // Arrange, Act and Assert
+    assertFalse(KkFileUtils.deleteFileByName(".."));
+  }
+
+  /**
+   * Test {@link KkFileUtils#htmlEscape(String)}.
+   *
+   * <ul>
+   *   <li>When createValidFtpUrl.
+   *   <li>Then return {@code ftp://localhost/test/file.txt}.
+   * </ul>
+   *
+   * <p>Method under test: {@link KkFileUtils#htmlEscape(String)}
+   */
+  @Test
+  @DisplayName(
+      "Test htmlEscape(String); when createValidFtpUrl; then return 'ftp://localhost/test/file.txt'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"String KkFileUtils.htmlEscape(String)"})
+  void testHtmlEscape_whenCreateValidFtpUrl_thenReturnFtpLocalhostTestFileTxt() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "ftp://localhost/test/file.txt",
+        KkFileUtils.htmlEscape(FtpUtilsFactory.createValidFtpUrl()));
   }
 
   /**
@@ -306,26 +351,6 @@ class KkFileUtilsDiffblueTest {
   }
 
   /**
-   * Test {@link KkFileUtils#htmlEscape(String)}.
-   *
-   * <ul>
-   *   <li>When {@code Input}.
-   *   <li>Then return {@code Input}.
-   * </ul>
-   *
-   * <p>Method under test: {@link KkFileUtils#htmlEscape(String)}
-   */
-  @Test
-  @DisplayName("Test htmlEscape(String); when 'Input'; then return 'Input'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String KkFileUtils.htmlEscape(String)"})
-  void testHtmlEscape_whenInput_thenReturnInput() {
-    // Arrange, Act and Assert
-    assertEquals("Input", KkFileUtils.htmlEscape("Input"));
-  }
-
-  /**
    * Test {@link KkFileUtils#suffixFromFileName(String)}.
    *
    * <p>Method under test: {@link KkFileUtils#suffixFromFileName(String)}
@@ -337,27 +362,27 @@ class KkFileUtilsDiffblueTest {
   @MethodsUnderTest({"String KkFileUtils.suffixFromFileName(String)"})
   void testSuffixFromFileName() {
     // Arrange, Act and Assert
-    assertEquals("txt", KkFileUtils.suffixFromFileName("foo.txt"));
+    assertEquals("txt", KkFileUtils.suffixFromFileName(FtpUtilsFactory.createValidFtpUrl()));
   }
 
   /**
    * Test {@link KkFileUtils#deleteDirectory(String)}.
    *
    * <ul>
-   *   <li>When {@code Dir}.
+   *   <li>When createValidFtpUrl.
    *   <li>Then return {@code false}.
    * </ul>
    *
    * <p>Method under test: {@link KkFileUtils#deleteDirectory(String)}
    */
   @Test
-  @DisplayName("Test deleteDirectory(String); when 'Dir'; then return 'false'")
+  @DisplayName("Test deleteDirectory(String); when createValidFtpUrl; then return 'false'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"boolean KkFileUtils.deleteDirectory(String)"})
-  void testDeleteDirectory_whenDir_thenReturnFalse() {
+  void testDeleteDirectory_whenCreateValidFtpUrl_thenReturnFalse() {
     // Arrange, Act and Assert
-    assertFalse(KkFileUtils.deleteDirectory("Dir"));
+    assertFalse(KkFileUtils.deleteDirectory(FtpUtilsFactory.createValidFtpUrl()));
   }
 
   /**
@@ -375,9 +400,29 @@ class KkFileUtilsDiffblueTest {
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"boolean KkFileUtils.deleteDirectory(String)"})
-  void testDeleteDirectory_whenDir_thenReturnFalse2() {
+  void testDeleteDirectory_whenDir_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(KkFileUtils.deleteDirectory("Dir../"));
+  }
+
+  /**
+   * Test {@link KkFileUtils#isAllowedUpload(String)}.
+   *
+   * <ul>
+   *   <li>When createValidFtpUrl.
+   *   <li>Then return {@code true}.
+   * </ul>
+   *
+   * <p>Method under test: {@link KkFileUtils#isAllowedUpload(String)}
+   */
+  @Test
+  @DisplayName("Test isAllowedUpload(String); when createValidFtpUrl; then return 'true'")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"boolean KkFileUtils.isAllowedUpload(String)"})
+  void testIsAllowedUpload_whenCreateValidFtpUrl_thenReturnTrue() {
+    // Arrange, Act and Assert
+    assertTrue(KkFileUtils.isAllowedUpload(FtpUtilsFactory.createValidFtpUrl()));
   }
 
   /**
@@ -401,43 +446,23 @@ class KkFileUtilsDiffblueTest {
   }
 
   /**
-   * Test {@link KkFileUtils#isAllowedUpload(String)}.
-   *
-   * <ul>
-   *   <li>When {@code File}.
-   *   <li>Then return {@code true}.
-   * </ul>
-   *
-   * <p>Method under test: {@link KkFileUtils#isAllowedUpload(String)}
-   */
-  @Test
-  @DisplayName("Test isAllowedUpload(String); when 'File'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean KkFileUtils.isAllowedUpload(String)"})
-  void testIsAllowedUpload_whenFile_thenReturnTrue() {
-    // Arrange, Act and Assert
-    assertTrue(KkFileUtils.isAllowedUpload("File"));
-  }
-
-  /**
    * Test {@link KkFileUtils#isExist(String)}.
    *
    * <ul>
-   *   <li>When {@code /directory/foo.txt}.
+   *   <li>When createValidFtpUrl.
    *   <li>Then return {@code false}.
    * </ul>
    *
    * <p>Method under test: {@link KkFileUtils#isExist(String)}
    */
   @Test
-  @DisplayName("Test isExist(String); when '/directory/foo.txt'; then return 'false'")
+  @DisplayName("Test isExist(String); when createValidFtpUrl; then return 'false'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"boolean KkFileUtils.isExist(String)"})
-  void testIsExist_whenDirectoryFooTxt_thenReturnFalse() {
+  void testIsExist_whenCreateValidFtpUrl_thenReturnFalse() {
     // Arrange, Act and Assert
-    assertFalse(KkFileUtils.isExist("/directory/foo.txt"));
+    assertFalse(KkFileUtils.isExist(FtpUtilsFactory.createValidFtpUrl()));
   }
 
   /**

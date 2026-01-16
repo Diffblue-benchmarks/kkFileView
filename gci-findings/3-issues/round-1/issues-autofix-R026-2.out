@@ -1,0 +1,245 @@
+INFO  Diffblue Cover 2026.01.01-SNAPSHOT-363c8f3-dev
+INFO  
+INFO  Command: issues
+INFO  Output a prioritized list of issues.
+INFO  
+INFO  Discovered modules:
+INFO  - cn.keking:kkFileView
+INFO  
+INFO  
+INFO  [1/1] Diagnosing issues for module: cn.keking:kkFileView
+INFO  ========================================================
+INFO  
+INFO  Detected Java version 1.8.0_472
+INFO  Selected build system: Maven
+INFO  Reading report file '/home/ubuntu/kkFileView/server/.diffblue/reports/report.json'
+INFO  Copied report file to '/home/ubuntu/kkFileView/server/.diffblue/reports/report-20260116T141828.json'
+INFO  
+INFO  R026: Failed to create Spring context
+      Attempt to initialize test context failed with
+      com.diffblue.fuzztest.shared.proxy.BeanInstantiationException: Could not instantiate bean: officePluginManager defined in null
+          at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+          at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+          at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+          at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+          at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+          at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+          at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+      java.lang.IllegalStateException: Failed to load ApplicationContext
+          at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:132)
+          at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+          at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+          at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+          at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+          at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+          at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+          at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+          at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+      org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'officePluginManager': Invocation of init method failed; nested exception is java.lang.RuntimeException: 找不到office组件，请确认'office.home'配置是否有误
+          at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:160)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:429)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1780)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:609)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:531)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+          at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+          at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:944)
+          at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:923)
+          at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:588)
+          at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:127)
+          at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+          at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:275)
+          at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:243)
+          at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+          at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+          at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+          at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+          at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+          at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+          at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+          at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+          at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+          at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+      java.lang.RuntimeException: 找不到office组件，请确认'office.home'配置是否有误
+          at cn.keking.service.OfficePluginManager.startOfficeManager(OfficePluginManager.java:59)
+          at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleElement.invoke(InitDestroyAnnotationBeanPostProcessor.java:389)
+          at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeInitMethods(InitDestroyAnnotationBeanPostProcessor.java:333)
+          at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:157)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:429)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1780)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:609)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:531)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+          at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+          at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:944)
+          at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:923)
+          at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:588)
+          at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:127)
+          at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+          at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:275)
+          at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:243)
+          at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+          at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+          at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+          at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+          at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+          at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+          at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+          at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+          at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+          at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+      when running class:
+      package cn.keking.service;
+      @org.springframework.boot.context.properties.EnableConfigurationProperties
+      @org.springframework.context.annotation.PropertySource(value = "classpath:application-test.properties")
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.OfficePluginManager.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass0 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.OfficePluginManager officePluginManager;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      To avoid this error, consider adding a custom base class to setup static
+      mocking for sun.reflect.NativeMethodAccessorImpl.
+      For details on how to set up a custom base class, please follow this link:
+      https://docs.diffblue.com/features/cover-cli/writing-tests/custom-test-setup
+      See https://diff.blue/R026 to resolve this issue.
+      
+INFO  Affected methods:
+      cn.keking.service.OfficePluginManager.destroyOfficeManager:()V
+      
+INFO  To resolve the issue, use the following prompt with your AI assistant:
+      
+      Fix the following issue preventing test creation for:
+      cn.keking.service.OfficePluginManager.destroyOfficeManager:()V
+      
+      Attempt to initialize test context failed with
+      com.diffblue.fuzztest.shared.proxy.BeanInstantiationException: Could not instantiate bean: officePluginManager defined in null
+          at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+          at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+          at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+          at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+          at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+          at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+          at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+      java.lang.IllegalStateException: Failed to load ApplicationContext
+          at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:132)
+          at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+          at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+          at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+          at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+          at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+          at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+          at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+          at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+      org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'officePluginManager': Invocation of init method failed; nested exception is java.lang.RuntimeException: 找不到office组件，请确认'office.home'配置是否有误
+          at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:160)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:429)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1780)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:609)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:531)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+          at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+          at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:944)
+          at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:923)
+          at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:588)
+          at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:127)
+          at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+          at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:275)
+          at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:243)
+          at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+          at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+          at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+          at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+          at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+          at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+          at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+          at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+          at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+          at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+      java.lang.RuntimeException: 找不到office组件，请确认'office.home'配置是否有误
+          at cn.keking.service.OfficePluginManager.startOfficeManager(OfficePluginManager.java:59)
+          at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleElement.invoke(InitDestroyAnnotationBeanPostProcessor.java:389)
+          at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeInitMethods(InitDestroyAnnotationBeanPostProcessor.java:333)
+          at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:157)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:429)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1780)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:609)
+          at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:531)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+          at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+          at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+          at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:944)
+          at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:923)
+          at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:588)
+          at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:127)
+          at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+          at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:275)
+          at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:243)
+          at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+          at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+          at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+          at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+          at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
+          at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+          at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+          at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+          at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+          at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+      when running class:
+      package cn.keking.service;
+      @org.springframework.boot.context.properties.EnableConfigurationProperties
+      @org.springframework.context.annotation.PropertySource(value = "classpath:application-test.properties")
+      @org.springframework.test.context.ContextConfiguration(classes = {cn.keking.service.OfficePluginManager.class})
+      @org.junit.runner.RunWith(value = org.springframework.test.context.junit4.SpringRunner.class) // if JUnit 4
+      @org.junit.jupiter.api.extension.ExtendWith(value = org.springframework.test.context.junit.jupiter.SpringExtension.class) // if JUnit 5
+      public class DiffblueFakeClass0 {
+        @org.springframework.beans.factory.annotation.Autowired cn.keking.service.OfficePluginManager officePluginManager;
+        @org.junit.Test // if JUnit 4
+        @org.junit.jupiter.api.Test // if JUnit 5
+        public void testSpringContextLoads() {}
+      }
+      To avoid this error, consider adding a custom base class to setup static
+      mocking for sun.reflect.NativeMethodAccessorImpl.
+      For details on how to set up a custom base class, please follow this link:
+      https://docs.diffblue.com/features/cover-cli/writing-tests/custom-test-setup
+      See https://diff.blue/R026 to resolve this issue.
+      
+INFO  
+INFO  1 issues were found and displayed
+INFO  Rerun without --prompts to summarise all the issues
+INFO  Actioning all 1 listed issues via agent
+INFO  Executing prompt with Claude Code agent...
+INFO  [Claude Code] ## Summary
+INFO  [Claude Code] 
+INFO  [Claude Code] I've resolved the issue preventing test creation for `cn.keking.service.OfficePluginManager.destroyOfficeManager()`. Here's what was done:
+INFO  [Claude Code] 
+INFO  [Claude Code] ### The Problem
+INFO  [Claude Code] The test context initialization was failing because `OfficePluginManager` requires an actual LibreOffice/OpenOffice installation, which is not available in the test environment. When the `@PostConstruct` method `startOfficeManager()` runs, it calls `LocalOfficeUtils.getDefaultOfficeHome()` which returns null, causing a RuntimeException.
+INFO  [Claude Code] 
+INFO  [Claude Code] ### The Solution
+INFO  [Claude Code] I created a Diffblue Cover configuration file at `/home/ubuntu/kkFileView/server/dcover.json` that tells Diffblue to use `cn.keking.DiffblueTestBase` as the custom base class for all generated tests.
+INFO  [Claude Code] 
+INFO  [Claude Code] **Key components that work together:**
+INFO  [Claude Code] 
+INFO  [Claude Code] 1. **dcover.json** (newly created at server/dcover.json:1-11) - Configures Diffblue Cover to use the custom base class
+INFO  [Claude Code] 2. **DiffblueTestBase** (existing at server/src/test/java/cn/keking/DiffblueTestBase.java:1-18) - Base class that imports TestOfficeConfig
+INFO  [Claude Code] 3. **TestOfficeConfig** (existing at server/src/test/java/cn/keking/config/TestOfficeConfig.java:1-28) - Provides a @Primary mocked OfficePluginManager bean that replaces the real implementation during tests
+INFO  [Claude Code] 
+INFO  [Claude Code] This approach ensures that when tests are generated, they'll extend `DiffblueTestBase`, which automatically imports the `TestOfficeConfig`. The mocked `OfficePluginManager` bean prevents the actual initialization code from running, avoiding the RuntimeException.
+INFO  [Claude Code] 
+INFO  [Claude Code] ### Next Steps
+INFO  [Claude Code] As you mentioned, you may need to run `mvn install -DskipTests` if this change affects the classpath. The next time Diffblue Cover runs, it should use the custom base class and successfully generate tests for `OfficePluginManager` methods without encountering the initialization error.
+INFO  Claude Code agent completed successfully.
+INFO  
+INFO  Log file: /home/ubuntu/kkFileView/.diffblue/log/user-20260116T142033.log
+INFO  Finished in 1m 30s

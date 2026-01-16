@@ -12,36 +12,18 @@ class FileTypeDiffblueTest {
    * Test {@link FileType#typeFromUrl(String)}.
    *
    * <ul>
-   *   <li>When {@code https://example.org/example}.
-   * </ul>
-   *
-   * <p>Method under test: {@link FileType#typeFromUrl(String)}
-   */
-  @Test
-  @DisplayName("Test typeFromUrl(String); when 'https://example.org/example'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"FileType FileType.typeFromUrl(String)"})
-  void testTypeFromUrl_whenHttpsExampleOrgExample() {
-    // Arrange, Act and Assert
-    assertEquals(FileType.OTHER, FileType.typeFromUrl("https://example.org/example"));
-  }
-
-  /**
-   * Test {@link FileType#typeFromUrl(String)}.
-   *
-   * <ul>
    *   <li>When {@code ?}.
+   *   <li>Then return {@code OTHER}.
    * </ul>
    *
    * <p>Method under test: {@link FileType#typeFromUrl(String)}
    */
   @Test
-  @DisplayName("Test typeFromUrl(String); when '?'")
+  @DisplayName("Test typeFromUrl(String); when '?'; then return 'OTHER'")
   @Tag("ContributionFromDiffblue")
   @ManagedByDiffblue
   @MethodsUnderTest({"FileType FileType.typeFromUrl(String)"})
-  void testTypeFromUrl_whenQuestionMark() {
+  void testTypeFromUrl_whenQuestionMark_thenReturnOther() {
     // Arrange, Act and Assert
     assertEquals(FileType.OTHER, FileType.typeFromUrl("?"));
   }

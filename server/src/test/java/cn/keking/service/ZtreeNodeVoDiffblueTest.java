@@ -1,6 +1,7 @@
 package cn.keking.service;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import cn.keking.utils.FtpUtilsFactory;
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
@@ -38,9 +39,9 @@ class ZtreeNodeVoDiffblueTest {
     // Arrange and Act
     ZtreeNodeVo actualZtreeNodeVo = new ZtreeNodeVo();
     actualZtreeNodeVo.setChildren(new ArrayList<>());
-    actualZtreeNodeVo.setId("42");
-    actualZtreeNodeVo.setName("Name");
-    actualZtreeNodeVo.setPid("Pid");
+    actualZtreeNodeVo.setId(FtpUtilsFactory.createValidFtpUrl());
+    actualZtreeNodeVo.setName(FtpUtilsFactory.createValidFtpUrl());
+    actualZtreeNodeVo.setPid(FtpUtilsFactory.createValidFtpUrl());
 
     // Assert
     assertTrue(actualZtreeNodeVo.children.isEmpty());
