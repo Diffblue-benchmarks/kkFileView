@@ -29,3 +29,9 @@ nbdist/
 
 server/src/main/cache/
 server/src/main/file/
+
+.diffblue/cache
+**.diffblue/cache
+**/.diffblue/cache
+**/**.diffblue/cache
+**/**/.diffblue/cache
